@@ -10,7 +10,8 @@
     "prebuild": "npm run clean",
     "build": "webpack -p --config ./package/webpack.config.js",
     "clean": "rimraf ./dist && mkdir dist",
-    "test": "jest --forceExit --detectOpenHandles --coverage --verbose"
+    "test": "jest --forceExit --detectOpenHandles --coverage --verbose",
+    "flow": "flow"
   },
   "repository": {
     "type": "git",
@@ -52,9 +53,11 @@
     "universal-cookie-express": "^4.0.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.9.5",
+    "@babel/preset-flow": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
     "@babel/register": "^7.9.0",
     "@types/material-ui": "^0.21.7",
@@ -66,6 +69,7 @@
     "eslint": "^6.8.0",
     "eslint-plugin-react-hooks": "^3.0.0",
     "file-loader": "^6.0.0",
+    "flow-bin": "^0.122.0",
     "html-loader": "^1.1.0",
     "html-minifier": "^4.0.0",
     "ignore-styles": "^5.0.1",
