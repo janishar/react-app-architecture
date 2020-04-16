@@ -1,3 +1,4 @@
+// @flow
 import express from 'express';
 import { join } from 'path';
 import cookiesMiddleware from 'universal-cookie-express';

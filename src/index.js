@@ -9,17 +9,10 @@ import { Route, BrowserRouter } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
 import { ThemeProvider } from '@material-ui/styles';
 
-function square(n: number): number {
-	return n * n;
-}
-
-square("2"); // Error!
-
-import RootReducer from './reducers'
-import AppContainer from './ui/app/Container';
+import rootReducer from './reducers'
+import App from './ui/app/App';
 
 import { logger, crashReporter } from './helpers/redux-middlewares'
-import CacheProvider from './providers/CacheProvider';
 
 import theme from './theme'
 
@@ -27,7 +20,7 @@ import theme from './theme'
 let preloadedState = window.__PRELOADED_STATE__
 
 try {
-	if (preloadedState && preloadedState.authData && preloadedState.authData.credential) 
+	if (preloadedState && preloadedState.authData && preloadedState.authData.credential)
 		preloadedState.authData.credential = JSON.parse(atob(preloadedState.authData.credential));
 } catch (e) { console.log(e) }
 
@@ -36,7 +29,7 @@ delete window.__PRELOADED_STATE__
 
 // Create Redux store with initial state
 const store = createStore(
-	RootReducer,
+	rootReducer,
 	preloadedState,
 	applyMiddleware(
 		thunkMiddleware,
@@ -49,6 +42,7 @@ const Routes = () => {
 	// useEffect in similar to componentDidMount for function components
 	useEffect(() => {
 		const jssStyles = document.querySelector('#jss-server-side');
+		//$FlowFixMe
 		if (jssStyles) jssStyles.parentNode.removeChild(jssStyles);
 	}, []);
 
@@ -56,11 +50,9 @@ const Routes = () => {
 		<Provider store={store}>
 			<CookiesProvider>
 				<BrowserRouter>
-					<CacheProvider>
-						<ThemeProvider theme={theme}>
-							<Route component={AppContainer} />
-						</ThemeProvider>
-					</CacheProvider>
+					<ThemeProvider theme={theme}>
+						<Route component={App} />
+					</ThemeProvider>
 				</BrowserRouter>
 			</CookiesProvider>
 		</Provider>

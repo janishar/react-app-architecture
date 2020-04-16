@@ -1,8 +1,9 @@
+// @flow
 import { combineReducers } from 'redux';
-import AppReducer from './ui/app/Reducer';
+import appReducer from './ui/app/reducer';
 
-const RootReducer = combineReducers({
-	appData: AppReducer,
+const rootReducer = combineReducers({
+	appData: appReducer,
 })
 
-export default RootReducer
+export default rootReducer

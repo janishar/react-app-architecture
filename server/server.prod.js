@@ -1,3 +1,4 @@
+// @flow
 /*
  Babel ES6/JSX Compiler
  All subsequent files required by Node with the extensions 

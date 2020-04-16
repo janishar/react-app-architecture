@@ -36,7 +36,6 @@
     "express": "^4.17.1",
     "hint.css": "^2.6.0",
     "jss": "^10.1.1",
-    "lodash": "^4.17.15",
     "material-ui-chip-input": "^1.1.0",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",

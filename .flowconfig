@@ -4,16 +4,18 @@
 ./node_modules/
 ./public/
 
-
 [include]
 ./src/
 ./server/
 
 [libs]
+./src/types.js
 
 [lints]
 
 [options]
+suppress_type=$FlowFixMe
+suppress_type=$FlowTODO
 
 [strict]
 nonstrict-import
