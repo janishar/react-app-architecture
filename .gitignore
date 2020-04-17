@@ -112,3 +112,4 @@ config.js
 
 # compliled by webpack
 dist
+build

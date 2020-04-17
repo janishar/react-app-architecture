@@ -16,7 +16,10 @@ const envKeys = Object
 		return result;
 	}, {});
 
-const development = process.env.NODE_ENV === 'development'
+const isDev = process.env.NODE_ENV === 'development';
+
+const srcPath = path.resolve(__dirname, './src/client');
+const distPath = path.resolve(__dirname, './dist');
 
 const extractStyle = new MiniCssExtractPlugin({
 	filename: `styles/[name]-${VERSION}.css`,
@@ -28,7 +31,7 @@ const copyAssets = new CopyWebpackPlugin([
 	// Copy directory contents to {output}/to/directory/
 	{
 		// from: 'assets', to: 'assets', // if the context directory has assets 
-		from: './src/assets', to: 'assets'
+		from: './src/client/assets', to: 'assets'
 	}
 ])
 
@@ -39,7 +42,7 @@ const cssLoaders = [
 	{
 		loader: "postcss-loader",
 		options: {
-			plugins: () => development ? [autoprefixer] :
+			plugins: () => isDev ? [autoprefixer] :
 				[
 					autoprefixer,
 					cssnano({ discardComments: { removeAll: true, filterPlugins: false } })
@@ -49,14 +52,14 @@ const cssLoaders = [
 ];
 
 module.exports = {
-	devtool: development ? 'inline-source-map' : false,
-	mode: development ? 'development' : 'production',
-	context: path.resolve(__dirname, './src'),
+	devtool: isDev ? 'inline-source-map' : false,
+	mode: isDev ? 'development' : 'production',
+	context: srcPath,
 	entry: {
-		app: development ? ['./src/index.js', 'webpack-hot-middleware/client'] : './src/index.js',
+		app: isDev ? [srcPath, 'webpack-hot-middleware/client'] : srcPath,
 	},
 	output: {
-		path: path.resolve(__dirname, '../dist'),
+		path: distPath,
 		filename: `js/[name]-bundle-${VERSION}.js`,
 		publicPath: '/'
 	},
@@ -65,7 +68,7 @@ module.exports = {
 		extractStyle,
 		new webpack.NamedModulesPlugin(),
 		new webpack.DefinePlugin(envKeys),
-	].concat(development ? [
+	].concat(isDev ? [
 		new webpack.HotModuleReplacementPlugin()
 	] : []),
 	module: {
@@ -82,28 +85,6 @@ module.exports = {
 				use: [
 					MiniCssExtractPlugin.loader,
 					...cssLoaders
-				]
-			},
-			{
-				test: /\.(scss)$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					...cssLoaders,
-					{
-						loader: "sass-loader",
-						options: {}
-					}
-				]
-			},
-			{
-				test: /\.(less)$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					...cssLoaders,
-					{
-						loader: "less-loader",
-						options: {}
-					}
 				]
 			},
 			{
@@ -133,10 +114,10 @@ module.exports = {
 		]
 	},
 	resolve: {
-		modules: [path.resolve(__dirname, './src'), path.resolve(__dirname, './src'), 'node_modules']
+		modules: [srcPath, 'node_modules']
 	},
 	optimization: {
-		minimize: !development,
+		minimize: !isDev,
 		splitChunks: {
 			cacheGroups: {
 				commons: {
