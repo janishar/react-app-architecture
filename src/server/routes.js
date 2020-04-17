@@ -10,7 +10,7 @@ const router = express.Router();
 router.use('/', landingPage)
 
 function landingPage(req, res, next) {
-	res.send(pageBuilder(req, res, <Landing />))
+	res.send(pageBuilder(req, <Landing />))
 }
 
 export default router;

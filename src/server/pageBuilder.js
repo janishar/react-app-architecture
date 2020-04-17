@@ -2,7 +2,6 @@
 import type { Request } from 'express';
 import type { Node } from 'react';
 import React from 'react';
-import { render } from 'react-dom';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { renderToString } from 'react-dom/server'
@@ -10,7 +9,7 @@ import { CookiesProvider } from 'react-cookie';
 import { StaticRouter } from 'react-router-dom';
 import { minify as minifyHtml } from 'html-minifier';
 import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles';
-import renderTemplate from './template';
+import render from './template';
 import configureStore from './devStoreConfig';
 import theme from '../client/theme';
 import rootReducer from '../client/reducers'
@@ -59,7 +58,15 @@ export default (req: Request, view: Node, currentState?: Object,
 	if (!coverImg) coverImg = `${baseUrl}/assets/og-cover-image.jpg`
 	if (!description) description = 'This is the sample project to learn and implement React app.'
 
-	let htmlPage = render(html, css, preloadedState, siteUrl, title, coverImg, description)
+	let htmlPage = render({
+		html: html,
+		css: css,
+		preloadedState: preloadedState,
+		siteUrl: siteUrl,
+		title: title,
+		coverImg: coverImg,
+		description: description
+	})
 
 	try {
 		htmlPage = minifyHtml(htmlPage, {

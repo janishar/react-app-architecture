@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && npm run bundle && npm run serve",
-    "watch": "npm run test && npm run clean && npm run build && npm run serve",
-    "serve": "node ./build/server/server.prod.js",
+    "watch": "npm run test && npm run clean && npm run devserver",
+    "devserver": "node src/server/server.dev.js",
+	"serve": "NODE_ENV=production node build/server/server.prod.js",
     "prebuild": "npm run clean",
     "bundle": "webpack -p --config ./webpack.config.js",
     "clean": "rimraf ./dist && mkdir dist",

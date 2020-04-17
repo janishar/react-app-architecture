@@ -105,7 +105,6 @@ dist
 
 # Project
 .idea
-.vscode
 *.iml
 .DS_Store
 config.js
