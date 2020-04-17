@@ -1,5 +1,4 @@
 // @flow
-import { hot } from 'react-hot-loader/root'; // required at the top for a bug in react-hot-loader lib
 import React, { useEffect } from 'react';
 import { hydrate } from 'react-dom'
 import { createStore, applyMiddleware } from 'redux'

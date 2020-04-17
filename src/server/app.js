@@ -1,10 +1,10 @@
 // @flow
+import path from 'path'
 import express from 'express';
 import { join } from 'path';
 import cookiesMiddleware from 'universal-cookie-express';
 import favicon from 'serve-favicon';
 import register from 'ignore-styles';
-import routes from './routes';
 
 const app = express();
 app.set('port', process.env.PORT || 3001);
@@ -19,6 +19,7 @@ register(['.sass', '.scss', '.less', '.css', '.svg', '.eot', '.woff', '.woff2', 
 
 app.use(cookiesMiddleware());
 
-app.use(routes)
+// sitemap
+app.use('/sitemap', (req, res, next) => res.sendFile(path.join(__dirname, '../../public/sitemap.xml')))
 
 export default app;

@@ -9,14 +9,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // bake .env into the client code
 const configEnv = dotenv.config({ debug: true }).parsed;
-const envKeys = Object
-	.keys(path.join(__dirname, '../.env'))
+const envKeys = Object.keys(configEnv)
 	.reduce((result, key) => {
-		result[`process.env.${key}`] = configEnv[key];
+		result[`process.env.${key}`] = JSON.stringify(configEnv[key]);
 		return result;
 	}, {});
 
-const isDev = process.env.NODE_ENV === 'development';
+const isEnvDevelopment = process.env.NODE_ENV === 'development';
 
 const srcPath = path.resolve(__dirname, './src/client');
 const distPath = path.resolve(__dirname, './dist');
@@ -36,13 +35,11 @@ const copyAssets = new CopyWebpackPlugin([
 ])
 
 const cssLoaders = [
-	{
-		loader: "css-loader",
-	},
+	{ loader: "css-loader" },
 	{
 		loader: "postcss-loader",
 		options: {
-			plugins: () => isDev ? [autoprefixer] :
+			plugins: () => isEnvDevelopment ? [autoprefixer] :
 				[
 					autoprefixer,
 					cssnano({ discardComments: { removeAll: true, filterPlugins: false } })
@@ -52,11 +49,11 @@ const cssLoaders = [
 ];
 
 module.exports = {
-	devtool: isDev ? 'inline-source-map' : false,
-	mode: isDev ? 'development' : 'production',
+	devtool: isEnvDevelopment ? 'inline-source-map' : false,
+	mode: isEnvDevelopment ? 'development' : 'production',
 	context: srcPath,
 	entry: {
-		app: isDev ? [srcPath, 'webpack-hot-middleware/client'] : srcPath,
+		app: isEnvDevelopment ? ['index.js', 'webpack-hot-middleware/client'] : 'index.js',
 	},
 	output: {
 		path: distPath,
@@ -68,7 +65,7 @@ module.exports = {
 		extractStyle,
 		new webpack.NamedModulesPlugin(),
 		new webpack.DefinePlugin(envKeys),
-	].concat(isDev ? [
+	].concat(isEnvDevelopment ? [
 		new webpack.HotModuleReplacementPlugin()
 	] : []),
 	module: {
@@ -94,7 +91,7 @@ module.exports = {
 					options: {
 						name: "[name].[ext]",
 						publicPath: '/',
-						outputPath: 'assets/',
+						outputPath: 'font/',
 						limit: 10 * 1000, //10 kb
 						fallback: 'file-loader'
 					}
@@ -107,7 +104,7 @@ module.exports = {
 					options: {
 						name: "[name].[ext]",
 						publicPath: '/',
-						outputPath: 'assets/',
+						outputPath: 'img/',
 					}
 				}]
 			}
@@ -117,7 +114,7 @@ module.exports = {
 		modules: [srcPath, 'node_modules']
 	},
 	optimization: {
-		minimize: !isDev,
+		minimize: !isEnvDevelopment,
 		splitChunks: {
 			cacheGroups: {
 				commons: {

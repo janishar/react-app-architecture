@@ -37,13 +37,18 @@ export default ({ html, css, preloadedState, siteUrl, title, coverImg, descripti
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@after_academy">
     <meta name="description" content="${description}"/>
-    <style id="jss-server-side">${css}</style>
-    <link rel="stylesheet" type="text/css" href="/styles/vendor-${VERSION}.css"/>
-    <link rel="stylesheet" type="text/css" href="/styles/app-${VERSION}.css"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <!-- 
+	<style id="jss-server-side">${css}</style>
+	
+	<!-- If you use css files in addition to jss then uncomment the stylesheet below-->
+	<!--   
+	<link rel="stylesheet" type="text/css" href="/styles/vendor-${VERSION}.css"/>
+	<link rel="stylesheet" type="text/css" href="/styles/app-${VERSION}.css"/>
+	-->
+	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<!-- 
     <script async src="https://www.googleta/gmanager.com/gtag/js?id=<YOUR_GOOGLE_ANALYTICS_ID>"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -51,7 +56,8 @@ export default ({ html, css, preloadedState, siteUrl, title, coverImg, descripti
         gtag('js', new Date());
         gtag('config', '<YOUR_GOOGLE_ANALYTICS_ID>');
     </script> 
-    -->
+	-->
+	
     ${appLoaderStyle}
   </head>
   <body>

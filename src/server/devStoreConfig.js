@@ -13,7 +13,7 @@ const devStoreConfig = (preloadedState: Object) => {
 		// Enable Webpack hot module replacement for reducers
 		// $FlowFixMe
 		module.hot.accept('../client/reducers', () => {
-			const nextRootReducer = require('../client/reducers').default
+			const nextRootReducer = require('../client/reducers')
 			store.replaceReducer(nextRootReducer)
 		})
 	}

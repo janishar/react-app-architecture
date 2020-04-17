@@ -4,16 +4,16 @@
   "description": "React.js Web Application Architecture - Learn to build a complete website for a blogging platform like Medium, FreeCodeCamp, MindOrks etc using React.js, Redux, MaterialUI, and Webpack. OpenSource project by AfterAcademy",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && npm run bundle && npm run serve",
+    "start": "npm run build && npm run serve",
+	"serve": "node build/server/server.prod.js",
+    "devserver": "node -r @babel/register src/server/server.dev.js",
     "watch": "npm run test && npm run clean && npm run devserver",
-    "devserver": "node src/server/server.dev.js",
-	"serve": "NODE_ENV=production node build/server/server.prod.js",
     "prebuild": "npm run clean",
+    "build": "rimraf ./build && ./node_modules/.bin/babel src/ -d build/ && npm run bundle",
     "bundle": "webpack -p --config ./webpack.config.js",
     "clean": "rimraf ./dist && mkdir dist",
     "test": "jest --forceExit --detectOpenHandles --coverage --verbose",
-    "flow": "flow",
-    "build": "rimraf ./build && ./node_modules/.bin/babel src/ -d build/"
+    "flow": "flow"
   },
   "repository": {
     "type": "git",
