@@ -1,5 +1,4 @@
 // @flow
-import { hot } from 'react-hot-loader/root'; // required at the top for a bug in react-hot-loader lib
 import React, { useEffect } from 'react';
 import { hydrate } from 'react-dom'
 import { createStore, applyMiddleware } from 'redux'
@@ -10,7 +9,7 @@ import { CookiesProvider } from 'react-cookie';
 import { ThemeProvider } from '@material-ui/styles';
 
 import rootReducer from './reducers'
-import App from './ui/app/App';
+import App from './ui/app';
 
 import { logger, crashReporter } from './helpers/redux-middlewares'
 

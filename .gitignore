@@ -105,10 +105,10 @@ dist
 
 # Project
 .idea
-.vscode
 *.iml
 .DS_Store
 config.js
 
 # compliled by webpack
 dist
+build

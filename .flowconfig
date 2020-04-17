@@ -1,15 +1,16 @@
 [ignore]
 ./dist/
+./build/
 ./tests/
 ./node_modules/
 ./public/
 
 [include]
 ./src/
-./server/
+./tests/
 
 [libs]
-./src/types.js
+./src/client/types.js
 
 [lints]
 
