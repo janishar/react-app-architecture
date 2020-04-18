@@ -1,7 +1,7 @@
 import React, { useEffect, ReactElement } from 'react';
 import { hydrate } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { Route, BrowserRouter } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
@@ -28,7 +28,7 @@ try {
 delete window['__PRELOADED_STATE__'];
 
 // Create Redux store with initial state
-const store = createStore(rootReducer, preloadedState, applyMiddleware(thunkMiddleware, logger, crashReporter));
+const store = createStore(rootReducer, preloadedState, applyMiddleware(thunk, logger, crashReporter));
 
 const Routes = (): ReactElement => {
 	// remove the css sent inline in the html on client side

@@ -1,8 +1,10 @@
-import { createStore, Store } from 'redux';
-import RootReducer from '../client/reducers';
+import { createStore, Store, applyMiddleware } from 'redux';
+import rootReducer from '../client/reducers';
+import thunk from 'redux-thunk';
+import { logger, crashReporter } from '../client/utils/reduxMiddlewares';
 
 const devStoreConfig = (preloadedState: any): Store => {
-	const store = createStore(RootReducer, preloadedState);
+	const store = createStore(rootReducer, preloadedState, applyMiddleware(thunk, logger, crashReporter));
 
 	// @ts-ignore
 	if (module.hot) {
