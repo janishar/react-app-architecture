@@ -1,7 +1,6 @@
 /**
  * Logs all actions and states after they are dispatched.
  */
-
 const LOGGING = process.env.LOGGING;
 
 export const logger = store => next => action => {

@@ -1,23 +1,22 @@
-// @flow
-const VERSION = require('../../package.json').version
+import { version } from '../../package.json';
 
-export type RenderOption = {
-  html: string,
-  css: string,
-  preloadedState: Object,
-  siteUrl: string,
-  title: string,
-  coverImg: string,
-  description: string,
+export interface RenderOption {
+	html: string;
+	css: string;
+	preloadedState: any;
+	siteUrl: string;
+	title: string;
+	coverImg: string;
+	description: string;
 }
 
 const appLoaderStyle = `
 	<style>
 	</style>
-`
+`;
 
-export default ({ html, css, preloadedState, siteUrl, title, coverImg, description }: RenderOption) =>
-  `<!doctype html>
+export default ({ html, css, preloadedState, siteUrl, title, coverImg, description }: RenderOption): string =>
+	`<!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
   <head>
     <title>${title}</title>
@@ -43,8 +42,8 @@ export default ({ html, css, preloadedState, siteUrl, title, coverImg, descripti
 	
 	<!-- If you use css files in addition to jss then uncomment the stylesheet below-->
 	<!--   
-	<link rel="stylesheet" type="text/css" href="/styles/vendor-${VERSION}.css"/>
-	<link rel="stylesheet" type="text/css" href="/styles/app-${VERSION}.css"/>
+	<link rel="stylesheet" type="text/css" href="/styles/vendor-${version}.css"/>
+	<link rel="stylesheet" type="text/css" href="/styles/app-${version}.css"/>
 	-->
 	
 	<!-- Global site tag (gtag.js) - Google Analytics -->
@@ -66,7 +65,7 @@ export default ({ html, css, preloadedState, siteUrl, title, coverImg, descripti
     <script type='text/javascript'>
         window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
     </script>
-    <script type='text/javascript' src="/js/vendor-bundle-${VERSION}.js"></script>
-    <script type='text/javascript' src="/js/app-bundle-${VERSION}.js"></script>
+    <script type='text/javascript' src="/js/vendor-bundle-${version}.js"></script>
+    <script type='text/javascript' src="/js/app-bundle-${version}.js"></script>
   </body>
-</html>`
+</html>`;

@@ -1,18 +1,17 @@
-// @flow
 import { Switch, Route } from 'react-router-dom';
-import React from 'react'
+import React, { ReactElement } from 'react';
 
 import Landing from '../landing';
 
-const Routes = () => (
+const Routes = (): ReactElement => (
 	<Switch>
 		{/* PUBLIC CONTENTS */}
-		<Route exact path='/' component={Landing} />
+		<Route exact path="/" component={Landing} />
 
 		{/*FALLBACK*/}
 		{/* <Route exact path='/404' component={NotFound} /> */}
 		{/* <Route path='*' component={NotFound} /> */}
-	</Switch >
-)
+	</Switch>
+);
 
 export default Routes;
