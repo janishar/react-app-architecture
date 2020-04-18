@@ -59,7 +59,7 @@ export const timeoutScheduler = () => (next: any) => (action: any) => {
  */
 export const rafScheduler = () => (next: any) => {
 	let queuedActions: any[] = [];
-	let frame: number = null;
+	let frame: number | null = null;
 
 	function loop() {
 		frame = null;

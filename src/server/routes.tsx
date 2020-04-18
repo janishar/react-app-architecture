@@ -2,15 +2,19 @@ import express, { Response } from 'express';
 import React from 'react';
 import pageBuilder from './pageBuilder';
 import Landing from '../client/landing';
-import { PublicRequest } from './types';
+import { PublicRequest } from 'server-types';
 
 const router = express.Router();
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function landingPage(req: PublicRequest, res: Response) {
+router.get('/', sendLandingPage);
+router.use('*', sendNotFoundPagePage);
+
+function sendLandingPage(req: PublicRequest, res: Response) {
 	res.send(pageBuilder(req, <Landing />));
 }
 
-router.use('/', landingPage);
+function sendNotFoundPagePage(req: PublicRequest, res: Response) {
+	res.status(404).send('<html><body><h1>PAGE NOT FOUND</h1></body></html>');
+}
 
 export default router;

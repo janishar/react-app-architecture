@@ -1,4 +1,4 @@
-import { Action, AsyncAction } from '../types';
+import { Action, AsyncAction } from 'app-types';
 
 export const CLEAR_PAGE_TITLE = 'CLEAR_PAGE_TITLE';
 export const SET_PAGE_TITLE = 'SET_PAGE_TITLE';

@@ -35,8 +35,7 @@ const Routes = (): ReactElement => {
 	// useEffect in similar to componentDidMount for function components
 	useEffect(() => {
 		const jssStyles = document.querySelector('#jss-server-side');
-		//$FlowFixMe
-		if (jssStyles) jssStyles.parentNode.removeChild(jssStyles);
+		if (jssStyles && jssStyles.parentNode) jssStyles.parentNode.removeChild(jssStyles);
 	}, []);
 
 	return (

@@ -1,12 +1,12 @@
 import app from './app';
 import routes from './routes';
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 app.use(routes);
 
-app.use((err: Error, req: Request, res: Response) => {
-	res.status(404);
-	res.redirect('/404');
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+	res.status(500).send('INTERNAL SERVER ERROR');
 });
 
 app.listen(process.env.PORT || 3001, () => {

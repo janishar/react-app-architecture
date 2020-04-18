@@ -11,7 +11,7 @@ import configureStore from './devStoreConfig';
 import theme from '../client/theme';
 import rootReducer from '../client/reducers';
 import App from '../client/app';
-import { PublicRequest } from './types';
+import { PublicRequest } from 'server-types';
 import thunk from 'redux-thunk';
 
 const isDev = process.env.NODE_ENV === 'development';

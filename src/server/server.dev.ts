@@ -4,6 +4,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import app from './app';
 import routes from './routes';
 import webpackConfig from '../../webpack.config';
+import { Request, Response, NextFunction } from 'express';
 
 const serverOptions = {
 	quiet: false,
@@ -20,6 +21,11 @@ app.use(webpackDevMiddleware(compiler, serverOptions));
 app.use(webpackHotMiddleware(compiler));
 
 app.use(routes);
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+	res.status(500).send(err);
+});
 
 app.listen(process.env.PORT || 3001, () => {
 	console.log(`🚧 server listening on port : ${process.env.PORT || 3001}`);
