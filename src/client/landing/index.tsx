@@ -5,7 +5,7 @@ export default function Landing(): ReactElement {
 	// const classes = useStyles();
 	return (
 		<div>
-			<h1>TESTING 2</h1>
+			<h1>TESTING</h1>
 		</div>
 	);
 }

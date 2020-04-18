@@ -4,14 +4,14 @@
   "description": "React.js Web Application Architecture - Learn to build a complete website for a blogging platform like Medium, FreeCodeCamp, MindOrks etc using React.js, Redux, MaterialUI, and Webpack. OpenSource project by AfterAcademy",
   "main": "index.js",
   "scripts": {
-	"start": "npm run build && npm run serve",
-	"serve": "NODE_ENV=production node -r ./babel-register.js src/server/server.prod.ts",
-	"devserver": "NODE_ENV=development node -r ./babel-register.js src/server/server.dev.ts",
-	"watch": "npm run test && npm run clean && npm run devserver",
-	"prebuild": "npm run clean",
-	"build": "NODE_ENV=production webpack -p --config ./webpack.config.js",
-	"clean": "rimraf ./dist && mkdir dist",
-	"test": "jest --forceExit --detectOpenHandles --coverage --verbose"
+    "start": "npm run build && npm run serve",
+    "serve": "NODE_ENV=production node -r ./babel-register.js src/server/server.prod.ts",
+    "devserver": "NODE_ENV=development node -r ./babel-register.js src/server/server.dev.ts",
+    "watch": "npm run clean && npm run devserver",
+    "prebuild": "npm run clean",
+    "build": "NODE_ENV=production webpack -p --config ./webpack.config.js",
+    "clean": "rimraf ./dist && mkdir dist",
+    "test": "jest --forceExit --detectOpenHandles --coverage --verbose"
   },
   "repository": {
     "type": "git",
@@ -61,6 +61,7 @@
     "@babel/preset-typescript": "^7.9.0",
     "@babel/register": "^7.9.0",
     "@babel/runtime": "^7.9.2",
+    "@hot-loader/react-dom": "^16.13.0",
     "@types/express": "^4.17.6",
     "@types/html-minifier": "^3.5.3",
     "@types/ignore-styles": "^5.0.0",

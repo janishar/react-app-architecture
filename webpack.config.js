@@ -109,6 +109,7 @@ module.exports = {
 	resolve: {
 		modules: [srcPath, 'node_modules'],
 		extensions: ['.ts', '.tsx', '.js', '.jsx'],
+		alias: { 'react-dom': '@hot-loader/react-dom' },
 	},
 	optimization: {
 		minimize: !isEnvDevelopment,
