@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 import { CookiesProvider } from 'react-cookie';
@@ -12,6 +12,7 @@ import theme from '../client/theme';
 import rootReducer from '../client/reducers';
 import App from '../client/app';
 import { PublicRequest } from './types';
+import thunk from 'redux-thunk';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -43,7 +44,7 @@ export default function pageBuilder(
 
 	if (!currentState) currentState = {};
 
-	const store = isDev ? configureStore(currentState) : createStore(rootReducer, currentState);
+	const store = isDev ? configureStore(currentState) : createStore(rootReducer, currentState, applyMiddleware(thunk));
 
 	// Render the component to a string
 	const html = renderToString(

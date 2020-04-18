@@ -1,9 +1,9 @@
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpackConfig from '../../webpack.config';
 import app from './app';
 import routes from './routes';
+import webpackConfig from '../../webpack.config';
 
 const serverOptions = {
 	quiet: false,

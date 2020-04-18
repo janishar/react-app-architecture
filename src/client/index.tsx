@@ -15,7 +15,7 @@ import { logger, crashReporter } from './utils/reduxMiddlewares';
 import theme from './theme';
 
 // Grab the state from a global variable injected into the server-generated HTML
-const preloadedState = window['__PRELOADED_STATE__'];
+const preloadedState = window.__PRELOADED_STATE__;
 
 try {
 	if (preloadedState && preloadedState.authData && preloadedState.authData.credential)
@@ -25,7 +25,7 @@ try {
 }
 
 // Allow the passed state to be garbage-collected
-delete window['__PRELOADED_STATE__'];
+delete window.__PRELOADED_STATE__;
 
 // Create Redux store with initial state
 const store = createStore(rootReducer, preloadedState, applyMiddleware(thunk, logger, crashReporter));
