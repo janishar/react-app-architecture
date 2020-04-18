@@ -9,11 +9,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // bake .env into the client code
 const configEnv = dotenv.config({ debug: true }).parsed;
-const envKeys = Object.keys(configEnv)
-	.reduce((result, key) => {
-		result[`process.env.${key}`] = JSON.stringify(configEnv[key]);
-		return result;
-	}, {});
+const envKeys = Object.keys(configEnv).reduce((result, key) => {
+	result[`process.env.${key}`] = JSON.stringify(configEnv[key]);
+	return result;
+}, {});
 
 const isEnvDevelopment = process.env.NODE_ENV === 'development';
 
@@ -22,30 +21,31 @@ const distPath = path.resolve(__dirname, './dist');
 
 const extractStyle = new MiniCssExtractPlugin({
 	filename: `styles/[name]-${VERSION}.css`,
-	chunkFilename: `styles/[name]-${VERSION}.css`
+	chunkFilename: `styles/[name]-${VERSION}.css`,
 });
 
 // used for those files which can't be loaded by url-loader
 const copyAssets = new CopyWebpackPlugin([
 	// Copy directory contents to {output}/to/directory/
 	{
-		// from: 'assets', to: 'assets', // if the context directory has assets 
-		from: './src/client/assets', to: 'assets'
-	}
-])
+		// from: 'assets', to: 'assets', // if the context directory has assets
+		from: './src/client/assets',
+		to: 'assets',
+	},
+]);
 
 const cssLoaders = [
-	{ loader: "css-loader" },
+	{ loader: 'css-loader' },
 	{
-		loader: "postcss-loader",
+		loader: 'postcss-loader',
 		options: {
-			plugins: () => isEnvDevelopment ? [autoprefixer] :
-				[
-					autoprefixer,
-					cssnano({ discardComments: { removeAll: true, filterPlugins: false } })
-				]
-		}
-	}
+			// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+			plugins: () =>
+				isEnvDevelopment
+					? [autoprefixer]
+					: [autoprefixer, cssnano({ discardComments: { removeAll: true, filterPlugins: false } })],
+		},
+	},
 ];
 
 module.exports = {
@@ -53,25 +53,20 @@ module.exports = {
 	mode: isEnvDevelopment ? 'development' : 'production',
 	context: srcPath,
 	entry: {
-		app: isEnvDevelopment ? ['index.js', 'webpack-hot-middleware/client'] : 'index.js',
+		app: isEnvDevelopment ? ['index.tsx', 'webpack-hot-middleware/client'] : 'index.tsx',
 	},
 	output: {
 		path: distPath,
 		filename: `js/[name]-bundle-${VERSION}.js`,
-		publicPath: '/'
+		publicPath: '/',
 	},
-	plugins: [
-		copyAssets,
-		extractStyle,
-		new webpack.NamedModulesPlugin(),
-		new webpack.DefinePlugin(envKeys),
-	].concat(isEnvDevelopment ? [
-		new webpack.HotModuleReplacementPlugin()
-	] : []),
+	plugins: [copyAssets, extractStyle, new webpack.NamedModulesPlugin(), new webpack.DefinePlugin(envKeys)].concat(
+		isEnvDevelopment ? [new webpack.HotModuleReplacementPlugin()] : [],
+	),
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				test: /\.(ts|js)x?$/,
 				exclude: [/node_modules/],
 				use: {
 					loader: 'babel-loader',
@@ -79,56 +74,58 @@ module.exports = {
 			},
 			{
 				test: /\.(css)$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					...cssLoaders
-				]
+				use: [MiniCssExtractPlugin.loader, ...cssLoaders],
 			},
 			{
 				test: /\.(eot|woff|woff2|ttf)$/,
-				use: [{
-					loader: 'url-loader',
-					options: {
-						name: "[name].[ext]",
-						publicPath: '/',
-						outputPath: 'font/',
-						limit: 10 * 1000, //10 kb
-						fallback: 'file-loader'
-					}
-				}]
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							name: '[name].[ext]',
+							publicPath: '/',
+							outputPath: 'font/',
+							limit: 10 * 1000, //10 kb
+							fallback: 'file-loader',
+						},
+					},
+				],
 			},
 			{
 				test: /\.(svg|png|jpg|jpeg|gif)$/,
-				use: [{
-					loader: 'file-loader',
-					options: {
-						name: "[name].[ext]",
-						publicPath: '/',
-						outputPath: 'img/',
-					}
-				}]
-			}
-		]
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: '[name].[ext]',
+							publicPath: '/',
+							outputPath: 'img/',
+						},
+					},
+				],
+			},
+		],
 	},
 	resolve: {
-		modules: [srcPath, 'node_modules']
+		modules: [srcPath, 'node_modules'],
+		extensions: ['.ts', '.tsx', '.js', '.jsx'],
 	},
 	optimization: {
 		minimize: !isEnvDevelopment,
 		splitChunks: {
 			cacheGroups: {
 				commons: {
-					name: "commons",
-					chunks: "all",
-					minChunks: 2
+					name: 'commons',
+					chunks: 'all',
+					minChunks: 2,
 				},
 				vendor: {
 					test: /node_modules/,
-					name: "vendor",
-					chunks: "all",
-					enforce: true
-				}
-			}
-		}
-	}
+					name: 'vendor',
+					chunks: 'all',
+					enforce: true,
+				},
+			},
+		},
+	},
 };
