@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import appReducer, { State as AppState } from './app/reducer';
+import appReducer, { State as AppState } from './ui/app/reducer';
 
 export interface RootState {
 	appState: AppState;

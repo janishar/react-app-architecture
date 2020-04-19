@@ -8,7 +8,7 @@ import { CookiesProvider } from 'react-cookie';
 import { ThemeProvider } from '@material-ui/styles';
 
 import rootReducer from './reducers';
-import App from './app';
+import App from './ui/app';
 
 import { logger, crashReporter } from './utils/reduxMiddlewares';
 

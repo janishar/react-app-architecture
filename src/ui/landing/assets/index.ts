@@ -1,4 +1,4 @@
-import { asset } from '../../utils/assetHelper';
+import { asset } from '../../../utils/assetHelper';
 
 // required for the webpack to bundle inthe package
 import './test-image.png';
