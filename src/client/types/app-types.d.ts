@@ -9,3 +9,9 @@ declare interface Action {
 declare type Dispatch = ReduxDispatch<ReduxAction<Action>>;
 
 declare type AsyncAction = ThunkAction<void, RootState, unknown, ReduxAction<string>>;
+
+declare global {
+	interface Window {
+		__PRELOADED_STATE__: any;
+	}
+}

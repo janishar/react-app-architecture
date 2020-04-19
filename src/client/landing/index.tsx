@@ -1,16 +1,14 @@
 import React, { ReactElement } from 'react';
 // import useStyles from './style';
 
-import image from './img/test-image.png';
-
-console.log('image', image);
+import './assets/test-image.png';
 
 export default function Landing(): ReactElement {
 	// const classes = useStyles();
 	return (
 		<div>
 			<h1>TESTING</h1>
-			<img src={image}></img>
+			<img src="assets/test-image.png"></img>
 		</div>
 	);
 }
