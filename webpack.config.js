@@ -18,8 +18,8 @@ const isEnvDevelopment = process.env.NODE_ENV === 'development';
 
 const srcPath = path.resolve(__dirname, './src/client');
 const distPath = path.resolve(__dirname, './dist');
-const htmlPath = path.resolve(__dirname, './public/index.html');
-const templatePath = path.resolve(__dirname, './dist/template/index.html');
+const templatePath = path.resolve(__dirname, './public/template.html');
+const htmlPath = path.resolve(__dirname, './dist/template.html');
 
 const extractStyle = new MiniCssExtractPlugin({
 	filename: isEnvDevelopment ? 'style/[name].css' : 'style/[name].[hash].css',
@@ -73,9 +73,9 @@ module.exports = {
 		] :
 		[
 			new HtmlWebpackPlugin({
-				template: htmlPath,
+				template: templatePath,
 				minify: false,
-				filename: templatePath
+				filename: htmlPath
 			})
 		]
 	),

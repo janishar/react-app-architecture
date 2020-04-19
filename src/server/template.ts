@@ -27,8 +27,8 @@ export interface RenderOption {
 export const loadTemplateBlocking = () => {
 	try {
 		const htmlPath = isDev
-			? join(__dirname, '../../public/index.html')
-			: join(__dirname, '../../dist/template/index.html');
+			? join(__dirname, '../../public/template.html')
+			: join(__dirname, '../../dist/template.html');
 		if (!fs.existsSync(htmlPath)) {
 			console.log(`${htmlPath} does not exists, loadTemplate failed`);
 			return process.exit();
