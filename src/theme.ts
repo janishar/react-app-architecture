@@ -19,7 +19,17 @@ const theme = createMuiTheme({
 			main: red.A400,
 		},
 		background: {
-			default: '#fff',
+			default: 'black',
+		},
+	},
+	custom: {
+		colors: {
+			white: 'white',
+			light: '#f9f9f9',
+			black: 'black',
+			dark: '#666',
+			gray: '#999',
+			aliceBlue: 'aliceBlue',
 		},
 	},
 	typography: {

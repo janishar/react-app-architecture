@@ -2,7 +2,7 @@ module.exports = function (source) {
 
 	if (!this.query.functionName) throw new Error('Provide the functionName in options for this loader')
 
-	const regex = new RegExp(`/${this.query.functionName}\((.*)\)/g`);
+	const regex = new RegExp(`${this.query.functionName}\\((.*)\\)`, 'g');
 
 	const results = [];
 	let match = null;
