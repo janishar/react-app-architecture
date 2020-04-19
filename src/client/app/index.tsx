@@ -13,9 +13,9 @@ function App({ children }: Prop): ReactElement {
 	const classes = useStyles();
 
 	const dispatch = useDispatch();
-	dispatch(testAsyncDispatch('Test Title'));
+
 	useEffect(() => {
-		// dispatch(testAsyncDispatch('Test Title'));
+		dispatch(testAsyncDispatch('Test Title'));
 	}, [dispatch]);
 
 	return <div className={classes.root}>{children !== undefined ? children : <Routes />}</div>;
