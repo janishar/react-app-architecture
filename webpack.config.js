@@ -16,7 +16,7 @@ const envKeys = Object.keys(configEnv).reduce((result, key) => {
 
 const isEnvDevelopment = process.env.NODE_ENV === 'development';
 
-const srcPath = path.resolve(__dirname, './src/client');
+const srcPath = path.resolve(__dirname, './src');
 const distPath = path.resolve(__dirname, './dist');
 const templatePath = path.resolve(__dirname, './public/template.html');
 const htmlPath = path.resolve(__dirname, './dist/template.html');
@@ -31,7 +31,7 @@ const copyAssets = new CopyWebpackPlugin([
 	// Copy directory contents to {output}/to/directory/
 	{
 		// from: 'assets', to: 'assets', // if the context directory has assets
-		from: './src/client/assets',
+		from: './src/assets',
 		to: 'assets',
 	},
 ]);

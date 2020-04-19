@@ -80,4 +80,4 @@ export default function render({
 		[APP_HTML]: html,
 		[SITE_CSS]: css,
 	});
-};
+}
