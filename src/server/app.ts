@@ -4,22 +4,24 @@ import { join } from 'path';
 import cookiesMiddleware from 'universal-cookie-express';
 import favicon from 'serve-favicon';
 import register from 'ignore-styles';
+import { loadTemplateBlocking } from './template';
+
+global.htmlTemplate = loadTemplateBlocking();
 
 const app = express();
 app.set('port', process.env.PORT || 3001);
+app.use('/template/*', (req, res) => res.status(404).send('<html><body><h1>PAGE NOT FOUND</h1></body></html>'));
 app.use(express.static(join(__dirname, '../../dist'), { maxAge: '7d' })); //seven day cache
-app.use(express.static(join(__dirname, '../../public'), { maxAge: '7d' }));
+app.use(express.static(join(__dirname, '../../public/robots.txt')));
+app.use(express.static(join(__dirname, '../../public/sitemap.xml')));
 app.use(favicon(join(__dirname, '../../public', 'favicon.ico')));
+app.get('/sitemap', (req, res) => res.sendFile(path.join(__dirname, '../../public/sitemap.xml')));
 
-// @ts-ignore
 global.navigator = { userAgent: 'all' };
 
 // This is added so that @babel/register don't crash when compiling modular style dependencies
 register(['.sass', '.scss', '.less', '.css', '.svg', '.eot', '.woff', '.woff2', '.ttf', '.png', '.jpg', '.jpeg']);
 
 app.use(cookiesMiddleware());
-
-// sitemap
-app.use('/sitemap', (req, res) => res.sendFile(path.join(__dirname, '../../public/sitemap.xml')));
 
 export default app;

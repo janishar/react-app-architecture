@@ -1,4 +1,18 @@
-import { version } from '../../package.json';
+import fs from 'fs';
+import { join } from 'path';
+
+const isDev = process.env.NODE_ENV === 'development';
+
+const SITE_TITLE = '%SITE_TITLE%';
+const SITE_URL = '%SITE_URL%';
+const SITE_COVER_IMG_URL = '%SITE_COVER_IMG_URL%';
+const SITE_DESCRIPTION = '%SITE_DESCRIPTION%';
+const SITE_CSS = '/*SITE_CSS*/';
+const APP_HTML = 'APP_HTML';
+const SITE_PRELOADED_STATE = 'SITE_PRELOADED_STATE';
+const SITE_SCRIPTS = '<!-- SITE_SCRIPTS -->';
+const DEV_SCRIPTS =
+	"<script type='text/javascript' src='/js/vendor.js'></script><script type='text/javascript' src='/js/app.js'></script>";
 
 export interface RenderOption {
 	html: string;
@@ -10,62 +24,60 @@ export interface RenderOption {
 	description: string;
 }
 
-const appLoaderStyle = `
-	<style>
-	</style>
-`;
+export const loadTemplateBlocking = () => {
+	try {
+		const htmlPath = isDev
+			? join(__dirname, '../../public/index.html')
+			: join(__dirname, '../../dist/template/index.html');
+		if (!fs.existsSync(htmlPath)) {
+			console.log(`${htmlPath} does not exists, loadTemplate failed`);
+			return process.exit();
+		}
+		const html = fs.readFileSync(htmlPath, 'utf8');
+		if (!html) {
+			console.log(`${htmlPath} does not exists, file empty`);
+			return process.exit();
+		}
+		return isDev ? html.replace(SITE_SCRIPTS, DEV_SCRIPTS) : html;
+	} catch (e) {
+		console.error(e);
+		process.exit();
+	}
+};
 
-export default ({ html, css, preloadedState, siteUrl, title, coverImg, description }: RenderOption): string =>
-	`<!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
-  <head>
-    <title>${title}</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no">
-    <link rel="canonical" href="${siteUrl}">
-    <meta name="keywords" content="afteracademy, github, opensource, react, redux, ssr"/>
-    <meta property="og:title" content="${title}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="${siteUrl}" />
-    <meta property="og:image" content="${coverImg}" />
-    <meta property="og:description" content="${description}" />
-    <meta property="twitter:title" content="${title}">
-    <meta name="twitter:description" content="${description}">
-    <meta name="twitter:image:src" content="${coverImg}">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@after_academy">
-    <meta name="description" content="${description}"/>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-	<style id="jss-server-side">${css}</style>
-	
-	<!-- If you use css files in addition to jss then uncomment the stylesheet below-->
-	<!--   
-	<link rel="stylesheet" type="text/css" href="/styles/vendor-${version}.css"/>
-	<link rel="stylesheet" type="text/css" href="/styles/app-${version}.css"/>
-	-->
-	
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<!-- 
-    <script async src="https://www.googleta/gmanager.com/gtag/js?id=<YOUR_GOOGLE_ANALYTICS_ID>"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '<YOUR_GOOGLE_ANALYTICS_ID>');
-    </script> 
-	-->
-	
-    ${appLoaderStyle}
-  </head>
-  <body>
-    <div id="appLoader" class="app-loader"></div>
-    <div id="root">${html}</div>
-    <script type='text/javascript'>
-        window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
-    </script>
-    <script type='text/javascript' src="/js/vendor-bundle-${version}.js"></script>
-    <script type='text/javascript' src="/js/app-bundle-${version}.js"></script>
-  </body>
-</html>`;
+function replace(str: string, mapObj: any) {
+	const re = new RegExp(
+		Object.keys(mapObj)
+			.map((key) => escapeRegExp(key))
+			.join('|'),
+		'gi',
+	);
+	return str.replace(re, function (matched) {
+		return mapObj[matched];
+	});
+}
+
+function escapeRegExp(str: string) {
+	return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+
+export default function render({
+	html,
+	css,
+	preloadedState,
+	siteUrl,
+	title,
+	coverImg,
+	description,
+}: RenderOption): string {
+	const htmlTemplate = global.htmlTemplate;
+	return replace(htmlTemplate, {
+		[SITE_TITLE]: title,
+		[SITE_URL]: siteUrl,
+		[SITE_COVER_IMG_URL]: coverImg,
+		[SITE_DESCRIPTION]: description,
+		[SITE_PRELOADED_STATE]: JSON.stringify(preloadedState).replace(/</g, '\\u003c'),
+		[APP_HTML]: html,
+		[SITE_CSS]: css,
+	});
+};

@@ -3,9 +3,9 @@ const webpack = require('webpack');
 const cssnano = require('cssnano');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
-const VERSION = require('./package.json').version;
 const dotenv = require('dotenv');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // bake .env into the client code
 const configEnv = dotenv.config({ debug: true }).parsed;
@@ -18,10 +18,12 @@ const isEnvDevelopment = process.env.NODE_ENV === 'development';
 
 const srcPath = path.resolve(__dirname, './src/client');
 const distPath = path.resolve(__dirname, './dist');
+const htmlPath = path.resolve(__dirname, './public/index.html');
+const templatePath = path.resolve(__dirname, './dist/template/index.html');
 
 const extractStyle = new MiniCssExtractPlugin({
-	filename: `styles/[name]-${VERSION}.css`,
-	chunkFilename: `styles/[name]-${VERSION}.css`,
+	filename: isEnvDevelopment ? 'style/[name].css' : 'style/[name].[hash].css',
+	chunkFilename: isEnvDevelopment ? 'style/[name].css' : 'style/[name].[hash].css',
 });
 
 // used for those files which can't be loaded by url-loader
@@ -39,7 +41,6 @@ const cssLoaders = [
 	{
 		loader: 'postcss-loader',
 		options: {
-			// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 			plugins: () =>
 				isEnvDevelopment
 					? [autoprefixer]
@@ -57,11 +58,26 @@ module.exports = {
 	},
 	output: {
 		path: distPath,
-		filename: `js/[name]-bundle-${VERSION}.js`,
+		filename: isEnvDevelopment ? 'js/[name].js' : 'js/[name].[hash].js',
 		publicPath: '/',
 	},
-	plugins: [copyAssets, extractStyle, new webpack.NamedModulesPlugin(), new webpack.DefinePlugin(envKeys)].concat(
-		isEnvDevelopment ? [new webpack.HotModuleReplacementPlugin()] : [],
+	plugins: [
+		copyAssets,
+		extractStyle,
+		new webpack.NamedModulesPlugin(),
+		new webpack.DefinePlugin(envKeys),
+
+	].concat(isEnvDevelopment ?
+		[
+			new webpack.HotModuleReplacementPlugin(),
+		] :
+		[
+			new HtmlWebpackPlugin({
+				template: htmlPath,
+				minify: false,
+				filename: templatePath
+			})
+		]
 	),
 	module: {
 		rules: [
@@ -84,7 +100,7 @@ module.exports = {
 						options: {
 							name: '[name].[ext]',
 							publicPath: '/',
-							outputPath: 'font/',
+							outputPath: 'assets/',
 							limit: 10 * 1000, //10 kb
 							fallback: 'file-loader',
 						},
@@ -99,7 +115,7 @@ module.exports = {
 						options: {
 							name: '[name].[ext]',
 							publicPath: '/',
-							outputPath: 'img/',
+							outputPath: 'assets/',
 						},
 					},
 				],
