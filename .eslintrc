@@ -52,6 +52,7 @@
 	"ignorePatterns": [
 		"build/**/*",
 		"dist/**/*",
+		"tools/**/*",
 		"webpack.config.js"
 	]
 }
