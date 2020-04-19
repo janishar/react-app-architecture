@@ -84,9 +84,10 @@ module.exports = {
 			{
 				test: /\.(ts|js)x?$/,
 				exclude: [/node_modules/],
-				use: {
-					loader: 'babel-loader',
-				},
+				use: [
+					{ loader: 'babel-loader' },
+					{ loader: path.resolve('./tools/importer-loader.js') },
+				],
 			},
 			{
 				test: /\.(css)$/,

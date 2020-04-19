@@ -1,5 +1,7 @@
 import React, { ReactElement } from 'react';
-import { testImage } from './assets';
+import importer from '../../utils/importer';
+
+const testImage = importer('./assets/test-image.png');
 
 export default function Landing(): ReactElement {
 	// const classes = useStyles();
