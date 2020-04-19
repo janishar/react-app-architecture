@@ -1,3 +1,4 @@
 {
-	"javascript.validate.enable": true
+	"javascript.validate.enable": true,
+	"typescript.preferences.importModuleSpecifier": "relative"
 }
