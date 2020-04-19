@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import importer from '../../utils/importer';
+import importer from '@utils/importer';
 
 const testImage = importer('./assets/test-image.png');
 

@@ -1,7 +1,7 @@
 import express, { Response } from 'express';
 import React from 'react';
 import pageBuilder from './pageBuilder';
-import Landing from '../ui/landing';
+import Landing from '@ui/landing';
 import { PublicRequest } from 'server-types';
 
 const router = express.Router();

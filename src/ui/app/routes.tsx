@@ -1,7 +1,7 @@
 import { Switch, Route } from 'react-router-dom';
 import React, { ReactElement } from 'react';
 
-import Landing from '../landing';
+import Landing from '@ui/landing';
 
 const Routes = (): ReactElement => (
 	<Switch>

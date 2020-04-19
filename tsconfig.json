@@ -26,7 +26,13 @@
 				"node_modules/*",
 				"src/*.d.ts",
 				"src/server/*.d.ts",
-			]
+			],
+			"@ui/*": [
+				"src/ui/*"
+			],
+			"@utils/*": [
+				"src/utils/*"
+			],
 		}
 	},
 	"include": [

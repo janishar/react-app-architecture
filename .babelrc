@@ -8,6 +8,18 @@
 		"react-hot-loader/babel",
 		"@babel/proposal-class-properties",
 		"@babel/proposal-object-rest-spread",
-		"@babel/plugin-transform-runtime"
+		"@babel/plugin-transform-runtime",
+		[
+			"module-resolver",
+			{
+				"root": [
+					"./src"
+				],
+				"alias": {
+					"@ui": "./src/ui",
+					"@utils": "./src/utils"
+				}
+			}
+		]
 	]
 }
