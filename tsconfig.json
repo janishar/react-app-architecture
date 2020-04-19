@@ -24,8 +24,8 @@
 		"paths": {
 			"*": [
 				"node_modules/*",
-				"src/client/*.d.ts",
-				"src/server/*.d.ts",
+				"src/client/server-types.d.ts",
+				"src/server/app-types.d.ts",
 			]
 		}
 	},

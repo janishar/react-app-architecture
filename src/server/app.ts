@@ -1,4 +1,3 @@
-import path from 'path';
 import express from 'express';
 import { join } from 'path';
 import cookiesMiddleware from 'universal-cookie-express';
@@ -15,7 +14,7 @@ app.use(express.static(join(__dirname, '../../dist'), { maxAge: '7d' })); //seve
 app.use(express.static(join(__dirname, '../../public/robots.txt')));
 app.use(express.static(join(__dirname, '../../public/sitemap.xml')));
 app.use(favicon(join(__dirname, '../../public', 'favicon.ico')));
-app.get('/sitemap', (req, res) => res.sendFile(path.join(__dirname, '../../public/sitemap.xml')));
+app.get('/sitemap', (req, res) => res.sendFile(join(__dirname, '../../public/sitemap.xml')));
 
 global.navigator = { userAgent: 'all' };
 
