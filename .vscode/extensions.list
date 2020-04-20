@@ -23,3 +23,4 @@ code --install-extension skyran.js-jsx-snippets
 code --install-extension VisualStudioExptTeam.vscodeintellicode
 code --install-extension xabikos.JavaScriptSnippets
 code --install-extension Zignd.html-css-class-completion
+code --install-extension msjsdiag.debugger-for-chrome

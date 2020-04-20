@@ -2,7 +2,7 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "install-vscode-plugins",
+			"label": "vscode: Install Plugins",
 			"type": "shell",
 			"command": "chmod +x ./.vscode/extensions.list | ./.vscode/extensions.list",
 			"presentation": {
@@ -11,19 +11,19 @@
 			}
 		},
 		{
-			"label": "install dependencies",
+			"label": "Install Dependencies",
 			"type": "npm",
 			"script": "install"
 		},
 		{
-			"label": "start prod server",
+			"label": "Start Prod Server",
 			"type": "npm",
 			"script": "start"
 		},
 		{
-			"label": "start dev server",
+			"label": "Start Dev Server",
 			"type": "npm",
-			"script": "watch"
+			"script": "watch",
 		},
 		{
 			"label": "Template: Generate File",
