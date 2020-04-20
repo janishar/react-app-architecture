@@ -25,7 +25,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
 				black: React.CSSProperties['color'];
 				dark: React.CSSProperties['color'];
 				gray: React.CSSProperties['color'];
-				aliceBlue: React.CSSProperties['color'];
+				blueLight: React.CSSProperties['color'];
 			};
 		};
 	}
@@ -38,7 +38,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
 				black: React.CSSProperties['color'];
 				dark: React.CSSProperties['color'];
 				gray: React.CSSProperties['color'];
-				aliceBlue: React.CSSProperties['color'];
+				blueLight: React.CSSProperties['color'];
 			};
 		};
 	}
