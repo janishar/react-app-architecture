@@ -7,13 +7,13 @@ import webpackConfig from '../../webpack.config';
 import { Request, Response, NextFunction } from 'express';
 
 const serverOptions = {
-	quiet: false,
-	noInfo: false,
-	hot: true,
-	inline: true,
-	lazy: false,
-	publicPath: webpackConfig.output.publicPath,
-	stats: { colors: true },
+    quiet: false,
+    noInfo: false,
+    hot: true,
+    inline: true,
+    lazy: false,
+    publicPath: webpackConfig.output.publicPath,
+    stats: { colors: true },
 };
 // @ts-ignore
 const compiler = webpack(webpackConfig);
@@ -24,9 +24,9 @@ app.use(routes);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-	res.status(500).send(err);
+    res.status(500).send(err);
 });
 
 app.listen(process.env.PORT || 3001, () => {
-	console.log(`🚧 server listening on port : ${process.env.PORT || 3001}`);
+    console.log(`🚧 server listening on port : ${process.env.PORT || 3001}`);
 }).on('error', (e) => console.log(e));

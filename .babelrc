@@ -1,27 +1,21 @@
 {
-	"presets": [
-		"@babel/preset-env",
-		"@babel/preset-react",
-		"@babel/preset-typescript"
-	],
-	"plugins": [
-		"react-hot-loader/babel",
-		"@babel/proposal-class-properties",
-		"@babel/proposal-object-rest-spread",
-		"@babel/plugin-transform-runtime",
-		[
-			"module-resolver",
-			{
-				"root": [
-					"./src"
-				],
-				"alias": {
-					"@ui": "./src/ui",
-					"@utils": "./src/utils",
-					"@core/reducers": "./src/reducers.ts",
-					"@core/theme": "./src/theme.ts"
-				}
-			}
-		]
-	]
+    "presets": ["@babel/preset-env", "@babel/preset-react", "@babel/preset-typescript"],
+    "plugins": [
+        "react-hot-loader/babel",
+        "@babel/proposal-class-properties",
+        "@babel/proposal-object-rest-spread",
+        "@babel/plugin-transform-runtime",
+        [
+            "module-resolver",
+            {
+                "root": ["./src"],
+                "alias": {
+                    "@ui": "./src/ui",
+                    "@utils": "./src/utils",
+                    "@core/reducers": "./src/reducers.ts",
+                    "@core/theme": "./src/theme.ts"
+                }
+            }
+        ]
+    ]
 }

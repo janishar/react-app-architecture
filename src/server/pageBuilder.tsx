@@ -17,83 +17,85 @@ import thunk from 'redux-thunk';
 const isDev = process.env.NODE_ENV === 'development';
 
 export const getProtocol = (req: PublicRequest): string => {
-	// @ts-ignore
-	let proto: string = req.connection.encrypted ? 'https' : 'http';
-	// only do this if you trust the proxy
-	const forwarded = req.headers['x-forwarded-proto'];
-	if (forwarded) proto = forwarded.toString();
-	return proto.split(/\s*,\s*/)[0];
+    // @ts-ignore
+    let proto: string = req.connection.encrypted ? 'https' : 'http';
+    // only do this if you trust the proxy
+    const forwarded = req.headers['x-forwarded-proto'];
+    if (forwarded) proto = forwarded.toString();
+    return proto.split(/\s*,\s*/)[0];
 };
 
 export const buildUrl = (req: PublicRequest, endpoint: string): string => {
-	const baseUrl = `${getProtocol(req)}://${req.get('host')}/`;
-	return `${baseUrl}${endpoint}`;
+    const baseUrl = `${getProtocol(req)}://${req.get('host')}/`;
+    return `${baseUrl}${endpoint}`;
 };
 
 export default function pageBuilder(
-	req: PublicRequest,
-	view: ReactElement,
-	currentState?: any,
-	title?: string,
-	coverImg?: string,
-	description?: string,
-	preloadedState?: any,
+    req: PublicRequest,
+    view: ReactElement,
+    currentState?: any,
+    title?: string,
+    coverImg?: string,
+    description?: string,
+    preloadedState?: any,
 ): string {
-	// create mui server style
-	const sheets = new ServerStyleSheets();
+    // create mui server style
+    const sheets = new ServerStyleSheets();
 
-	if (!currentState) currentState = {};
+    if (!currentState) currentState = {};
 
-	const store = isDev ? configureStore(currentState) : createStore(rootReducer, currentState, applyMiddleware(thunk));
+    const store = isDev
+        ? configureStore(currentState)
+        : createStore(rootReducer, currentState, applyMiddleware(thunk));
 
-	// Render the component to a string
-	const html = renderToString(
-		sheets.collect(
-			<Provider store={store}>
-				<CookiesProvider cookies={req.universalCookies}>
-					<StaticRouter location={req.url} context={{}}>
-						<ThemeProvider theme={theme}>
-							<App>{view}</App>
-						</ThemeProvider>
-					</StaticRouter>
-				</CookiesProvider>
-			</Provider>,
-		),
-	);
+    // Render the component to a string
+    const html = renderToString(
+        sheets.collect(
+            <Provider store={store}>
+                <CookiesProvider cookies={req.universalCookies}>
+                    <StaticRouter location={req.url} context={{}}>
+                        <ThemeProvider theme={theme}>
+                            <App>{view}</App>
+                        </ThemeProvider>
+                    </StaticRouter>
+                </CookiesProvider>
+            </Provider>,
+        ),
+    );
 
-	// Grab the CSS from our sheets.
-	const css = sheets.toString();
+    // Grab the CSS from our sheets.
+    const css = sheets.toString();
 
-	// for sending the tree structure data
-	// to recreated on client side
-	// Grab the initial state from our Redux store
-	if (preloadedState === undefined) preloadedState = store.getState();
+    // for sending the tree structure data
+    // to recreated on client side
+    // Grab the initial state from our Redux store
+    if (preloadedState === undefined) preloadedState = store.getState();
 
-	const baseUrl = `${getProtocol(req)}://${req.get('host')}`;
-	const siteUrl = baseUrl + req.originalUrl;
+    const baseUrl = `${getProtocol(req)}://${req.get('host')}`;
+    const siteUrl = baseUrl + req.originalUrl;
 
-	if (!title) title = `AfterAcademy | React Project`;
-	if (!coverImg) coverImg = `${baseUrl}/assets/og-cover-image.jpg`;
-	if (!description) description = 'This is the sample project to learn and implement React app.';
+    if (!title) title = `AfterAcademy | React Project`;
+    if (!coverImg) coverImg = `${baseUrl}/assets/og-cover-image.jpg`;
+    if (!description) description = 'This is the sample project to learn and implement React app.';
 
-	let htmlPage = render({
-		html: html,
-		css: css,
-		preloadedState: preloadedState,
-		siteUrl: siteUrl,
-		title: title,
-		coverImg: coverImg,
-		description: description,
-	});
+    let htmlPage = render({
+        html: html,
+        css: css,
+        preloadedState: preloadedState,
+        siteUrl: siteUrl,
+        title: title,
+        coverImg: coverImg,
+        description: description,
+    });
 
-	try {
-		htmlPage = minifyHtml(htmlPage, {
-			minifyCSS: true,
-			minifyJS: true,
-		});
-	} catch (e) {
-		console.log(e);
-	}
+    try {
+        htmlPage = minifyHtml(htmlPage, {
+            minifyCSS: true,
+            minifyJS: true,
+        });
+    } catch (e) {
+        console.log(e);
+    }
 
-	return htmlPage;
+    return htmlPage;
 }

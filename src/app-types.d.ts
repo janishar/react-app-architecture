@@ -3,7 +3,7 @@ import { ThunkAction } from 'redux-thunk';
 import { RootState } from './reducers';
 
 declare interface Action {
-	type: string;
+    type: string;
 }
 
 declare type Dispatch = (_: Action) => void;
@@ -11,35 +11,35 @@ declare type Dispatch = (_: Action) => void;
 declare type AsyncAction = ThunkAction<void, RootState, unknown, ReduxAction<string>>;
 
 declare global {
-	interface Window {
-		__PRELOADED_STATE__: any;
-	}
+    interface Window {
+        __PRELOADED_STATE__: any;
+    }
 }
 
 declare module '@material-ui/core/styles/createMuiTheme' {
-	interface Theme {
-		custom: {
-			colors: {
-				white: React.CSSProperties['color'];
-				light: React.CSSProperties['color'];
-				black: React.CSSProperties['color'];
-				dark: React.CSSProperties['color'];
-				gray: React.CSSProperties['color'];
-				blueLight: React.CSSProperties['color'];
-			};
-		};
-	}
-	// allow configuration using `createMuiTheme`
-	interface ThemeOptions {
-		custom: {
-			colors: {
-				white: React.CSSProperties['color'];
-				light: React.CSSProperties['color'];
-				black: React.CSSProperties['color'];
-				dark: React.CSSProperties['color'];
-				gray: React.CSSProperties['color'];
-				blueLight: React.CSSProperties['color'];
-			};
-		};
-	}
+    interface Theme {
+        custom: {
+            colors: {
+                white: React.CSSProperties['color'];
+                light: React.CSSProperties['color'];
+                black: React.CSSProperties['color'];
+                dark: React.CSSProperties['color'];
+                gray: React.CSSProperties['color'];
+                blueLight: React.CSSProperties['color'];
+            };
+        };
+    }
+    // allow configuration using `createMuiTheme`
+    interface ThemeOptions {
+        custom: {
+            colors: {
+                white: React.CSSProperties['color'];
+                light: React.CSSProperties['color'];
+                black: React.CSSProperties['color'];
+                dark: React.CSSProperties['color'];
+                gray: React.CSSProperties['color'];
+                blueLight: React.CSSProperties['color'];
+            };
+        };
+    }
 }

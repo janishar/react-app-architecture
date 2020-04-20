@@ -10,8 +10,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // bake .env into the client code
 const configEnv = dotenv.config({ debug: true }).parsed;
 const envKeys = Object.keys(configEnv).reduce((result, key) => {
-	result[`process.env.${key}`] = JSON.stringify(configEnv[key]);
-	return result;
+    result[`process.env.${key}`] = JSON.stringify(configEnv[key]);
+    return result;
 }, {});
 
 const isEnvDevelopment = process.env.NODE_ENV === 'development';
@@ -22,133 +22,134 @@ const templatePath = path.resolve(__dirname, './public/template.html');
 const htmlPath = path.resolve(__dirname, './dist/template.html');
 
 const extractStyle = new MiniCssExtractPlugin({
-	filename: isEnvDevelopment ? 'style/[name].css' : 'style/[name].[hash].css',
-	chunkFilename: isEnvDevelopment ? 'style/[name].css' : 'style/[name].[hash].css',
+    filename: isEnvDevelopment ? 'style/[name].css' : 'style/[name].[hash].css',
+    chunkFilename: isEnvDevelopment ? 'style/[name].css' : 'style/[name].[hash].css',
 });
 
 // used for those files which can't be loaded by url-loader
 const copyAssets = new CopyWebpackPlugin([
-	// Copy directory contents to {output}/to/directory/
-	{
-		// from: 'assets', to: 'assets', // if the context directory has assets
-		from: './src/assets',
-		to: 'assets',
-	},
+    // Copy directory contents to {output}/to/directory/
+    {
+        // from: 'assets', to: 'assets', // if the context directory has assets
+        from: './src/assets',
+        to: 'assets',
+    },
 ]);
 
 const cssLoaders = [
-	{ loader: 'css-loader' },
-	{
-		loader: 'postcss-loader',
-		options: {
-			plugins: () =>
-				isEnvDevelopment
-					? [autoprefixer]
-					: [autoprefixer, cssnano({ discardComments: { removeAll: true, filterPlugins: false } })],
-		},
-	},
+    { loader: 'css-loader' },
+    {
+        loader: 'postcss-loader',
+        options: {
+            plugins: () =>
+                isEnvDevelopment
+                    ? [autoprefixer]
+                    : [
+                          autoprefixer,
+                          cssnano({ discardComments: { removeAll: true, filterPlugins: false } }),
+                      ],
+        },
+    },
 ];
 
 module.exports = {
-	devtool: isEnvDevelopment ? 'inline-source-map' : false,
-	mode: isEnvDevelopment ? 'development' : 'production',
-	context: srcPath,
-	entry: {
-		app: isEnvDevelopment ? ['index.tsx', 'webpack-hot-middleware/client'] : 'index.tsx',
-	},
-	output: {
-		path: distPath,
-		filename: isEnvDevelopment ? 'js/[name].js' : 'js/[name].[hash].js',
-		publicPath: '/',
-	},
-	plugins: [
-		copyAssets,
-		extractStyle,
-		new webpack.NamedModulesPlugin(),
-		new webpack.DefinePlugin(envKeys),
-
-	].concat(isEnvDevelopment ?
-		[
-			new webpack.HotModuleReplacementPlugin(),
-		] :
-		[
-			new HtmlWebpackPlugin({
-				template: templatePath,
-				minify: false,
-				filename: htmlPath
-			})
-		]
-	),
-	module: {
-		rules: [
-			{
-				test: /\.(ts|js)x?$/,
-				exclude: [/node_modules/],
-				use: [
-					{ loader: 'babel-loader' },
-					{ 
-						loader: path.resolve('./tools/importer-loader.js'),
-						options: {
-							functionName : 'importer'
-						} 
-					},
-				],
-			},
-			{
-				test: /\.(css)$/,
-				use: [MiniCssExtractPlugin.loader, ...cssLoaders],
-			},
-			{
-				test: /\.(eot|woff|woff2|ttf)$/,
-				use: [
-					{
-						loader: 'url-loader',
-						options: {
-							name: '[name].[ext]',
-							publicPath: '/',
-							outputPath: 'assets/',
-							limit: 10 * 1000, //10 kb
-							fallback: 'file-loader',
-						},
-					},
-				],
-			},
-			{
-				test: /\.(svg|png|jpg|jpeg|gif)$/,
-				use: [
-					{
-						loader: 'file-loader',
-						options: {
-							name: '[name].[ext]',
-							publicPath: '/',
-							outputPath: 'assets/',
-						},
-					},
-				],
-			},
-		],
-	},
-	resolve: {
-		modules: [srcPath, 'node_modules'],
-		extensions: ['.ts', '.tsx', '.js', '.jsx'],
-		alias: { 'react-dom': '@hot-loader/react-dom' },
-	},
-	optimization: {
-		minimize: !isEnvDevelopment,
-		splitChunks: {
-			cacheGroups: {
-				commons: {
-					name: 'commons',
-					chunks: 'all',
-					minChunks: 2,
-				},
-				vendor: {
-					test: /node_modules/,
-					name: 'vendor',
-					chunks: 'all',
-					enforce: true,
-				},
-			},
-		},
-	},
+    devtool: isEnvDevelopment ? 'inline-source-map' : false,
+    mode: isEnvDevelopment ? 'development' : 'production',
+    context: srcPath,
+    entry: {
+        app: isEnvDevelopment ? ['index.tsx', 'webpack-hot-middleware/client'] : 'index.tsx',
+    },
+    output: {
+        path: distPath,
+        filename: isEnvDevelopment ? 'js/[name].js' : 'js/[name].[hash].js',
+        publicPath: '/',
+    },
+    plugins: [
+        copyAssets,
+        extractStyle,
+        new webpack.NamedModulesPlugin(),
+        new webpack.DefinePlugin(envKeys),
+    ].concat(
+        isEnvDevelopment
+            ? [new webpack.HotModuleReplacementPlugin()]
+            : [
+                  new HtmlWebpackPlugin({
+                      template: templatePath,
+                      minify: false,
+                      filename: htmlPath,
+                  }),
+              ],
+    ),
+    module: {
+        rules: [
+            {
+                test: /\.(ts|js)x?$/,
+                exclude: [/node_modules/],
+                use: [
+                    { loader: 'babel-loader' },
+                    {
+                        loader: path.resolve('./tools/importer-loader.js'),
+                        options: {
+                            functionName: 'importer',
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.(css)$/,
+                use: [MiniCssExtractPlugin.loader, ...cssLoaders],
+            },
+            {
+                test: /\.(eot|woff|woff2|ttf)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            publicPath: '/',
+                            outputPath: 'assets/',
+                            limit: 10 * 1000, //10 kb
+                            fallback: 'file-loader',
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.(svg|png|jpg|jpeg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            publicPath: '/',
+                            outputPath: 'assets/',
+                        },
+                    },
+                ],
+            },
+        ],
+    },
+    resolve: {
+        modules: [srcPath, 'node_modules'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        alias: { 'react-dom': '@hot-loader/react-dom' },
+    },
+    optimization: {
+        minimize: !isEnvDevelopment,
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    name: 'commons',
+                    chunks: 'all',
+                    minChunks: 2,
+                },
+                vendor: {
+                    test: /node_modules/,
+                    name: 'vendor',
+                    chunks: 'all',
+                    enforce: true,
+                },
+            },
+        },
+    },
 };

@@ -7,24 +7,24 @@ import { testAsyncDispatch } from './actions';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 interface Props {
-	children: ReactElement;
+    children: ReactElement;
 }
 
 function App({ children }: Props): ReactElement {
-	const classes = useStyles();
+    const classes = useStyles();
 
-	const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(testAsyncDispatch('Test Title'));
-	}, [dispatch]);
+    useEffect(() => {
+        dispatch(testAsyncDispatch('Test Title'));
+    }, [dispatch]);
 
-	return (
-		<React.Fragment>
-			<CssBaseline />
-			<div className={classes.root}>{children !== undefined ? children : <Routes />}</div>;
-		</React.Fragment>
-	);
+    return (
+        <React.Fragment>
+            <CssBaseline />
+            <div className={classes.root}>{children !== undefined ? children : <Routes />}</div>;
+        </React.Fragment>
+    );
 }
 
 export default hot(App);
