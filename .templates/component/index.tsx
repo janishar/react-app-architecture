@@ -8,7 +8,7 @@ interface Prop {
 	children: ReactElement;
 }
 
-export default function Component({ }: Prop): ReactElement {
+export default function Component({}: Prop): ReactElement {
 	const classes = useStyles();
 	const appState = useStateSelector((state) => state.appState);
 	const dispatch = useDispatch();
