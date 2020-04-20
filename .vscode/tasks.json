@@ -1,0 +1,76 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "install-vscode-plugins",
+			"type": "shell",
+			"command": "chmod +x ./.vscode/extensions.list | ./.vscode/extensions.list",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			}
+		},
+		{
+			"label": "install dependencies",
+			"type": "npm",
+			"script": "install"
+		},
+		{
+			"label": "start prod server",
+			"type": "npm",
+			"script": "start"
+		},
+		{
+			"label": "start dev server",
+			"type": "npm",
+			"script": "watch"
+		},
+		{
+			"label": "Template: Generate File",
+			"type": "shell",
+			"command": "cp",
+			"presentation": {
+				"reveal": "never",
+				"panel": "shared"
+			},
+			"args": [
+				"${workspaceFolder}/.templates/component/${input:templateFileName}",
+				"${relativeFileDirname}"
+			]
+		},
+		{
+			"label": "Template: Generate UI Component",
+			"type": "shell",
+			"command": "cp",
+			"presentation": {
+				"reveal": "never",
+				"panel": "shared"
+			},
+			"args": [
+				"-r",
+				"${workspaceFolder}/.templates/component",
+				"${workspaceFolder}/src/ui/${input:templateComponentName}"
+			]
+		},
+	],
+	"inputs": [
+		{
+			"type": "pickString",
+			"id": "templateFileName",
+			"description": "What type of file do you want to create?",
+			"options": [
+				"input.tsx",
+				"actions.ts",
+				"reducer.ts",
+				"routes.tsx",
+				"style.ts"
+			],
+			"default": "index.tsx"
+		},
+		{
+			"type": "promptString",
+			"id": "templateComponentName",
+			"description": "What is the name of the component do you want to create?"
+		},
+	]
+}

@@ -7,12 +7,10 @@ import { Route, BrowserRouter } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
 import { ThemeProvider } from '@material-ui/styles';
 
-import rootReducer from './reducers';
+import rootReducer from '@core/reducers';
 import App from '@ui/app';
-
 import { logger, crashReporter } from '@utils/reduxMiddlewares';
-
-import theme from './theme';
+import theme from '@core/theme';
 
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__;

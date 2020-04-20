@@ -53,6 +53,7 @@
 		"build/**/*",
 		"dist/**/*",
 		"tools/**/*",
+		".vscode/**/*",
 		"webpack.config.js"
 	]
 }

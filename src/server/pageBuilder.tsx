@@ -8,9 +8,9 @@ import { minify as minifyHtml } from 'html-minifier';
 import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles';
 import render from './template';
 import configureStore from './devStoreConfig';
-import theme from '../theme';
-import rootReducer from '../reducers';
-import App from '../ui/app';
+import theme from '@core/theme';
+import rootReducer from '@core/reducers';
+import App from '@ui/app';
 import { PublicRequest } from 'server-types';
 import thunk from 'redux-thunk';
 

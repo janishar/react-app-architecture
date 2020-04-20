@@ -1,4 +1,4 @@
-import { Action, AsyncAction } from 'app-types';
+import { Action, AsyncAction, Dispatch } from 'app-types';
 
 export const CLEAR_PAGE_TITLE = 'CLEAR_PAGE_TITLE';
 export const SET_PAGE_TITLE = 'SET_PAGE_TITLE';
@@ -34,6 +34,6 @@ export const updateUserName = (name: string): UpdateUserNameAction => ({
 	payload: name,
 });
 
-export const testAsyncDispatch = (message: string): AsyncAction => async (dispatch) => {
+export const testAsyncDispatch = (message: string): AsyncAction => async (dispatch: Dispatch) => {
 	dispatch(setPageTitle(message));
 };

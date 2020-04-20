@@ -33,9 +33,16 @@
 			"@utils/*": [
 				"src/utils/*"
 			],
+			"@core/reducers": [
+				"src/reducers.ts"
+			],
+			"@core/theme": [
+				"src/theme.ts"
+			],
 		}
 	},
 	"include": [
-		"src/**/*"
+		"src/**/*",
+		".templates/**/*",
 	]
 }

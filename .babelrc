@@ -17,7 +17,9 @@
 				],
 				"alias": {
 					"@ui": "./src/ui",
-					"@utils": "./src/utils"
+					"@utils": "./src/utils",
+					"@core/reducers": "./src/reducers.ts",
+					"@core/theme": "./src/theme.ts"
 				}
 			}
 		]
