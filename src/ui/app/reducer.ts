@@ -2,10 +2,10 @@ import { CLEAR_PAGE_TITLE, SET_PAGE_TITLE, UPDATE_APP_USER_NAME, ActionTypes } f
 
 const PAGE_DEFAULT_TITLE = 'AfterAcademy | OpenSource Project';
 
-export interface State {
+export type State = {
     currentPageTitle: string | null;
     updatedUserName: string | null;
-}
+};
 
 export const defaultState: State = {
     currentPageTitle: null,

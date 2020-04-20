@@ -43,3 +43,15 @@ declare module '@material-ui/core/styles/createMuiTheme' {
         };
     }
 }
+
+export type Role = {
+    _id: string;
+    code: string;
+};
+
+export type User = {
+    _id: string;
+    name: string;
+    roles: Array<Role>;
+    profilePicUrl?: string;
+};

@@ -31,7 +31,7 @@ const copyAssets = new CopyWebpackPlugin([
     // Copy directory contents to {output}/to/directory/
     {
         // from: 'assets', to: 'assets', // if the context directory has assets
-        from: './src/assets',
+        from: './assets',
         to: 'assets',
     },
 ]);

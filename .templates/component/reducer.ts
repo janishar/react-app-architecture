@@ -1,6 +1,6 @@
 import { EXAMPLE_ACTION, ActionTypes } from './actions';
 
-export interface State {
+export type State = {
     exampleVariable: string | null;
 }
 
