@@ -6,11 +6,11 @@ import { useDispatch } from 'react-redux';
 import { testAsyncDispatch } from './actions';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-interface Prop {
+interface Props {
 	children: ReactElement;
 }
 
-function App({ children }: Prop): ReactElement {
+function App({ children }: Props): ReactElement {
 	const classes = useStyles();
 
 	const dispatch = useDispatch();

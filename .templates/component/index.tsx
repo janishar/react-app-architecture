@@ -4,11 +4,11 @@ import { useDispatch } from 'react-redux';
 import { sendExampleAction } from './actions';
 import { useStateSelector } from '@core/reducers';
 
-interface Prop {
-	children: ReactElement;
+interface Props {
+	exampleProp: any;
 }
 
-export default function Component({}: Prop): ReactElement {
+export default function Component({ exampleProp }: Props): ReactElement {
 	const classes = useStyles();
 	const appState = useStateSelector((state) => state.appState);
 	const dispatch = useDispatch();
