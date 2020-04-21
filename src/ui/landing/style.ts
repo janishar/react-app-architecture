@@ -7,10 +7,11 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
     aboutUsSection: {
         paddingTop: spacing(6),
         paddingBottom: spacing(10),
-        background: palette.secondary.light,
+        background: palette.secondary.dark,
     },
     sectionHeading: {
-        marginBottom: spacing(4),
+        marginBottom: spacing(6),
+        marginTop: spacing(2),
     },
     infoCard: {
         height: '100%',
@@ -18,13 +19,25 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
         [breakpoints.down('sm')]: {
             padding: spacing(2),
         },
+        background: palette.secondary.light,
     },
-    infoBigAvatar: {
+    card: {
+        height: '100%',
+        padding: spacing(4),
+        [breakpoints.down('sm')]: {
+            padding: spacing(2),
+        },
+    },
+    avatar: {
         width: 60,
         height: 60,
     },
-    infoButton: {
+    button: {
         marginLeft: spacing(2),
+    },
+    resourcesSection: {
+        paddingTop: spacing(6),
+        paddingBottom: spacing(10),
     },
 }));
 

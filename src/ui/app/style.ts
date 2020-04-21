@@ -8,7 +8,7 @@ const useStyles = makeStyles(({}: Theme) => ({
         float: 'none',
     },
     contentArea: {
-        marginTop: 64,
+        marginTop: 60,
     },
 }));
 
