@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500px" height="500px" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>mindorks-logo-secondary</title>
+    <desc>Created with Sketch.</desc>
+    <g id="mindorks-logo-secondary" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="logo">
+            <rect id="Rectangle" fill="#11209F" x="0" y="0" width="500" height="500" rx="250"></rect>
+            <g id="Group" transform="translate(170.000000, 166.000000)" fill="#FFFFFF">
+                <path d="M46.4230769,1.04059814 L46.7495637,0.713740458 L79.2747406,33.2758713 L111.65812,0.855699514 L111.65812,0.713740458 L157.598291,0.713740458 L157.598291,167.206107 L111.65812,167.206107 L111.65812,66.2447324 L78.7229945,99.2172772 L46.4230769,66.8806616 L46.4230769,167.206107 L0.482905983,167.206107 L0.482905983,0.713740458 L46.4230769,0.713740458 L46.4230769,1.04059814 Z" id="Combined-Shape"></path>
+            </g>
+            <g id="left" transform="translate(30.000000, 167.000000)">
+                <path d="M97,57.0146764 L97,109.761302 L0.91509434,165.359176 L-6.55031585e-15,163.770665 L0,112.938323 L96.9119776,56.8618785 L97,57.0146764 Z" id="Combined-Shape" fill="#F5A623" transform="translate(48.500000, 111.110527) scale(-1, 1) translate(-48.500000, -111.110527) "></path>
+                <path d="M97,0.152797941 L97,52.8994235 L0.91509434,108.497298 L-4.4408921e-15,106.908787 L0,56.0764449 L96.9119776,7.13384907e-12 L97,0.152797941 Z" id="Combined-Shape" fill="#FFFFFF"></path>
+            </g>
+            <g id="right" transform="translate(419.500000, 251.000000) scale(-1, -1) translate(-419.500000, -251.000000) translate(371.000000, 168.000000)">
+                <path d="M97,57.0146764 L97,109.761302 L0.91509434,165.359176 L9.99200722e-16,163.770665 L0,112.938323 L96.9119776,56.8618785 L97,57.0146764 Z" id="Combined-Shape" fill="#F5A623" transform="translate(48.500000, 111.110527) scale(-1, 1) translate(-48.500000, -111.110527) "></path>
+                <path d="M97,0.152797941 L97,52.8994235 L0.91509434,108.497298 L-5.77315973e-15,106.908787 L0,56.0764449 L96.9119776,-4.03588274e-12 L97,0.152797941 Z" id="Combined-Shape" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -23,8 +23,12 @@ function App({ children }: Props): ReactElement {
     return (
         <Fragment>
             <CssBaseline />
-            <Header />
-            <div className={classes.root}>{children !== undefined ? children : <Routes />}</div>
+            <div className={classes.root}>
+                <Header />
+                <div className={classes.contentArea}>
+                    {children !== undefined ? children : <Routes />}
+                </div>
+            </div>
         </Fragment>
     );
 }

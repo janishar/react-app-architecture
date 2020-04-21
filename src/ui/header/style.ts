@@ -1,11 +1,11 @@
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(({ custom, spacing, breakpoints }: Theme) => ({
+const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
     root: {
         flexGrow: 1,
     },
     appbar: {
-        boxShadow: '0px 4px 8px 0px rgba(255, 255, 255, 0.1)',
+        boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.1)',
     },
     menuButton: {
         marginRight: spacing(2),
@@ -44,7 +44,7 @@ const useStyles = makeStyles(({ custom, spacing, breakpoints }: Theme) => ({
         paddingBottom: spacing(1),
     },
     drawerIcon: {
-        color: custom.colors.dark,
+        color: palette.common.white,
     },
     drawerCloseButton: {
         marginLeft: '45%',

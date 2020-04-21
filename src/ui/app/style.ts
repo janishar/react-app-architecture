@@ -7,6 +7,9 @@ const useStyles = makeStyles(({}: Theme) => ({
         margin: '0 auto',
         float: 'none',
     },
+    contentArea: {
+        marginTop: 64,
+    },
 }));
 
 export default useStyles;
