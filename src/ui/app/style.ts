@@ -9,6 +9,7 @@ const useStyles = makeStyles(({}: Theme) => ({
     },
     contentArea: {
         marginTop: 60,
+        minHeight: '65vh',
     },
 }));
 

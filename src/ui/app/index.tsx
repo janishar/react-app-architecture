@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { testAsyncDispatch } from './actions';
 import { CssBaseline } from '@material-ui/core';
 import Header from '@ui/header';
+import Footer from '@ui/footer';
 
 interface Props {
     children: ReactElement;
@@ -28,6 +29,7 @@ function App({ children }: Props): ReactElement {
                 <div className={classes.contentArea}>
                     {children !== undefined ? children : <Routes />}
                 </div>
+                <Footer />
             </div>
         </Fragment>
     );
