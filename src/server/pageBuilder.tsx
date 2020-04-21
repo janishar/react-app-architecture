@@ -5,7 +5,7 @@ import { renderToString } from 'react-dom/server';
 import { CookiesProvider } from 'react-cookie';
 import { StaticRouter } from 'react-router-dom';
 import { minify as minifyHtml } from 'html-minifier';
-import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles';
+import { ServerStyleSheets, ThemeProvider } from '@material-ui/core/styles';
 import render from './template';
 import configureStore from './devStoreConfig';
 import theme from '@core/theme';

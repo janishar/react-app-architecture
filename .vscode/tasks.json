@@ -12,8 +12,12 @@
         },
         {
             "label": "Install Dependencies",
-            "type": "npm",
-            "script": "install"
+            "type": "shell",
+            "command": "npm install",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
         },
         {
             "label": "Start Prod Server",

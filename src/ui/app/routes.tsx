@@ -1,5 +1,5 @@
-import { Switch, Route } from 'react-router-dom';
 import React, { ReactElement } from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 import Landing from '@ui/landing';
 

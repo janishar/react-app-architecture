@@ -1,30 +1,36 @@
 import React, { ReactElement, useState, MouseEvent } from 'react';
 import useStyles from './style';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import importer from '@utils/importer';
 import { Link } from 'react-router-dom';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import { useStateSelector } from '@core/reducers';
-import Fab from '@material-ui/core/Fab';
-import Drawer from '@material-ui/core/Drawer';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardHeader from '@material-ui/core/CardHeader';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import CloseIcon from '@material-ui/icons/Close';
-import WebIcon from '@material-ui/icons/Web';
-import EmailIcon from '@material-ui/icons/Email';
-import InfoIcon from '@material-ui/icons/Info';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import SvgIcon from '@material-ui/core/SvgIcon';
+import {
+    AppBar,
+    Toolbar,
+    Avatar,
+    Typography,
+    Button,
+    IconButton,
+    Menu,
+    Fab,
+    Drawer,
+    CardActionArea,
+    CardHeader,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    MenuItem,
+    SvgIcon,
+} from '@material-ui/core';
+
+import {
+    Info as InfoIcon,
+    Close as CloseIcon,
+    Web as WebIcon,
+    Email as EmailIcon,
+    Menu as MenuIcon,
+} from '@material-ui/icons';
+
 import { mdiLogout } from '@mdi/js';
 
 const afterAcademyLogo = importer('./assets/afteracademy-logo.svg');

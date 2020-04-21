@@ -4,7 +4,7 @@ import Routes from './routes';
 import useStyles from './style';
 import { useDispatch } from 'react-redux';
 import { testAsyncDispatch } from './actions';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { CssBaseline } from '@material-ui/core';
 import Header from '@ui/header';
 
 interface Props {
