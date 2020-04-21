@@ -8,6 +8,7 @@ export default function Landing(): ReactElement {
     return (
         <div>
             <h1>TESTING</h1>
+            <img src={testImage} />
         </div>
     );
 }
