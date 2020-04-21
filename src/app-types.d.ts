@@ -20,11 +20,6 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     interface Theme {
         custom: {
             colors: {
-                white: React.CSSProperties['color'];
-                light: React.CSSProperties['color'];
-                black: React.CSSProperties['color'];
-                dark: React.CSSProperties['color'];
-                gray: React.CSSProperties['color'];
                 blueLight: React.CSSProperties['color'];
             };
         };
@@ -33,11 +28,6 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     interface ThemeOptions {
         custom: {
             colors: {
-                white: React.CSSProperties['color'];
-                light: React.CSSProperties['color'];
-                black: React.CSSProperties['color'];
-                dark: React.CSSProperties['color'];
-                gray: React.CSSProperties['color'];
                 blueLight: React.CSSProperties['color'];
             };
         };
