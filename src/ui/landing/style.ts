@@ -15,7 +15,6 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
     },
     infoCard: {
         height: '100%',
-        padding: spacing(4),
         [breakpoints.down('sm')]: {
             padding: spacing(2),
         },
@@ -23,7 +22,6 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
     },
     card: {
         height: '100%',
-        padding: spacing(4),
         [breakpoints.down('sm')]: {
             padding: spacing(2),
         },
