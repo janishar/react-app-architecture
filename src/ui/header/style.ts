@@ -23,7 +23,7 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
     },
     loginButton: {
         margin: spacing(1),
-        paddingLeft: '40',
+        paddingLeft: 40,
     },
     sectionDesktop: {
         display: 'none',

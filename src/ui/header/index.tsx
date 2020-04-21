@@ -148,7 +148,7 @@ export default function Header(): ReactElement {
                         to={'/'}
                     />
                     <Typography variant="h6" className={classes.brandName}>
-                        AfterAcademy
+                        AfterAcademy Tutorials
                     </Typography>
                     <div className={classes.sectionDesktop}>
                         {[
