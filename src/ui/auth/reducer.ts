@@ -1,5 +1,12 @@
 import { updateAuthData, forceLogout, loginActions, logoutActions } from './actions';
-import { AuthData, Action } from 'app-types';
+import { Action, User } from 'app-types';
+
+export type AuthData = {
+    user: User;
+    tokens: {
+        accessToken: string;
+    };
+};
 
 export type State = {
     data: AuthData | null;

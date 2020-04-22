@@ -18,6 +18,8 @@ const instance = axios.create({
 instance.interceptors.request.use(
     (config) => {
         // Do something before request is sent
+        if (isLogEnabled)
+            console.log('Network Request:', `${config.baseURL}${config.url}`, config.method);
         return config;
     },
     async (error) => {
@@ -28,7 +30,7 @@ instance.interceptors.request.use(
 
 // Add a response interceptor
 instance.interceptors.response.use(
-    function (response) {
+    (response) => {
         // Any status code that lie within the range of 2xx cause this function to trigger
         // Do something with response data
         return response;
@@ -37,31 +39,52 @@ instance.interceptors.response.use(
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         // Do something with response error
         if (isLogEnabled) console.error('Network Response:', error);
-        throw error;
+        throw error && error.response && error.response.data;
     },
 );
 
-export interface PublicRequest {
-    url: string;
-    method: Method;
-    data?: any;
-}
-
-export interface ProtectedRequest extends PublicRequest {
-    token: string;
-}
-
-export const publicRequest = async (request: PublicRequest) => {
-    const { data } = await instance.request(request);
-    return data;
+export type NetworkResponse<T extends object | null> = {
+    readonly statusCode: string;
+    readonly message: string;
+    readonly data?: T;
 };
 
-export const protectedRequest = async (request: ProtectedRequest, dispatch: Dispatch) => {
+export interface NetworkRequest<T extends object | null> {
+    url: string;
+    method: Method;
+    data?: T;
+}
+
+export interface NetworkAuthRequest<T extends object | null> extends NetworkRequest<T> {
+    headers?: { Authorization: string };
+}
+
+/**
+ * @T : Request Body Type
+ * @R : Response Body type
+ */
+export async function publicRequest<T extends object | null, R extends object | null>(
+    request: NetworkRequest<T>,
+): Promise<NetworkResponse<R>> {
+    const { data } = await instance.request<NetworkResponse<R>>(request);
+    return data;
+}
+
+/**
+ * @T : Request Body Type
+ * @R : Response Body type
+ */
+export async function protectedRequest<T extends object | null, R extends object | null>(
+    request: NetworkRequest<T>,
+    token: string,
+    dispatch: Dispatch,
+): Promise<NetworkResponse<R>> {
     try {
-        const { data } = await instance.request(request);
+        (request as NetworkAuthRequest<T>).headers = { Authorization: `Bearer ${token}` };
+        const { data } = await instance.request<NetworkResponse<R>>(request);
         return data;
     } catch (e) {
         if (e.response && e.response.status === '401') dispatch(forceLogout.action());
         throw e;
     }
-};
+}

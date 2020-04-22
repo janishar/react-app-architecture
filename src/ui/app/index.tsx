@@ -11,7 +11,6 @@ import { useStateSelector } from '@core/reducers';
 import { updateAuthData } from '@ui/auth/actions';
 import { useRouteMatch } from 'react-router-dom';
 import { scrollPageToTop, setPageTitle, removeAppLoader } from '@utils/pageUtils';
-import { testAsyncDispatch } from './actions';
 
 export const KEY_AUTH_DATA = 'KEY_AUTH_DATA';
 
@@ -27,7 +26,6 @@ function App({ children }: { children: ReactElement }): ReactElement {
 
     useEffect(() => {
         removeAppLoader();
-        dispatch(testAsyncDispatch());
     }, []);
 
     useEffect(() => {

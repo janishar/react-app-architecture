@@ -2,12 +2,12 @@ import { Action as ReduxAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from './reducers';
 
-declare interface Action {
+declare interface Action<T = any> {
     readonly type: string;
-    readonly payload?: any;
+    readonly payload?: T;
 }
 
-declare type Dispatch = (_: Action) => void;
+declare type Dispatch<T = any> = (_: Action<T>) => void;
 
 declare type AsyncAction = ThunkAction<void, RootState, unknown, ReduxAction<string>>;
 
@@ -45,16 +45,4 @@ export type User = {
     name: string;
     roles: Array<Role>;
     profilePicUrl?: string;
-};
-
-export type AuthData = {
-    user: User;
-    tokens: {
-        accessToken: string;
-    };
-};
-
-export type NetworkResponse<T extends object> = {
-    readonly message?: string;
-    readonly data?: T;
 };

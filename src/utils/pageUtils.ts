@@ -9,6 +9,6 @@ export const scrollPageToTop = () => {
 export const removeAppLoader = () => {
     if (document) {
         const appLoader = document.getElementById('appLoader');
-        if (appLoader && appLoader.parentNode) appLoader.parentNode.removeChild(appLoader);
+        if (appLoader?.parentNode) appLoader.parentNode.removeChild(appLoader);
     }
 };

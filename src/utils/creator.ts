@@ -1,4 +1,5 @@
-import { Action, NetworkResponse } from 'app-types';
+import { Action } from 'app-types';
+import { NetworkResponse } from '@utils/network';
 
 export function actionCreator<T>(actionType: string) {
     interface SingleAction extends Action {
@@ -24,7 +25,7 @@ export function actionCreator<T>(actionType: string) {
     return actionWrapper;
 }
 
-export function networkActionsCreator<S extends object, E extends object>(actionType: string) {
+export function networkActionsCreator<T extends object | null>(actionType: string) {
     const requesting = actionType + '_REQUESTING';
     const success = actionType + '_SUCCESS';
     const failure = actionType + '_FAILURE';
@@ -35,24 +36,24 @@ export function networkActionsCreator<S extends object, E extends object>(action
 
     interface SuccessAction extends Action {
         readonly type: typeof success;
-        readonly payload?: NetworkResponse<S>;
+        readonly payload: NetworkResponse<T>;
     }
 
     interface FailureAction extends Action {
         readonly type: typeof failure;
-        readonly payload?: NetworkResponse<E>;
+        readonly payload: NetworkResponse<null>;
     }
 
     const requestingActionGenerator = (): RequestingAction => ({
         type: requesting,
     });
 
-    const successActionGenerator = (response?: NetworkResponse<S>): SuccessAction => ({
+    const successActionGenerator = (response: NetworkResponse<T>): SuccessAction => ({
         type: success,
         payload: response,
     });
 
-    const failureActionGenerator = (response?: NetworkResponse<E>): FailureAction => ({
+    const failureActionGenerator = (response: NetworkResponse<null>): FailureAction => ({
         type: failure,
         payload: response,
     });
@@ -64,12 +65,12 @@ export function networkActionsCreator<S extends object, E extends object>(action
 
     type SuccessActionWrapper = {
         readonly type: typeof success;
-        readonly action: (response?: NetworkResponse<S>) => SuccessAction;
+        readonly action: (response: NetworkResponse<T>) => SuccessAction;
     };
 
     type FailureActionWrapper = {
         readonly type: typeof requesting;
-        readonly action: (response?: NetworkResponse<E>) => FailureAction;
+        readonly action: (response: NetworkResponse<null>) => FailureAction;
     };
 
     type ActionWrappers = {
