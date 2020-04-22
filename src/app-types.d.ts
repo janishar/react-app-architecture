@@ -4,6 +4,7 @@ import { RootState } from './reducers';
 
 declare interface Action {
     type: string;
+    payload?: any;
 }
 
 declare type Dispatch = (_: Action) => void;
@@ -44,4 +45,11 @@ export type User = {
     name: string;
     roles: Array<Role>;
     profilePicUrl?: string;
+};
+
+export type AuthData = {
+    user: User;
+    tokens: {
+        accessToken: string;
+    };
 };

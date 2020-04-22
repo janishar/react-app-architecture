@@ -1,8 +1,8 @@
 import { Action, AsyncAction, Dispatch } from 'app-types';
+import { publicRequest } from '@utils/network';
 
 export const CLEAR_PAGE_TITLE = 'CLEAR_PAGE_TITLE';
 export const SET_PAGE_TITLE = 'SET_PAGE_TITLE';
-export const UPDATE_APP_USER_NAME = 'UPDATE_APP_USER_NAME';
 
 export interface ClearPageTitleAction extends Action {
     type: typeof CLEAR_PAGE_TITLE;
@@ -13,12 +13,7 @@ export interface SetPageTitleAction extends Action {
     payload: string | null;
 }
 
-export interface UpdateUserNameAction extends Action {
-    type: typeof UPDATE_APP_USER_NAME;
-    payload: string | null;
-}
-
-export type ActionTypes = ClearPageTitleAction | SetPageTitleAction | UpdateUserNameAction;
+export type ActionTypes = ClearPageTitleAction | SetPageTitleAction;
 
 export const clearPageTitle = (): ClearPageTitleAction => ({
     type: CLEAR_PAGE_TITLE,
@@ -29,11 +24,15 @@ export const setPageTitle = (title: string): SetPageTitleAction => ({
     payload: title,
 });
 
-export const updateUserName = (name: string): UpdateUserNameAction => ({
-    type: UPDATE_APP_USER_NAME,
-    payload: name,
-});
-
 export const testAsyncDispatch = (message: string): AsyncAction => async (dispatch: Dispatch) => {
-    dispatch(setPageTitle(message));
+    // Example
+    try {
+        const response = await publicRequest({
+            url: '/blogs/latest?pageNumber=1&pageItemCount=10',
+            method: 'GET',
+        });
+        console.log('testAsyncDispatch in', response);
+    } catch (error) {
+        console.log('testAsyncDispatch error', error);
+    }
 };
