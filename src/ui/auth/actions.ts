@@ -1,24 +1,10 @@
-import { Action, AuthData } from 'app-types';
+import { AuthData } from 'app-types';
+import { networkActionsCreator, actionCreator } from '@utils/creator';
 
-export const UPDATE_AUTH_DATA = 'UPDATE_AUTH_DATA';
-export const FORCED_LOGOUT = 'FORCED_LOGOUT';
+export const updateAuthData = actionCreator<AuthData | null>('UPDATE_AUTH_DATA');
 
-export interface AuthDataAction extends Action {
-    type: typeof UPDATE_AUTH_DATA;
-    payload: AuthData | null;
-}
+export const forceLogout = actionCreator<null>('FORCED_LOGOUT');
 
-export interface ForceLogoutAction extends Action {
-    type: typeof FORCED_LOGOUT;
-}
+export const loginActions = networkActionsCreator('LOGIN');
 
-export type ActionTypes = AuthDataAction | ForceLogoutAction;
-
-export const updateAuthDataAction = (authData: AuthData | null): AuthDataAction => ({
-    type: UPDATE_AUTH_DATA,
-    payload: authData,
-});
-
-export const forceLogout = (): ForceLogoutAction => ({
-    type: FORCED_LOGOUT,
-});
+export const logoutActions = networkActionsCreator('LOGOUT');

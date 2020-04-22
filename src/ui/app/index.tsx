@@ -8,17 +8,14 @@ import Header from '@ui/header';
 import Footer from '@ui/footer';
 import { useCookies } from 'react-cookie';
 import { useStateSelector } from '@core/reducers';
-import { updateAuthDataAction } from '@ui/auth/actions';
+import { updateAuthData } from '@ui/auth/actions';
 import { useRouteMatch } from 'react-router-dom';
 import { scrollPageToTop, setPageTitle, removeAppLoader } from '@utils/pageUtils';
+import { testAsyncDispatch } from './actions';
 
 export const KEY_AUTH_DATA = 'KEY_AUTH_DATA';
 
-interface Props {
-    children: ReactElement;
-}
-
-function App({ children }: Props): ReactElement {
+function App({ children }: { children: ReactElement }): ReactElement {
     const classes = useStyles();
     const dispatch = useDispatch();
     const match = useRouteMatch();
@@ -30,6 +27,7 @@ function App({ children }: Props): ReactElement {
 
     useEffect(() => {
         removeAppLoader();
+        dispatch(testAsyncDispatch());
     }, []);
 
     useEffect(() => {
@@ -38,7 +36,7 @@ function App({ children }: Props): ReactElement {
 
     useEffect(() => {
         const authData = cookies[KEY_AUTH_DATA];
-        if (authData) dispatch(updateAuthDataAction(authData));
+        if (authData) dispatch(updateAuthData.action(authData));
     }, [cookies, dispatch]);
 
     useEffect(() => {

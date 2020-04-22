@@ -2,7 +2,7 @@ import axios, { Method } from 'axios';
 import { forceLogout } from '@ui/auth/actions';
 import { Dispatch } from 'app-types';
 
-const isLogging = process.env.LOGGING === 'true';
+const isLogEnabled = process.env.LOGGING === 'true';
 
 const instance = axios.create({
     baseURL: process.env.API_BASE_URL,
@@ -21,7 +21,7 @@ instance.interceptors.request.use(
         return config;
     },
     async (error) => {
-        if (isLogging) console.error('Network Request:', error);
+        if (isLogEnabled) console.error('Network Request:', error);
         throw error;
     },
 );
@@ -36,7 +36,7 @@ instance.interceptors.response.use(
     async (error) => {
         // Any status codes that falls outside the range of 2xx cause this function to trigger
         // Do something with response error
-        if (isLogging) console.error('Network Response:', error);
+        if (isLogEnabled) console.error('Network Response:', error);
         throw error;
     },
 );
@@ -61,7 +61,7 @@ export const protectedRequest = async (request: ProtectedRequest, dispatch: Disp
         const { data } = await instance.request(request);
         return data;
     } catch (e) {
-        if (e.response && e.response.status === '401') dispatch(forceLogout());
+        if (e.response && e.response.status === '401') dispatch(forceLogout.action());
         throw e;
     }
 };

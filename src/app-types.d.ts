@@ -3,8 +3,8 @@ import { ThunkAction } from 'redux-thunk';
 import { RootState } from './reducers';
 
 declare interface Action {
-    type: string;
-    payload?: any;
+    readonly type: string;
+    readonly payload?: any;
 }
 
 declare type Dispatch = (_: Action) => void;
@@ -52,4 +52,9 @@ export type AuthData = {
     tokens: {
         accessToken: string;
     };
+};
+
+export type NetworkResponse<T extends object> = {
+    readonly message?: string;
+    readonly data?: T;
 };
