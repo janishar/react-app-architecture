@@ -92,17 +92,19 @@ const InfoCard = ({
                     {description}
                 </Typography>
             </CardContent>
-            <Button
-                className={classes.button}
-                variant="contained"
-                component="a"
-                size="small"
-                color="primary"
-                href={href}
-                target="_blank"
-            >
-                {action}
-            </Button>
+            <CardActions className={classes.cardAction}>
+                <Button
+                    className={classes.button}
+                    variant="contained"
+                    component="a"
+                    size="small"
+                    color="primary"
+                    href={href}
+                    target="_blank"
+                >
+                    {action}
+                </Button>
+            </CardActions>
         </Card>
     );
 };

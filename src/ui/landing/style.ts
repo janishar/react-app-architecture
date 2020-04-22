@@ -26,6 +26,9 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
             padding: spacing(2),
         },
     },
+    cardAction: {
+        paddingBottom: spacing(3),
+    },
     avatar: {
         width: 60,
         height: 60,
