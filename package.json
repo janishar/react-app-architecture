@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && npm run serve",
-    "serve": "NODE_ENV=production node -r ./tools/babel-register.js src/server/server.prod.ts",
+    "serve": "NODE_ENV=production node build/server/server.prod.js",
     "devserver": "NODE_ENV=development node -r ./tools/babel-register.js src/server/server.dev.ts",
     "watch": "npm run clean && npm run devserver",
     "prebuild": "npm run clean",
-    "build": "npm run clean && NODE_ENV=production webpack -p --config ./webpack.config.js",
-    "clean": "rimraf ./dist && mkdir dist",
+    "bundle": "npm run clean && NODE_ENV=production webpack -p --config ./webpack.config.js",
+    "build": "npm run bundle && npx babel src/ -d build/ --extensions '.js,.jsx,.ts,.tsx'",
+    "clean": "rimraf ./dist && mkdir dist && rimraf ./build && mkdir build",
     "test": "jest --forceExit --detectOpenHandles --coverage --verbose"
   },
   "repository": {

@@ -12,8 +12,8 @@
                 "alias": {
                     "@ui": "./src/ui",
                     "@utils": "./src/utils",
-                    "@core/reducers": "./src/reducers.ts",
-                    "@core/theme": "./src/theme.ts"
+                    "@core/reducers": "./src/reducers",
+                    "@core/theme": "./src/theme"
                 }
             }
         ],
