@@ -46,9 +46,11 @@ export default function pageBuilder(
     if (!currentState) currentState = {};
 
     const authData = req.universalCookies.get(KEY_AUTH_DATA);
-    if (authData?.tokens?.accessToken)
+    if (authData?.tokens?.accessToken) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { tokens, ...data } = authData;
         currentState.authState = {
-            data: { ...authData, tokens: { accessToken: null } }, // security
+            data: data, // security
             isLoggingIn: false,
             isLoggingOut: false,
             isLoggedIn: true,
@@ -56,6 +58,7 @@ export default function pageBuilder(
             isRedirectHome: false,
             message: null,
         };
+    }
 
     const store = isDev
         ? configureStore(currentState)
