@@ -42,7 +42,6 @@ export default function Header(): ReactElement {
     const classes = useStyles();
     const { isLoggedIn, data: authData } = useStateSelector(({ authState }) => authState);
     const user = authData?.user;
-    const token = authData?.tokens?.accessToken;
 
     const [openAuthDialog, setOpenAuthDialog] = useState(false);
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -97,7 +96,7 @@ export default function Header(): ReactElement {
                 <MenuItem
                     className={classes.menuItem}
                     onClick={() => {
-                        if (token) dispatch(logout(token));
+                        dispatch(logout());
                         handlePopupMenuClose();
                     }}
                 >
@@ -137,7 +136,7 @@ export default function Header(): ReactElement {
                     <ListItem
                         className={classes.drawerItem}
                         onClick={() => {
-                            if (token) dispatch(logout(token));
+                            dispatch(logout());
                             toggleDrawer();
                         }}
                         button

@@ -1,7 +1,8 @@
-import { AsyncAction, Dispatch } from 'app-types';
+import { AsyncAction, Dispatch, StateFetcher } from 'app-types';
 import { networkActionsCreator, actionCreator } from '@utils/creator';
 import { publicRequest, protectedRequest } from '@utils/network';
 import { AuthData } from './reducer';
+import { validateToken } from '@utils/appUtils';
 
 export const updateAuthData = actionCreator<AuthData | null>('UPDATE_AUTH_DATA');
 
@@ -37,8 +38,9 @@ export const basicLogin = ({ email, password }: LoginRequestBody): AsyncAction =
     }
 };
 
-export const logout = (token: string): AsyncAction => async (dispatch: Dispatch) => {
+export const logout = (): AsyncAction => async (dispatch: Dispatch, getState: StateFetcher) => {
     try {
+        const token = validateToken(getState());
         dispatch(logoutActions.requesting.action());
         const response = await protectedRequest<null, null>(
             {

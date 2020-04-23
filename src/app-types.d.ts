@@ -9,6 +9,8 @@ declare interface Action<T = any> {
 
 declare type Dispatch<T = any> = (_: Action<T>) => void;
 
+declare type StateFetcher = () => RootState;
+
 declare type AsyncAction = ThunkAction<void, RootState, unknown, ReduxAction<string>>;
 
 declare global {
