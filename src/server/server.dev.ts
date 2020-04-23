@@ -4,7 +4,6 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import app from './app';
 import routes from './routes';
 import webpackConfig from '../../webpack.config';
-import { Request, Response, NextFunction } from 'express';
 
 const serverOptions = {
   quiet: false,
