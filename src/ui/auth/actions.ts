@@ -11,6 +11,8 @@ export const loginActions = networkActionsCreator<AuthData>('LOGIN');
 
 export const logoutActions = networkActionsCreator<null>('LOGOUT');
 
+export const removeMessage = actionCreator<null>('REMOVE_AUTH_MESSAGE');
+
 export type LoginRequestBody = {
     email: string;
     password: string;

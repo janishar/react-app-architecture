@@ -1,5 +1,5 @@
-import { updateAuthData, forceLogout, loginActions, logoutActions } from './actions';
-import { Action, User } from 'app-types';
+import { updateAuthData, forceLogout, loginActions, logoutActions, removeMessage } from './actions';
+import { Action, User, Message } from 'app-types';
 
 export type AuthData = {
     user: User;
@@ -15,7 +15,7 @@ export type State = {
     isLoggedIn: boolean;
     isForcedLogout: boolean;
     isRedirectHome: boolean;
-    message: string | null;
+    message: Message | null;
 };
 
 export const defaultState: State = {
@@ -30,6 +30,12 @@ export const defaultState: State = {
 
 const reducer = (state: State = defaultState, { type, payload }: Action): State => {
     switch (type) {
+        case removeMessage.type: {
+            return {
+                ...state,
+                message: null,
+            };
+        }
         case updateAuthData.type:
             if (!payload) return { ...defaultState };
             return {
@@ -44,7 +50,6 @@ const reducer = (state: State = defaultState, { type, payload }: Action): State 
             return {
                 ...state,
                 isLoggingIn: true,
-                message: null,
             };
         case loginActions.success.type:
             return {
@@ -53,19 +58,18 @@ const reducer = (state: State = defaultState, { type, payload }: Action): State 
                 isLoggingIn: false,
                 isLoggedIn: true,
                 isForcedLogout: false,
-                message: payload.message,
+                message: { text: payload.message, type: 'success' },
             };
         case loginActions.failure.type:
             return {
                 ...state,
-                message: payload.message,
                 isLoggingIn: false,
+                message: { text: payload.message, type: 'error' },
             };
         case logoutActions.requesting.type:
             return {
                 ...state,
                 isLoggingOut: true,
-                message: null,
             };
         case logoutActions.success.type:
             return {
@@ -74,7 +78,7 @@ const reducer = (state: State = defaultState, { type, payload }: Action): State 
                 isLoggingOut: false,
                 isLoggedIn: false,
                 isForcedLogout: false,
-                message: payload.message,
+                message: { text: payload.message, type: 'success' },
             };
         case logoutActions.failure.type:
             return {
@@ -82,7 +86,7 @@ const reducer = (state: State = defaultState, { type, payload }: Action): State 
                 isLoggingOut: false,
                 isLoggedIn: false,
                 isForcedLogout: false,
-                message: payload.message,
+                message: { text: payload.message, type: 'error' },
             };
         default:
             return state;

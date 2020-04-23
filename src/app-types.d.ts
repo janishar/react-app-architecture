@@ -46,3 +46,8 @@ export type User = {
     roles: Array<Role>;
     profilePicUrl?: string;
 };
+
+export type Message = {
+    text: string;
+    type: 'success' | 'warning' | 'error' | 'info';
+};

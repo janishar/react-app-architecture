@@ -31,19 +31,24 @@ import {
     Menu as MenuIcon,
 } from '@material-ui/icons';
 
-import { mdiLogout } from '@mdi/js';
+import { mdiLogout, mdiLogin } from '@mdi/js';
+import AuthDialog from '@ui/auth';
+import { logout } from '@ui/auth/actions';
+import { useDispatch } from 'react-redux';
 
 const afterAcademyLogo = importer('./assets/afteracademy-logo.svg');
 
 export default function Header(): ReactElement {
     const classes = useStyles();
     const { isLoggedIn, data: authData } = useStateSelector(({ authState }) => authState);
-    const user = authData ? authData.user : null;
+    const user = authData?.user;
+    const token = authData?.tokens?.accessToken;
 
-    const [openLoginDialog, setOpenLoginDialog] = useState(false);
+    const [openAuthDialog, setOpenAuthDialog] = useState(false);
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [popupMoreAnchorEl, setPopupMoreAnchorEl] = useState<HTMLElement | null>(null);
     const isPopupMenuOpen = Boolean(popupMoreAnchorEl);
+    const dispatch = useDispatch();
 
     function handlePopupMenuClose() {
         setPopupMoreAnchorEl(null);
@@ -91,7 +96,7 @@ export default function Header(): ReactElement {
                 <MenuItem
                     className={classes.menuItem}
                     onClick={() => {
-                        // onLogout(data);
+                        if (token) dispatch(logout(token));
                         handlePopupMenuClose();
                     }}
                 >
@@ -127,6 +132,40 @@ export default function Header(): ReactElement {
                         <ListItemText primary={title} />
                     </ListItem>
                 ))}
+                {isLoggedIn && (
+                    <ListItem
+                        className={classes.drawerItem}
+                        onClick={() => {
+                            if (token) dispatch(logout(token));
+                            toggleDrawer();
+                        }}
+                        button
+                    >
+                        <ListItemIcon className={classes.drawerIcon}>
+                            <SvgIcon>
+                                <path d={mdiLogout} />
+                            </SvgIcon>
+                        </ListItemIcon>
+                        <ListItemText primary="Logout" />
+                    </ListItem>
+                )}
+                {!isLoggedIn && (
+                    <ListItem
+                        className={classes.drawerItem}
+                        onClick={() => {
+                            setOpenAuthDialog(true);
+                            toggleDrawer();
+                        }}
+                        button
+                    >
+                        <ListItemIcon className={classes.drawerIcon}>
+                            <SvgIcon>
+                                <path d={mdiLogin} />
+                            </SvgIcon>
+                        </ListItemIcon>
+                        <ListItemText primary="Login" />
+                    </ListItem>
+                )}
             </List>
             <div className={classes.drawerCloseButtonContainer}>
                 <IconButton className={classes.drawerCloseButton} onClick={toggleDrawer}>
@@ -182,7 +221,7 @@ export default function Header(): ReactElement {
                                 color="primary"
                                 aria-label="login"
                                 className={classes.loginButton}
-                                onClick={() => setOpenLoginDialog(true)}
+                                onClick={() => setOpenAuthDialog(true)}
                             >
                                 Login
                             </Fab>
@@ -202,6 +241,7 @@ export default function Header(): ReactElement {
             </AppBar>
             {popupMenu}
             {mobileDrawerMenu}
+            <AuthDialog open={openAuthDialog} onClose={() => setOpenAuthDialog(false)} />
         </div>
     );
 }
