@@ -1,22 +1,13 @@
 {
-    "javascript.validate.enable": true,
-    "typescript.preferences.importModuleSpecifier": "auto",
-    "typescript.tsc.autoDetect": "off",
-    "grunt.autoDetect": "off",
-    "jake.autoDetect": "off",
-    "gulp.autoDetect": "off",
-    "npm.autoDetect": "on",
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.insertSpaces": true,
-    "editor.detectIndentation": false,
-    "editor.tabSize": 4,
-    "[json]": {
-        "editor.tabSize": 2
-    },
-    "[html]": {
-        "editor.tabSize": 2
-    },
-    "[xml]": {
-        "editor.tabSize": 2
-    }
+  "javascript.validate.enable": true,
+  "typescript.preferences.importModuleSpecifier": "auto",
+  "typescript.tsc.autoDetect": "off",
+  "grunt.autoDetect": "off",
+  "jake.autoDetect": "off",
+  "gulp.autoDetect": "off",
+  "npm.autoDetect": "on",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2
 }

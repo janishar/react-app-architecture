@@ -20,30 +20,30 @@ delete window.__PRELOADED_STATE__;
 
 // Create Redux store with initial state
 const store = createStore(
-    rootReducer,
-    preloadedState,
-    applyMiddleware(thunk, logger, crashReporter),
+  rootReducer,
+  preloadedState,
+  applyMiddleware(thunk, logger, crashReporter),
 );
 
 const Routes = (): ReactElement => {
-    // remove the css sent inline in the html on client side
-    // useEffect in similar to componentDidMount for function components
-    useEffect(() => {
-        const jssStyles = document.querySelector('#jss-server-side');
-        if (jssStyles && jssStyles.parentNode) jssStyles.parentNode.removeChild(jssStyles);
-    }, []);
+  // remove the css sent inline in the html on client side
+  // useEffect in similar to componentDidMount for function components
+  useEffect(() => {
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles && jssStyles.parentNode) jssStyles.parentNode.removeChild(jssStyles);
+  }, []);
 
-    return (
-        <Provider store={store}>
-            <CookiesProvider>
-                <BrowserRouter>
-                    <ThemeProvider theme={theme}>
-                        <Route component={App} />
-                    </ThemeProvider>
-                </BrowserRouter>
-            </CookiesProvider>
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <CookiesProvider>
+        <BrowserRouter>
+          <ThemeProvider theme={theme}>
+            <Route component={App} />
+          </ThemeProvider>
+        </BrowserRouter>
+      </CookiesProvider>
+    </Provider>
+  );
 };
 
 hydrate(<Routes />, document.getElementById('root'));

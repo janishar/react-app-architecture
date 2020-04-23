@@ -1,33 +1,33 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        // Target latest version of ECMAScript.
-        "target": "esnext",
-        // Search under node_modules for non-relative imports.
-        "moduleResolution": "node",
-        // Process & infer types from .js files.
-        "allowJs": true,
-        // Don't emit; allow Babel to transform files.
-        "noEmit": true,
-        // Enable strictNullChecks & noImplicitAny.
-        "strictNullChecks": true,
-        "noImplicitAny": true,
-        // Disallow features that require cross-file information for emit.
-        "isolatedModules": true,
-        // Import non-ES modules as default imports.
-        "esModuleInterop": true,
-        // Enable support for jsx files
-        "jsx": "react",
-        // Import .json files
-        "resolveJsonModule": true,
-        "baseUrl": ".",
-        "paths": {
-            "*": ["node_modules/*", "src/*.d.ts", "src/server/*.d.ts"],
-            "@ui/*": ["src/ui/*"],
-            "@utils/*": ["src/utils/*"],
-            "@core/reducers": ["src/reducers.ts"],
-            "@core/theme": ["src/theme.ts"]
-        }
-    },
-    "include": ["src/**/*", ".templates/**/*"]
+  "compilerOptions": {
+    "module": "commonjs",
+    // Target latest version of ECMAScript.
+    "target": "esnext",
+    // Search under node_modules for non-relative imports.
+    "moduleResolution": "node",
+    // Process & infer types from .js files.
+    "allowJs": true,
+    // Don't emit; allow Babel to transform files.
+    "noEmit": true,
+    // Enable strictNullChecks & noImplicitAny.
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    // Disallow features that require cross-file information for emit.
+    "isolatedModules": true,
+    // Import non-ES modules as default imports.
+    "esModuleInterop": true,
+    // Enable support for jsx files
+    "jsx": "react",
+    // Import .json files
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*", "src/*.d.ts", "src/server/*.d.ts"],
+      "@ui/*": ["src/ui/*"],
+      "@utils/*": ["src/utils/*"],
+      "@core/reducers": ["src/reducers.ts"],
+      "@core/theme": ["src/theme.ts"]
+    }
+  },
+  "include": ["src/**/*", ".templates/**/*"]
 }

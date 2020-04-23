@@ -19,18 +19,18 @@ global.navigator = { userAgent: 'all' };
 
 // This is added so that @babel/register don't crash when compiling modular style dependencies
 register([
-    '.sass',
-    '.scss',
-    '.less',
-    '.css',
-    '.svg',
-    '.eot',
-    '.woff',
-    '.woff2',
-    '.ttf',
-    '.png',
-    '.jpg',
-    '.jpeg',
+  '.sass',
+  '.scss',
+  '.less',
+  '.css',
+  '.svg',
+  '.eot',
+  '.woff',
+  '.woff2',
+  '.ttf',
+  '.png',
+  '.jpg',
+  '.jpeg',
 ]);
 
 app.use(cookiesMiddleware());

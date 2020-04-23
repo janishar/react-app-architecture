@@ -11,11 +11,11 @@ router.get('/', sendLandingPage);
 router.use('*', sendNotFoundPagePage);
 
 function sendLandingPage(req: PublicRequest, res: Response) {
-    res.send(pageBuilder(req, <Landing />));
+  res.send(pageBuilder(req, <Landing />));
 }
 
 function sendNotFoundPagePage(req: PublicRequest, res: Response) {
-    res.status(404).send(pageBuilder(req, <NotFound />));
+  res.status(404).send(pageBuilder(req, <NotFound />));
 }
 
 export default router;

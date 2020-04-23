@@ -15,65 +15,63 @@ import { scrollPageToTop, setPageTitle, removeAppLoader } from '@utils/pageUtils
 export const KEY_AUTH_DATA = 'KEY_AUTH_DATA';
 
 function App({ children }: { children: ReactElement }): ReactElement {
-    const classes = useStyles();
-    const dispatch = useDispatch();
-    const match = useRouteMatch();
-    const [cookies, setCookie, removeCookie] = useCookies([KEY_AUTH_DATA]);
-    const { currentPageTitle } = useStateSelector(({ appState }) => appState);
-    const { data: authData, isLoggedIn } = useStateSelector(({ authState }) => authState);
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const match = useRouteMatch();
+  const [cookies, setCookie, removeCookie] = useCookies([KEY_AUTH_DATA]);
+  const { currentPageTitle } = useStateSelector(({ appState }) => appState);
+  const { data: authData, isLoggedIn } = useStateSelector(({ authState }) => authState);
 
-    useEffect(() => {
-        removeAppLoader();
-        const authData = cookies[KEY_AUTH_DATA];
-        if (authData) dispatch(updateAuthData.action(authData));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+  useEffect(() => {
+    removeAppLoader();
+    const authData = cookies[KEY_AUTH_DATA];
+    if (authData) dispatch(updateAuthData.action(authData));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    useEffect(() => {
-        if (currentPageTitle) setPageTitle(currentPageTitle);
-    }, [currentPageTitle]);
+  useEffect(() => {
+    if (currentPageTitle) setPageTitle(currentPageTitle);
+  }, [currentPageTitle]);
 
-    useEffect(() => {
-        scrollPageToTop();
-    }, [match]);
+  useEffect(() => {
+    scrollPageToTop();
+  }, [match]);
 
-    useEffect(() => {
-        if (isLoggedIn) {
-            setAuthCookies();
-        } else {
-            removeAuthCookies();
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLoggedIn]);
+  useEffect(() => {
+    if (isLoggedIn) {
+      setAuthCookies();
+    } else {
+      removeAuthCookies();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn]);
 
-    const setAuthCookies = () => {
-        if (authData?.tokens?.accessToken) {
-            const expiryInSec = 30 * 24 * 60 * 60; // 30 days
-            setCookie(KEY_AUTH_DATA, authData, {
-                path: '/',
-                maxAge: expiryInSec,
-                sameSite: 'strict',
-                secure: process.env.NODE_ENV === 'production', // only https access allowed
-            });
-        }
-    };
+  const setAuthCookies = () => {
+    if (authData?.tokens?.accessToken) {
+      const expiryInSec = 30 * 24 * 60 * 60; // 30 days
+      setCookie(KEY_AUTH_DATA, authData, {
+        path: '/',
+        maxAge: expiryInSec,
+        sameSite: 'strict',
+        secure: process.env.NODE_ENV === 'production', // only https access allowed
+      });
+    }
+  };
 
-    const removeAuthCookies = () => {
-        removeCookie(KEY_AUTH_DATA, { path: '/' });
-    };
+  const removeAuthCookies = () => {
+    removeCookie(KEY_AUTH_DATA, { path: '/' });
+  };
 
-    return (
-        <Fragment>
-            <CssBaseline />
-            <div className={classes.root}>
-                <Header />
-                <div className={classes.contentArea}>
-                    {children !== undefined ? children : <Routes />}
-                </div>
-                <Footer />
-            </div>
-        </Fragment>
-    );
+  return (
+    <Fragment>
+      <CssBaseline />
+      <div className={classes.root}>
+        <Header />
+        <div className={classes.contentArea}>{children !== undefined ? children : <Routes />}</div>
+        <Footer />
+      </div>
+    </Fragment>
+  );
 }
 
 export default hot(App);

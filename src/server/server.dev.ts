@@ -7,13 +7,13 @@ import webpackConfig from '../../webpack.config';
 import { Request, Response, NextFunction } from 'express';
 
 const serverOptions = {
-    quiet: false,
-    noInfo: false,
-    hot: true,
-    inline: true,
-    lazy: false,
-    publicPath: webpackConfig.output.publicPath,
-    stats: { colors: true },
+  quiet: false,
+  noInfo: false,
+  hot: true,
+  inline: true,
+  lazy: false,
+  publicPath: webpackConfig.output.publicPath,
+  stats: { colors: true },
 };
 // @ts-ignore
 const compiler = webpack(webpackConfig);
@@ -22,6 +22,8 @@ app.use(webpackHotMiddleware(compiler));
 
 app.use(routes);
 
-app.listen(process.env.PORT || 3001, () => {
+app
+  .listen(process.env.PORT || 3001, () => {
     console.log(`🚧 server listening on port : ${process.env.PORT || 3001}`);
-}).on('error', (e) => console.log(e));
+  })
+  .on('error', (e) => console.log(e));

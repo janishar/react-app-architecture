@@ -1,93 +1,93 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "vscode: Install Plugins",
-            "type": "shell",
-            "command": "chmod +x ./.vscode/extensions.list | ./.vscode/extensions.list",
-            "presentation": {
-                "reveal": "always",
-                "panel": "new"
-            }
-        },
-        {
-            "label": "Install Dependencies",
-            "type": "shell",
-            "command": "npm install",
-            "presentation": {
-                "reveal": "always",
-                "panel": "new"
-            }
-        },
-        {
-            "label": "Start Prod Server",
-            "type": "npm",
-            "script": "start"
-        },
-        {
-            "label": "Start Dev Server",
-            "type": "npm",
-            "script": "watch"
-        },
-        {
-            "label": "Template: Generate File",
-            "type": "shell",
-            "command": "cp",
-            "presentation": {
-                "reveal": "never",
-                "panel": "shared"
-            },
-            "args": [
-                "${workspaceFolder}/.templates/component/${input:templateFileName}",
-                "${relativeFileDirname}"
-            ]
-        },
-        {
-            "label": "Template: Generate UI Component",
-            "type": "shell",
-            "command": "cp",
-            "presentation": {
-                "reveal": "never",
-                "panel": "shared"
-            },
-            "args": [
-                "-r",
-                "${workspaceFolder}/.templates/component",
-                "${workspaceFolder}/src/ui/${input:templateComponentName}"
-            ]
-        },
-        {
-            "label": "Template: Generate Simple Component",
-            "type": "shell",
-            "command": "cp",
-            "presentation": {
-                "reveal": "never",
-                "panel": "shared"
-            },
-            "args": [
-                "-r",
-                "${workspaceFolder}/.templates/simple_component",
-                "${workspaceFolder}/src/ui/${input:simpleComponentName}"
-            ]
-        }
-    ],
-    "inputs": [
-        {
-            "type": "pickString",
-            "id": "templateFileName",
-            "description": "What type of file do you want to create?",
-            "options": ["input.tsx", "actions.ts", "reducer.ts", "routes.tsx", "style.ts"],
-            "default": "index.tsx"
-        },
-        {
-            "type": "promptString",
-            "id": "templateComponentName",
-            "description": "What is the name of the component do you want to create?"
-        },
-        {
-            "type": "promptString",
-            "id": "simpleComponentName",
-            "description": "What is the name of the simple component do you want to create?"
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "vscode: Install Plugins",
+      "type": "shell",
+      "command": "chmod +x ./.vscode/extensions.list | ./.vscode/extensions.list",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Install Dependencies",
+      "type": "shell",
+      "command": "npm install",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Start Prod Server",
+      "type": "npm",
+      "script": "start"
+    },
+    {
+      "label": "Start Dev Server",
+      "type": "npm",
+      "script": "watch"
+    },
+    {
+      "label": "Template: Generate File",
+      "type": "shell",
+      "command": "cp",
+      "presentation": {
+        "reveal": "never",
+        "panel": "shared"
+      },
+      "args": [
+        "${workspaceFolder}/.templates/component/${input:templateFileName}",
+        "${relativeFileDirname}"
+      ]
+    },
+    {
+      "label": "Template: Generate UI Component",
+      "type": "shell",
+      "command": "cp",
+      "presentation": {
+        "reveal": "never",
+        "panel": "shared"
+      },
+      "args": [
+        "-r",
+        "${workspaceFolder}/.templates/component",
+        "${workspaceFolder}/src/ui/${input:templateComponentName}"
+      ]
+    },
+    {
+      "label": "Template: Generate Simple Component",
+      "type": "shell",
+      "command": "cp",
+      "presentation": {
+        "reveal": "never",
+        "panel": "shared"
+      },
+      "args": [
+        "-r",
+        "${workspaceFolder}/.templates/simple_component",
+        "${workspaceFolder}/src/ui/${input:simpleComponentName}"
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "templateFileName",
+      "description": "What type of file do you want to create?",
+      "options": ["input.tsx", "actions.ts", "reducer.ts", "routes.tsx", "style.ts"],
+      "default": "index.tsx"
+    },
+    {
+      "type": "promptString",
+      "id": "templateComponentName",
+      "description": "What is the name of the component do you want to create?"
+    },
+    {
+      "type": "promptString",
+      "id": "simpleComponentName",
+      "description": "What is the name of the simple component do you want to create?"
+    }
+  ]
 }
