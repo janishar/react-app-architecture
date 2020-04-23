@@ -1,16 +1,8 @@
 {
-    "useTabs": false,
-    "semi": true,
-    "trailingComma": "all",
-    "singleQuote": true,
-    "printWidth": 100,
-    "tabWidth": 4,
-    "overrides": [
-        {
-            "files": ["package.json", "package-lock.json", "*.xml", "*.html"],
-            "options": {
-                "tabWidth": 2
-            }
-        }
-    ]
+  "useTabs": false,
+  "semi": true,
+  "trailingComma": "all",
+  "singleQuote": true,
+  "printWidth": 100,
+  "tabWidth": 2
 }
