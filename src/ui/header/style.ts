@@ -60,6 +60,9 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
     menuItem: {
         minWidth: 300,
     },
+    paper: {
+        background: palette.secondary.light,
+    },
 }));
 
 export default useStyles;

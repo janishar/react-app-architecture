@@ -90,6 +90,7 @@ export default function Header(): ReactElement {
             transformOrigin={{ vertical: 'top', horizontal: 'right' }}
             open={isPopupMenuOpen}
             onClose={handlePopupMenuClose}
+            PopoverClasses={{ paper: classes.paper }}
         >
             {isLoggedIn && renderProfileView(handlePopupMenuClose)}
             {isLoggedIn && (
