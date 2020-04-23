@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, ChangeEvent, Fragment } from 'react';
+import React, { ReactElement, useState, ChangeEvent, Fragment, useEffect } from 'react';
 import useStyles from './style';
 import { useDispatch } from 'react-redux';
 import { useStateSelector } from '@core/reducers';
@@ -40,6 +40,11 @@ export default function Component({
         isPasswordError: false,
         passwordError: '',
     });
+
+    useEffect(() => {
+        if (isLoggedIn) onClose();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLoggedIn]);
 
     const handleCredentialChange = (name: string) => (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault(); // to prevent from loosing focus
