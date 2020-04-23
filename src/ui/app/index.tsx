@@ -20,22 +20,18 @@ function App({ children }: { children: ReactElement }): ReactElement {
     const match = useRouteMatch();
     const [cookies, setCookie, removeCookie] = useCookies([KEY_AUTH_DATA]);
     const { currentPageTitle } = useStateSelector(({ appState }) => appState);
-    const { data: authData, isLoggedIn, isForcedLogout } = useStateSelector(
-        ({ authState }) => authState,
-    );
+    const { data: authData, isLoggedIn } = useStateSelector(({ authState }) => authState);
 
     useEffect(() => {
         removeAppLoader();
+        const authData = cookies[KEY_AUTH_DATA];
+        if (authData) dispatch(updateAuthData.action(authData));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
         if (currentPageTitle) setPageTitle(currentPageTitle);
     }, [currentPageTitle]);
-
-    useEffect(() => {
-        const authData = cookies[KEY_AUTH_DATA];
-        if (authData) dispatch(updateAuthData.action(authData));
-    }, [cookies, dispatch]);
 
     useEffect(() => {
         scrollPageToTop();
@@ -50,13 +46,8 @@ function App({ children }: { children: ReactElement }): ReactElement {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoggedIn]);
 
-    useEffect(() => {
-        if (!isForcedLogout && isLoggedIn) setAuthCookies();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isForcedLogout, isLoggedIn]);
-
     const setAuthCookies = () => {
-        if (authData) {
+        if (authData?.tokens?.accessToken) {
             const expiryInSec = 30 * 24 * 60 * 60; // 30 days
             setCookie(KEY_AUTH_DATA, authData, {
                 path: '/',

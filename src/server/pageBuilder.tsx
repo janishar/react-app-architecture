@@ -9,8 +9,8 @@ import { ServerStyleSheets, ThemeProvider } from '@material-ui/core/styles';
 import render from './template';
 import configureStore from './devStoreConfig';
 import theme from '@core/theme';
-import rootReducer from '@core/reducers';
-import App from '@ui/app';
+import rootReducer, { RootState } from '@core/reducers';
+import App, { KEY_AUTH_DATA } from '@ui/app';
 import { PublicRequest } from 'server-types';
 import thunk from 'redux-thunk';
 
@@ -33,7 +33,7 @@ export const buildUrl = (req: PublicRequest, endpoint: string): string => {
 export default function pageBuilder(
     req: PublicRequest,
     view: ReactElement,
-    currentState?: any,
+    currentState: RootState,
     title?: string,
     coverImg?: string,
     description?: string,
@@ -42,7 +42,20 @@ export default function pageBuilder(
     // create mui server style
     const sheets = new ServerStyleSheets();
 
+    // @ts-ignore
     if (!currentState) currentState = {};
+
+    const authData = req.universalCookies.get(KEY_AUTH_DATA);
+    if (authData?.tokens?.accessToken)
+        currentState.authState = {
+            data: { ...authData, tokens: { accessToken: null } }, // security
+            isLoggingIn: false,
+            isLoggingOut: false,
+            isLoggedIn: true,
+            isForcedLogout: false,
+            isRedirectHome: false,
+            message: null,
+        };
 
     const store = isDev
         ? configureStore(currentState)

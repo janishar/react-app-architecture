@@ -15,13 +15,6 @@ import theme from '@core/theme';
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__;
 
-try {
-    if (preloadedState && preloadedState.authData && preloadedState.authData.credential)
-        preloadedState.authData.credential = JSON.parse(atob(preloadedState.authData.credential));
-} catch (e) {
-    console.log(e);
-}
-
 // Allow the passed state to be garbage-collected
 delete window.__PRELOADED_STATE__;
 
