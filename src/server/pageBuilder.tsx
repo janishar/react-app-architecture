@@ -30,20 +30,24 @@ export const buildUrl = (req: PublicRequest, endpoint: string): string => {
   return `${baseUrl}${endpoint}`;
 };
 
+export type PageInfo = {
+  title: string;
+  description: string;
+  coverImg?: string;
+};
+
 export default function pageBuilder(
   req: PublicRequest,
   view: ReactElement,
-  currentState: RootState,
-  title?: string,
-  coverImg?: string,
-  description?: string,
-  preloadedState?: any,
+  pageinfo: PageInfo = {
+    title: 'AfterAcademy | React Project',
+    description: 'This is the sample project to learn and implement React app.',
+  },
+  //@ts-ignore
+  currentState: RootState = {},
 ): string {
   // create mui server style
   const sheets = new ServerStyleSheets();
-
-  // @ts-ignore
-  if (!currentState) currentState = {};
 
   const authData = req.universalCookies.get(KEY_AUTH_DATA);
   if (authData?.tokens?.accessToken) {
@@ -82,25 +86,18 @@ export default function pageBuilder(
   // Grab the CSS from our sheets.
   const css = sheets.toString();
 
-  // for sending the tree structure data
-  // to recreated on client side
-  // Grab the initial state from our Redux store
-  if (preloadedState === undefined) preloadedState = store.getState();
-
   const baseUrl = `${getProtocol(req)}://${req.get('host')}`;
   const siteUrl = baseUrl + req.originalUrl;
 
-  if (!title) title = `AfterAcademy | React Project`;
-  if (!coverImg) coverImg = `${baseUrl}/assets/og-cover-image.jpg`;
-  if (!description) description = 'This is the sample project to learn and implement React app.';
+  const { coverImg, title, description } = pageinfo;
 
   let htmlPage = render({
     html: html,
     css: css,
-    preloadedState: preloadedState,
+    preloadedState: store.getState(),
     siteUrl: siteUrl,
     title: title,
-    coverImg: coverImg,
+    coverImg: coverImg ? coverImg : `${baseUrl}/assets/og-cover-image.jpg`,
     description: description,
   });
 

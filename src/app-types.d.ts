@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react';
 import { Action as ReduxAction } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from './reducers';

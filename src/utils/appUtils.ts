@@ -10,3 +10,12 @@ export const validateToken = (rootState: RootState) => {
   if (!token) throw new Error('Please Log in');
   return token;
 };
+
+export const convertToReadableDate = (date: string) => formatDate(new Date(date));
+
+export const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-US', { day: 'numeric' }) +
+  ' ' +
+  date.toLocaleDateString('en-US', { month: 'short' }) +
+  ' ' +
+  date.toLocaleDateString('en-US', { year: 'numeric' });
