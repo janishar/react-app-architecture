@@ -201,6 +201,9 @@ export default function Header(): ReactElement {
                 {title}
               </Button>
             ))}
+            {user?.profilePicUrl && (
+              <Avatar alt={user.name} src={user.profilePicUrl} className={classes.avatar} />
+            )}
             {isLoggedIn ? (
               <IconButton
                 aria-label="show more"
