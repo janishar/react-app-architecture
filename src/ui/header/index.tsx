@@ -184,7 +184,7 @@ export default function Header(): ReactElement {
         {isWriter &&
           [
             { title: 'Write Blog', link: '/write/blog', icon: <CreateIcon /> },
-            { title: 'Blogs', link: '/writer/blogs', icon: <WebIcon /> },
+            { title: 'My Blogs', link: '/writer/blogs', icon: <WebIcon /> },
           ].map(({ title, link, icon }, position) => (
             <ListItem
               key={position}

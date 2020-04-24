@@ -1,13 +1,13 @@
 import { removeMessage, blogActions, clearPage } from './actions';
 import { Action, Message } from 'app-types';
 
-export type Author = {
+export interface Author {
   _id: string;
   name: string;
   profilePicUrl: string;
-};
+}
 
-export type Blog = {
+export interface Blog {
   _id: string;
   tags: Array<string>;
   likes: number;
@@ -19,7 +19,7 @@ export type Blog = {
   imgUrl: string;
   publishedAt: string;
   text?: string;
-};
+}
 
 export type State = {
   data: Blog | null;

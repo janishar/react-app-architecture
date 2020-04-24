@@ -1,5 +1,5 @@
 import { hot } from 'react-hot-loader/root';
-import React, { Fragment, ReactElement, useEffect } from 'react';
+import React, { Fragment, ReactElement, useEffect, useRef } from 'react';
 import Routes from './routes';
 import useStyles from './style';
 import { useDispatch } from 'react-redux';
@@ -15,6 +15,7 @@ import { scrollPageToTop, setPageTitle, removeAppLoader } from '@utils/pageUtils
 export const KEY_AUTH_DATA = 'KEY_AUTH_DATA';
 
 function App({ children }: { children: ReactElement }): ReactElement {
+  const willMount = useRef(true);
   const classes = useStyles();
   const dispatch = useDispatch();
   const match = useRouteMatch();
@@ -22,10 +23,15 @@ function App({ children }: { children: ReactElement }): ReactElement {
   const { currentPageTitle } = useStateSelector(({ appState }) => appState);
   const { data: authData, isLoggedIn } = useStateSelector(({ authState }) => authState);
 
-  useEffect(() => {
-    removeAppLoader();
+  // only run on the client
+  if (typeof window !== 'undefined' && willMount.current) {
     const authData = cookies[KEY_AUTH_DATA];
     if (authData) dispatch(updateAuthData.action(authData));
+    willMount.current = false;
+  }
+
+  useEffect(() => {
+    removeAppLoader();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
