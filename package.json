@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && npm run serve",
-    "serve": "NODE_ENV=production node build/server/server.prod.js",
+    "serve": "NODE_ENV=production node -r dotenv/config build/server/server.prod.js",
     "devserver": "NODE_ENV=development node -r ./tools/babel-register.js src/server/server.dev.ts",
     "watch": "npm run clean && npm run devserver",
     "prebuild": "npm run clean",

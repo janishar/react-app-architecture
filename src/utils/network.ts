@@ -11,7 +11,7 @@ const instance = axios.create({
     'x-api-key': process.env.API_KEY,
     'Content-Type': 'application/json',
   },
-  maxContentLength: 2000,
+  maxContentLength: 5 * 1000 * 1000, // bytes => 5 MB
 });
 
 // Add a request interceptor
