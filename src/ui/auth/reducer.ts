@@ -1,6 +1,12 @@
 import { updateAuthData, forceLogout, loginActions, logoutActions, removeMessage } from './actions';
 import { Action, User, Message } from 'app-types';
 
+export enum Roles {
+  LEARNER = 'LEARNER',
+  WRITER = 'WRITER',
+  EDITOR = 'EDITOR',
+}
+
 export type AuthData = {
   user: User;
   tokens: {

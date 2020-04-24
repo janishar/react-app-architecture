@@ -1,7 +1,7 @@
 import React, { ReactElement, useState, MouseEvent } from 'react';
 import useStyles from './style';
 import importer from '@utils/importer';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useStateSelector } from '@core/reducers';
 import {
   AppBar,
@@ -21,6 +21,7 @@ import {
   ListItemText,
   MenuItem,
   SvgIcon,
+  Divider,
 } from '@material-ui/core';
 
 import {
@@ -29,19 +30,28 @@ import {
   Web as WebIcon,
   Email as EmailIcon,
   Menu as MenuIcon,
+  List as ListIcon,
+  Create as CreateIcon,
+  SupervisorAccount as SupervisorAccountIcon,
 } from '@material-ui/icons';
 
 import { mdiLogout, mdiLogin } from '@mdi/js';
 import AuthDialog from '@ui/auth';
 import { logout } from '@ui/auth/actions';
 import { useDispatch } from 'react-redux';
+import { checkRole } from '@utils/appUtils';
+import { Roles } from '@ui/auth/reducer';
 
 const afterAcademyLogo = importer('./assets/afteracademy-logo.svg');
 
 export default function Header(): ReactElement {
   const classes = useStyles();
+  const history = useHistory();
   const { isLoggedIn, data: authData } = useStateSelector(({ authState }) => authState);
   const user = authData?.user;
+
+  const isWriter = checkRole(user, Roles.WRITER);
+  const isEditor = checkRole(user, Roles.EDITOR);
 
   const [openAuthDialog, setOpenAuthDialog] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -88,6 +98,48 @@ export default function Header(): ReactElement {
       PopoverClasses={{ paper: classes.paper }}
     >
       {isLoggedIn && renderProfileView(handlePopupMenuClose)}
+      {isWriter && (
+        <MenuItem
+          className={classes.menuItem}
+          onClick={() => {
+            history.push('/write/blog');
+            handlePopupMenuClose();
+          }}
+        >
+          <IconButton color="inherit">
+            <CreateIcon />
+          </IconButton>
+          <p>Write Blog</p>
+        </MenuItem>
+      )}
+      {isWriter && (
+        <MenuItem
+          className={classes.menuItem}
+          onClick={() => {
+            history.push('/writer/blogs');
+            handlePopupMenuClose();
+          }}
+        >
+          <IconButton color="inherit">
+            <ListIcon />
+          </IconButton>
+          <p>My Blogs</p>
+        </MenuItem>
+      )}
+      {isEditor && (
+        <MenuItem
+          className={classes.menuItem}
+          onClick={() => {
+            history.push('/editor/blogs');
+            handlePopupMenuClose();
+          }}
+        >
+          <IconButton color="inherit">
+            <SupervisorAccountIcon />
+          </IconButton>
+          <p>Blogs Admin</p>
+        </MenuItem>
+      )}
       {isLoggedIn && (
         <MenuItem
           className={classes.menuItem}
@@ -128,6 +180,42 @@ export default function Header(): ReactElement {
             <ListItemText primary={title} />
           </ListItem>
         ))}
+        {isWriter && <Divider />}
+        {isWriter &&
+          [
+            { title: 'Write Blog', link: '/write/blog', icon: <CreateIcon /> },
+            { title: 'Blogs', link: '/writer/blogs', icon: <WebIcon /> },
+          ].map(({ title, link, icon }, position) => (
+            <ListItem
+              key={position}
+              className={classes.drawerItem}
+              button
+              component={Link}
+              to={link}
+              onClick={toggleDrawer}
+            >
+              <ListItemIcon className={classes.drawerIcon}>{icon}</ListItemIcon>
+              <ListItemText primary={title} />
+            </ListItem>
+          ))}
+        <Divider />
+        {isEditor && <Divider />}
+        {isEditor &&
+          [{ title: 'Blog Admin', link: '/editor/blogs', icon: <SupervisorAccountIcon /> }].map(
+            ({ title, link, icon }, position) => (
+              <ListItem
+                key={position}
+                className={classes.drawerItem}
+                button
+                component={Link}
+                to={link}
+                onClick={toggleDrawer}
+              >
+                <ListItemIcon className={classes.drawerIcon}>{icon}</ListItemIcon>
+                <ListItemText primary={title} />
+              </ListItem>
+            ),
+          )}
         {isLoggedIn && (
           <ListItem
             className={classes.drawerItem}
