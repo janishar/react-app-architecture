@@ -17,8 +17,9 @@ router.use('*', sendNotFoundPagePage);
 async function sendBlogsPage(req: PublicRequest, res: Response, next: NextFunction) {
   try {
     const response = await publicRequest<null, Array<Blog>>({
-      url: 'blogs/latest?pageNumber=1&pageItemCount=1000',
+      url: 'blogs/latest',
       method: 'GET',
+      params: { pageNumber: 1, pageItemCount: 1000 },
     });
     res.send(
       pageBuilder(

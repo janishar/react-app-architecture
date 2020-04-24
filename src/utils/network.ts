@@ -53,6 +53,7 @@ export interface NetworkRequest<T extends object | null> {
   url: string;
   method: Method;
   data?: T;
+  params?: object;
 }
 
 export interface NetworkAuthRequest<T extends object | null> extends NetworkRequest<T> {

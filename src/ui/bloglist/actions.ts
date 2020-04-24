@@ -14,8 +14,9 @@ export const fetchLatestBlogs = (): AsyncAction => async (dispatch: Dispatch) =>
   try {
     dispatch(blogsLatestAction.requesting.action());
     const response = await publicRequest<null, Array<Blog>>({
-      url: 'blogs/latest?pageNumber=1&pageItemCount=1000',
+      url: 'blogs/latest',
       method: 'GET',
+      params: { pageNumber: 1, pageItemCount: 1000 },
     });
     dispatch(blogsLatestAction.success.action(response));
   } catch (e) {
