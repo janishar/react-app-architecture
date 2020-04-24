@@ -9,6 +9,9 @@ export const scrollPageToTop = () => {
 export const removeAppLoader = () => {
   if (document) {
     const appLoader = document.getElementById('appLoader');
-    if (appLoader?.parentNode) appLoader.parentNode.removeChild(appLoader);
+    if (appLoader)
+      setTimeout(() => {
+        if (appLoader?.parentNode) appLoader.parentNode.removeChild(appLoader);
+      }, 500);
   }
 };

@@ -38,12 +38,57 @@
 
   <!-- app loader css-->
   <style>
-    /*TODO*/
+    .progress-body {
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      padding: 0;
+      margin: 0;
+      z-index: 100000;
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
+    .progress {
+      background: rgba(0, 0, 0, 1);
+      justify-content: flex-start;
+      border-radius: 0px;
+      align-items: center;
+      position: relative;
+      padding: 0 0px;
+      display: flex;
+      height: 5px;
+      width: 100%;
+    }
+
+    .progress-value {
+      animation: appLoadingProgress 1s infinite forwards;
+      box-shadow: 0 0px 0px 0px #fff;
+      border-radius: 0px;
+      background: #ff9800;
+      height: 5px;
+      width: 0;
+    }
+
+    @keyframes appLoadingProgress {
+      0% {
+        width: 0;
+      }
+
+      100% {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <div id="appLoader" class="app-loader"></div>
+  <div id="appLoader" class="progress-body">
+    <div class="progress">
+      <div class="progress-value"></div>
+    </div>
+  </div>
   <div id="root">APP_HTML</div>
   <script type='text/javascript'>window.__PRELOADED_STATE__ = SITE_PRELOADED_STATE</script>
   <!-- SITE_SCRIPTS -->
