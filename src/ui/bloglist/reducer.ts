@@ -1,4 +1,4 @@
-import { blogsLatestAction, removeMessage } from './actions';
+import { blogsLatestActions, removeMessage } from './actions';
 import { Action, Message } from 'app-types';
 import { Blog } from '@ui/blogpage/reducer';
 
@@ -21,12 +21,12 @@ const reducer = (state: State = defaultState, { type, payload }: Action): State 
         ...state,
         message: null,
       };
-    case blogsLatestAction.requesting.type:
+    case blogsLatestActions.requesting.type:
       return {
         ...state,
         isFetching: true,
       };
-    case blogsLatestAction.failure.type:
+    case blogsLatestActions.failure.type:
       return {
         ...state,
         isFetching: false,
@@ -35,7 +35,7 @@ const reducer = (state: State = defaultState, { type, payload }: Action): State 
           text: 'No more blogs',
         },
       };
-    case blogsLatestAction.success.type:
+    case blogsLatestActions.success.type:
       return {
         ...state,
         isFetching: false,

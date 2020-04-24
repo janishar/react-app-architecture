@@ -43,8 +43,7 @@ export default function pageBuilder(
     title: 'AfterAcademy | React Project',
     description: 'This is the sample project to learn and implement React app.',
   },
-  //@ts-ignore
-  currentState: RootState = {},
+  currentState: Partial<RootState> = {},
 ): string {
   // create mui server style
   const sheets = new ServerStyleSheets();

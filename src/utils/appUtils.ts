@@ -11,9 +11,9 @@ export const validateToken = (rootState: RootState) => {
   return token;
 };
 
-export const convertToReadableDate = (date: string) => formatDate(new Date(date));
+export const convertToReadableDate = (date: string): string => formatDate(new Date(date));
 
-export const formatDate = (date: Date) =>
+export const formatDate = (date: Date): string =>
   date.toLocaleDateString('en-US', { day: 'numeric' }) +
   ' ' +
   date.toLocaleDateString('en-US', { month: 'short' }) +

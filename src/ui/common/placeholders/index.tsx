@@ -1,23 +1,23 @@
 import React, { ReactElement } from 'react';
 import useStyles from './style';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { Grid, Box } from '@material-ui/core';
+import { Grid, Box, CardActionArea, CardHeader } from '@material-ui/core';
 
 type BreakPoints = boolean | 12 | 6 | 4 | 2 | 'auto' | 1 | 3 | 5 | 7 | 8 | 9 | 10 | 11 | undefined;
 
-type Props = {
+type CardListProps = {
   xs?: BreakPoints;
   sm?: BreakPoints;
   md?: BreakPoints;
   count?: number;
 };
 
-export const CardListPlaceholder = ({
+export function CardListPlaceholder({
   xs = 12,
   sm = 6,
   md = 4,
   count = 6,
-}: Props): ReactElement => {
+}: CardListProps): ReactElement {
   const classes = useStyles();
   return (
     <Grid container justify="center">
@@ -34,4 +34,25 @@ export const CardListPlaceholder = ({
       ))}
     </Grid>
   );
-};
+}
+
+export function AuthorPlaceholder({
+  width = 40,
+  height = 40,
+}: {
+  width?: number;
+  height?: number;
+}): ReactElement {
+  const classes = useStyles();
+  return (
+    <div className={classes.author}>
+      <CardActionArea>
+        <CardHeader
+          avatar={<Skeleton variant="circle" width={width} height={height} />}
+          title={<Skeleton height={width / 2.5} width="80%" />}
+          subheader={<Skeleton height={width / 2.5} width="40%" />}
+        />
+      </CardActionArea>
+    </div>
+  );
+}

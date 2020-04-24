@@ -1,17 +1,65 @@
 import React, { ReactElement, useEffect } from 'react';
 import useStyles from './style';
 import { useDispatch } from 'react-redux';
-import { sendExample } from './actions';
+import { removeMessage, clearPage, fetchBlogByEndpoint } from './actions';
 import { useStateSelector } from '@core/reducers';
+import { useRouteMatch } from 'react-router-dom';
+import Snackbar from '@ui/common/snackbar';
+import { CardActionArea, Avatar, Grid, LinearProgress, CardHeader } from '@material-ui/core';
+import { convertToReadableDate } from '@utils/appUtils';
+import { AuthorPlaceholder } from '@ui/common/placeholders';
+import Skeleton from '@material-ui/lab/Skeleton';
 
-export default function Component({ exampleProp }: { exampleProp: any }): ReactElement {
+export default function BlogPage(): ReactElement {
   const classes = useStyles();
-  const appState = useStateSelector((state) => state.appState);
+  const match = useRouteMatch<{ endpoint: string }>();
+  const { data, isFetching, message } = useStateSelector((state) => state.blogState);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(sendExample.action('Example Message'));
-  }, [dispatch]);
+    const endpoint = match.params.endpoint;
+    if (endpoint)
+      if (!data) {
+        dispatch(fetchBlogByEndpoint(endpoint));
+      } else if (data.blogUrl !== endpoint) {
+        dispatch(clearPage.action(endpoint));
+        dispatch(fetchBlogByEndpoint(endpoint));
+      }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [match.params.endpoint]);
 
-  return <div className={classes.root}></div>;
+  const authorView = data ? (
+    <div className={classes.author}>
+      <CardActionArea>
+        <CardHeader
+          avatar={<Avatar aria-label={data.author.name} src={data.author.profilePicUrl} />}
+          title={data.author.name}
+          subheader={convertToReadableDate(data.publishedAt)}
+        />
+      </CardActionArea>
+    </div>
+  ) : null;
+
+  return (
+    <div className={classes.root}>
+      {isFetching && <LinearProgress />}
+      <Grid className={classes.content} container justify="center">
+        <Grid item xs={12} sm={12} md={7}>
+          {isFetching ? <AuthorPlaceholder /> : authorView}
+          {isFetching ? (
+            <Skeleton variant="rect" height={600} />
+          ) : (
+            data && data.text && <div dangerouslySetInnerHTML={{ __html: data.text }} />
+          )}
+        </Grid>
+      </Grid>
+      {message && (
+        <Snackbar
+          message={message.text}
+          variant={message.type}
+          onClose={() => dispatch(removeMessage.action())}
+        />
+      )}
+    </div>
+  );
 }

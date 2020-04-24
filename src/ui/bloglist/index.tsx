@@ -20,7 +20,7 @@ import { Blog } from '@ui/blogpage/reducer';
 import { Link } from 'react-router-dom';
 import { convertToReadableDate } from '@utils/appUtils';
 
-export default function Component(): ReactElement {
+export default function BlogList(): ReactElement {
   const classes = useStyles();
   const { data, isFetching, message } = useStateSelector((state) => state.blogListState);
   const dispatch = useDispatch();

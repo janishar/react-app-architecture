@@ -2,17 +2,51 @@ import express, { Response, NextFunction } from 'express';
 import React from 'react';
 import pageBuilder from './pageBuilder';
 import { PublicRequest } from 'server-types';
-import BlogList from '@ui/bloglist';
-import Landing from '@ui/landing';
-import NotFound from '@ui/notfound';
 import { publicRequest } from '@utils/network';
 import { Blog, defaultState as blogListDefaultState } from '@ui/blogpage/reducer';
+import BlogList from '@ui/bloglist';
+import BlogPage from '@ui/blogpage';
+import Landing from '@ui/landing';
+import NotFound from '@ui/notfound';
 
 const router = express.Router();
 
+router.get('/blog/:endpoint', sendBlogPage);
 router.get('/blogs', sendBlogsPage);
 router.get('/', sendLandingPage);
 router.use('*', sendNotFoundPagePage);
+
+async function sendBlogPage(req: PublicRequest, res: Response) {
+  try {
+    const response = await publicRequest<null, Blog>({
+      url: 'blog/url',
+      method: 'GET',
+      params: {
+        endpoint: req.params.endpoint,
+      },
+    });
+    if (!response.data) throw new Error('Not Found');
+    res.send(
+      pageBuilder(
+        req,
+        <BlogPage />,
+        {
+          title: response.data.title,
+          description: response.data.description,
+        },
+        {
+          blogState: {
+            ...blogListDefaultState,
+            isFetching: false,
+            data: response.data,
+          },
+        },
+      ),
+    );
+  } catch (e) {
+    sendNotFoundPagePage(req, res);
+  }
+}
 
 async function sendBlogsPage(req: PublicRequest, res: Response, next: NextFunction) {
   try {
@@ -31,7 +65,6 @@ async function sendBlogsPage(req: PublicRequest, res: Response, next: NextFuncti
             'AfterAcademy opne source blogs and articles with latest developments and trends',
         },
         {
-          // @ts-ignore
           blogListState: {
             ...blogListDefaultState,
             isFetching: false,

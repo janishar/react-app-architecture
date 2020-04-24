@@ -3,7 +3,7 @@ import rootReducer, { RootState } from '../reducers';
 import thunk from 'redux-thunk';
 import { logger, crashReporter } from '../utils/reduxMiddlewares';
 
-const devStoreConfig = (preloadedState: RootState): Store => {
+const devStoreConfig = (preloadedState: Partial<RootState>): Store => {
   const store = createStore(
     rootReducer,
     preloadedState,

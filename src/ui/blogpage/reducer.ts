@@ -1,5 +1,5 @@
-import { sendExample } from './actions';
-import { Action } from 'app-types';
+import { removeMessage, blogActions, clearPage } from './actions';
+import { Action, Message } from 'app-types';
 
 export type Author = {
   _id: string;
@@ -18,22 +18,51 @@ export type Blog = {
   blogUrl: string;
   imgUrl: string;
   publishedAt: string;
+  text?: string;
 };
 
 export type State = {
-  exampleVariable: string | null;
+  data: Blog | null;
+  isFetching: boolean;
+  message: Message | null;
 };
 
 export const defaultState: State = {
-  exampleVariable: null,
+  data: null,
+  isFetching: false,
+  message: null,
 };
 
 const reducer = (state: State = defaultState, { type, payload }: Action): State => {
   switch (type) {
-    case sendExample.type:
+    case clearPage.type:
+      return {
+        ...defaultState,
+      };
+    case removeMessage.type:
       return {
         ...state,
-        exampleVariable: payload,
+        message: null,
+      };
+    case blogActions.requesting.type:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case blogActions.failure.type:
+      return {
+        ...state,
+        isFetching: false,
+        message: {
+          type: 'error',
+          text: 'Please refresh the page',
+        },
+      };
+    case blogActions.success.type:
+      return {
+        ...state,
+        isFetching: false,
+        data: payload.data,
       };
     default:
       return state;
