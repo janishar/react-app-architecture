@@ -1,6 +1,5 @@
 import { blogsLatestActions, removeMessage } from './actions';
-import { Action, Message } from 'app-types';
-import { Blog } from '@ui/blogpage/reducer';
+import { Action, Message, Blog } from 'app-types';
 
 export type State = {
   data: Array<Blog> | null;

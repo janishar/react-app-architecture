@@ -3,12 +3,13 @@ import React from 'react';
 import pageBuilder from './pageBuilder';
 import { PublicRequest } from 'server-types';
 import { publicRequest } from '@utils/network';
-import { Blog, defaultState as blogListDefaultState } from '@ui/blogpage/reducer';
+import { defaultState as blogListDefaultState } from '@ui/blogpage/reducer';
 import BlogList from '@ui/bloglist';
 import BlogPage from '@ui/blogpage';
 import Landing from '@ui/landing';
 import NotFound from '@ui/notfound';
 import WriterBlogs from '@ui/writer/myblogs';
+import { Blog } from 'app-types';
 
 const router = express.Router();
 

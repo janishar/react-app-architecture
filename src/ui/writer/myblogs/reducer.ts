@@ -6,15 +6,7 @@ import {
   deleteBlogActions,
   blogActions,
 } from './actions';
-import { Action, Message } from 'app-types';
-import { Blog } from '@ui/blogpage/reducer';
-
-export interface BlogDetail extends Blog {
-  isSubmitted: boolean;
-  isDraft: boolean;
-  isPublished: boolean;
-  draftText: string;
-}
+import { Action, Message, BlogDetail } from 'app-types';
 
 export type BlogsData = {
   drafts?: Array<BlogDetail>;

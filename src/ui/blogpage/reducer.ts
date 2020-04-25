@@ -1,25 +1,5 @@
 import { removeMessage, blogActions, clearPage } from './actions';
-import { Action, Message } from 'app-types';
-
-export interface Author {
-  _id: string;
-  name: string;
-  profilePicUrl: string;
-}
-
-export interface Blog {
-  _id: string;
-  tags: Array<string>;
-  likes: number;
-  score: number;
-  title: string;
-  description: string;
-  author: Author;
-  blogUrl: string;
-  imgUrl: string;
-  publishedAt: string;
-  text?: string;
-}
+import { Action, Message, Blog } from 'app-types';
 
 export type State = {
   data: Blog | null;

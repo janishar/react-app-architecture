@@ -53,3 +53,30 @@ export type Message = {
   text: string;
   type: 'success' | 'warning' | 'error' | 'info';
 };
+
+export interface Author {
+  _id: string;
+  name: string;
+  profilePicUrl: string;
+}
+
+export interface Blog {
+  _id: string;
+  tags: Array<string>;
+  likes: number;
+  score: number;
+  title: string;
+  description: string;
+  author: Author;
+  blogUrl: string;
+  imgUrl: string;
+  publishedAt: string;
+  text?: string;
+}
+
+export interface BlogDetail extends Blog {
+  isSubmitted: boolean;
+  isDraft: boolean;
+  isPublished: boolean;
+  draftText: string;
+}

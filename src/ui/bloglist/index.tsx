@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, MouseEvent } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import useStyles from './style';
 import { useDispatch } from 'react-redux';
 import { fetchLatestBlogs, removeMessage } from './actions';
@@ -16,7 +16,7 @@ import {
   Avatar,
 } from '@material-ui/core';
 import importer from '@utils/importer';
-import { Blog } from '@ui/blogpage/reducer';
+import { Blog } from 'app-types';
 import { Link } from 'react-router-dom';
 import { convertToReadableDate } from '@utils/appUtils';
 
