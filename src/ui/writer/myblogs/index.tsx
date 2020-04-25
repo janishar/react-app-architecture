@@ -12,6 +12,7 @@ import {
 import { useStateSelector } from '@core/reducers';
 import Snackbar from '@ui/common/snackbar';
 import NotFound from '@ui/notfound';
+import ConfirmationDialog from '@ui/common/confirmation';
 import {
   Tab,
   AppBar,
@@ -24,6 +25,7 @@ import {
   Chip,
   Button,
 } from '@material-ui/core';
+import { BlogDetail } from './reducer';
 
 const tabNames = ['drafts', 'submissions', 'published'];
 
@@ -42,6 +44,13 @@ export default function Component(): ReactElement {
 
   const dispatch = useDispatch();
   const [currentTab, setCurrentTab] = useState(0);
+  const [deleteDialogState, setDeleteDialogState] = useState<{
+    open: boolean;
+    blog: BlogDetail | null;
+  }>({
+    open: false,
+    blog: null,
+  });
 
   useEffect(() => {
     if (!data && !(isFetchingDrafts || isFetchingSubmissions || isFetchingPublished)) {
@@ -73,7 +82,13 @@ export default function Component(): ReactElement {
               {blog.title}
             </Typography>
             {blog.isPublished === true && (blog.isDraft === true || blog.isSubmitted === true) && (
-              <Chip size="small" color="primary" label="MODIFIED" className={classes.chip} />
+              <Chip
+                size="small"
+                variant="outlined"
+                color="primary"
+                label="MODIFIED"
+                className={classes.chip}
+              />
             )}
             <Typography variant="body1" color="textSecondary" component="p">
               {blog.description}
@@ -105,7 +120,7 @@ export default function Component(): ReactElement {
                   variant="contained"
                   size="small"
                   onClick={() => {
-                    // setDeleteDialogState({ open: true, blog: blog });
+                    setDeleteDialogState({ open: true, blog: blog });
                   }}
                 >
                   Delete
@@ -155,6 +170,18 @@ export default function Component(): ReactElement {
           </Grid>
         </Grid>
       </Grid>
+      <ConfirmationDialog
+        open={deleteDialogState.open}
+        title={deleteDialogState.blog !== null ? deleteDialogState.blog.title : ''}
+        message="Are you sure you want to delete this draft. Once deleted this draft will be removed forever."
+        onPositiveAction={() => {
+          if (deleteDialogState.blog) dispatch(deleteBlog(deleteDialogState.blog));
+          setDeleteDialogState({ open: false, blog: null });
+        }}
+        onNegativeAction={() => setDeleteDialogState({ open: false, blog: null })}
+        positionText="Delete Now"
+        negativeText="Cancel"
+      />
       {message && (
         <Snackbar
           message={message.text}

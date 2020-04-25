@@ -20,7 +20,7 @@ import {
 
 import Snackbar from '@ui/common/snackbar';
 
-export default function Component({
+export default function AuthDialog({
   open,
   onClose,
 }: {
