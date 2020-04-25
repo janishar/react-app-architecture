@@ -4,6 +4,7 @@ import { validateToken } from '@utils/appUtils';
 import { protectedRequest } from '@utils/network';
 
 export const removeMessage = actionCreator<null>('WRITER_REMOVE_MESSAGE');
+export const clearPage = actionCreator<null>('WRITER_CLEAR_PAGE');
 export const blogActions = networkActionsCreator<BlogDetail>('WRITER_BLOG');
 export const deleteBlogActions = networkActionsCreator<BlogDetail>('WRITER_DELETE_BLOG');
 export const draftBlogsActions = networkActionsCreator<Array<BlogDetail>>('WRITER_DRAFT_BLOGS');

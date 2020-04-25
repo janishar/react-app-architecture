@@ -5,6 +5,7 @@ import {
   publishedBlogsActions,
   deleteBlogActions,
   blogActions,
+  clearPage,
 } from './actions';
 import { Action, Message, BlogDetail } from 'app-types';
 
@@ -42,6 +43,10 @@ const reducer = (state: State = defaultState, { type, payload }: Action): State 
       return {
         ...state,
         message: null,
+      };
+    case clearPage.type:
+      return {
+        ...defaultState,
       };
     // Handle draft blogs data
     case draftBlogsActions.requesting.type:

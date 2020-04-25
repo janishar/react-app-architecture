@@ -2,6 +2,7 @@ import { AsyncAction, Dispatch, StateFetcher, BlogDetail, Blog } from 'app-types
 import { actionCreator, networkActionsCreator } from '@utils/creator';
 import { validateToken } from '@utils/appUtils';
 import { protectedRequest } from '@utils/network';
+import { clearPage } from '@ui/writer/myblogs/actions';
 
 export const showMessage = actionCreator<string>('WRITING_PAD_SHOW_MESSAGE');
 export const removeMessage = actionCreator<null>('WRITING_PAD_REMOVE_MESSAGE');
@@ -63,6 +64,7 @@ export const createBlog = (body: BlogRequestBody): AsyncAction => async (
       dispatch,
     );
     dispatch(createBlogActions.success.action(response));
+    dispatch(clearPage.action());
   } catch (e) {
     dispatch(createBlogActions.failure.action(e));
   }
@@ -85,6 +87,7 @@ export const saveBlog = (blogId: string, body: BlogRequestBody): AsyncAction => 
       dispatch,
     );
     dispatch(saveBlogActions.success.action(response));
+    dispatch(clearPage.action());
   } catch (e) {
     dispatch(saveBlogActions.failure.action(e));
   }
@@ -106,6 +109,7 @@ export const submitBlog = (blogId: string): AsyncAction => async (
       dispatch,
     );
     dispatch(submitBlogActions.success.action(response));
+    dispatch(clearPage.action());
   } catch (e) {
     dispatch(submitBlogActions.failure.action(e));
   }
@@ -127,6 +131,7 @@ export const withdrawBlog = (blogId: string): AsyncAction => async (
       dispatch,
     );
     dispatch(withdrawBlogActions.success.action(response));
+    dispatch(clearPage.action());
   } catch (e) {
     dispatch(withdrawBlogActions.failure.action(e));
   }
