@@ -9,7 +9,7 @@ import { CardActionArea, Avatar, Grid, LinearProgress, CardHeader } from '@mater
 import { convertToReadableDate } from '@utils/appUtils';
 import { AuthorPlaceholder } from '@ui/common/placeholders';
 import Skeleton from '@material-ui/lab/Skeleton';
-import marked from 'marked';
+import Markdown from '@ui/common/markdown';
 
 export default function BlogPage(): ReactElement {
   const classes = useStyles();
@@ -50,7 +50,7 @@ export default function BlogPage(): ReactElement {
           {isFetching ? (
             <Skeleton variant="rect" height={600} />
           ) : (
-            data && data.text && <div dangerouslySetInnerHTML={{ __html: marked(data.text) }} />
+            data && data.text && <Markdown text={data.text} />
           )}
         </Grid>
       </Grid>

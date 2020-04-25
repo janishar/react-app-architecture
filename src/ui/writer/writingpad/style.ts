@@ -29,6 +29,17 @@ const useStyles = makeStyles(({ spacing, palette, typography, breakpoints }: The
       marginTop: 0,
     },
   },
+  speedDial: {
+    position: 'fixed',
+    top: 100,
+    right: spacing(3),
+  },
+  progress: {
+    top: 65,
+    width: '100%',
+    position: 'fixed',
+    zIndex: 1000,
+  },
 }));
 
 export default useStyles;
