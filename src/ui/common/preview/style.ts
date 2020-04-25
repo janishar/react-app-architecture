@@ -5,9 +5,6 @@ const useStyles = makeStyles(({ spacing, palette, breakpoints }: Theme) => ({
     marginLeft: spacing(2),
     flex: 1,
   },
-  preview: {
-    marginTop: 80,
-  },
   blogContent: {
     marginTop: spacing(3),
     padding: spacing(6),
