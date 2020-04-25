@@ -140,12 +140,21 @@ module.exports = {
           chunks: 'all',
           minChunks: 2,
         },
-        vendor: {
-          test: /node_modules/,
-          name: 'vendor',
-          chunks: 'all',
-          enforce: true,
-        },
+        vendor: isEnvDevelopment
+          ? {
+              test: /node_modules/,
+              name: 'vendor',
+              chunks: 'all',
+              enforce: true,
+            }
+          : {
+              test: /node_modules/,
+              name: 'vendor',
+              chunks: 'all',
+              enforce: true,
+              minSize: 75 * 1000, // 75 kb
+              maxSize: 200 * 1000, // 200 kb
+            },
       },
     },
   },
