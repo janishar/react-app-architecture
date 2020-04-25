@@ -11,11 +11,11 @@ const useStyles = makeStyles(({ spacing, palette }: Theme) => ({
     },
     '& pre': {
       padding: spacing(2),
-      background: palette.secondary.light,
+      background: palette.secondary.dark,
       whiteSpace: 'pre-wrap',
       wordWrap: 'break-word',
       '& code': {
-        background: palette.secondary.light,
+        background: palette.secondary.dark,
       },
     },
     '& h1': {
@@ -26,7 +26,7 @@ const useStyles = makeStyles(({ spacing, palette }: Theme) => ({
       lineHeight: 1.8,
     },
     '& code': {
-      fontFamily: 'monospace,Courier New,Courier',
+      fontFamily: 'Menlo, Monaco, Consolas, "Courier New", "Courier", monospace;',
       display: 'inline',
       padding: '1px 5px 3px',
       borderRadius: 2,

@@ -8,6 +8,8 @@ import {
   Typography,
   Button,
   Grid,
+  Paper,
+  PaperProps,
 } from '@material-ui/core';
 import useStyles from './style';
 import { Close as CloseIcon } from '@material-ui/icons';
@@ -27,7 +29,13 @@ type Props = { blog: BlogDetail; open: boolean; onClose: (event: MouseEvent<HTML
 export default function BlogPreview({ blog, open, onClose }: Props): ReactElement {
   const classes = useStyles();
   return (
-    <Dialog fullScreen open={open} TransitionComponent={Transition}>
+    <Dialog
+      fullScreen
+      open={open}
+      TransitionComponent={Transition}
+      PaperProps={{ className: classes.paper }}
+      PaperComponent={PaperComponent}
+    >
       <AppBar position="fixed" color="secondary">
         <Toolbar>
           <IconButton edge="start" color="inherit" onClick={onClose} aria-label="close">
@@ -49,3 +57,5 @@ export default function BlogPreview({ blog, open, onClose }: Props): ReactElemen
     </Dialog>
   );
 }
+
+const PaperComponent = (props: PaperProps) => <Paper {...props} />;

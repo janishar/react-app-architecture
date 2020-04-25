@@ -138,7 +138,7 @@ export default function Component({ blog }: { blog?: Blog }): ReactElement {
           <TextareaAutosize
             className={classes.pad}
             aria-label="blog writing pad"
-            rowsMin={10}
+            rowsMin={15}
             value={data?.draftText}
             onChange={(e) => dispatch(editBlog.action({ draftText: e.target.value }))}
             placeholder="Write something awesome today.."

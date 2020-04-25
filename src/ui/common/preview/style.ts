@@ -8,12 +8,15 @@ const useStyles = makeStyles(({ spacing, palette, breakpoints }: Theme) => ({
   blogContent: {
     marginTop: spacing(3),
     padding: spacing(6),
-    background: palette.background.paper,
+    background: palette.background.default,
     paddingBlockStart: spacing(10),
     [breakpoints.down('md')]: {
       padding: spacing(2),
       marginTop: 0,
     },
+  },
+  paper: {
+    background: palette.background.paper,
   },
 }));
 

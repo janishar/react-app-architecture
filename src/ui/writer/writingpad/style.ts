@@ -3,20 +3,21 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 const useStyles = makeStyles(({ spacing, palette, typography, breakpoints }: Theme) => ({
   root: {
     flexGrow: 1,
+    background: palette.background.paper,
   },
   content: {
-    paddingTop: spacing(6),
-    paddingBlockStart: spacing(10),
+    paddingTop: spacing(2),
   },
   pad: {
     width: '100% !important',
-    background: palette.background.paper,
-    ...typography.body1,
-    color: palette.common.white,
+    background: palette.background.default,
+    ...typography.body2,
+    color: palette.grey[200],
     resize: 'none',
     border: 'none',
     outline: 'none',
     boxShadow: 'none',
+    fontFamily: 'Menlo, Monaco, Consolas, "Courier New", "Courier", monospace;',
     '-webkit-box-shadow': 'none',
     '-moz-box-shadow': 'none',
     marginTop: spacing(3),
