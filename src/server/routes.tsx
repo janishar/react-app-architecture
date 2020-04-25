@@ -4,18 +4,20 @@ import pageBuilder from './pageBuilder';
 import { PublicRequest } from 'server-types';
 import { publicRequest } from '@utils/network';
 import { defaultState as blogListDefaultState } from '@ui/blogpage/reducer';
+import { Blog } from 'app-types';
 import BlogList from '@ui/bloglist';
 import BlogPage from '@ui/blogpage';
 import Landing from '@ui/landing';
 import NotFound from '@ui/notfound';
 import WriterBlogs from '@ui/writer/myblogs';
-import { Blog } from 'app-types';
+import WritingPad from '@ui/writer/writingpad';
 
 const router = express.Router();
 
 router.get('/blog/:endpoint', sendBlogPage);
 router.get('/blogs', sendBlogsPage);
 router.get('/writer/blogs', sendWriterBlogsPage);
+router.get('/write/blog', sendWritingPadPage);
 router.get('/', sendLandingPage);
 router.use('*', sendNotFoundPagePage);
 
@@ -84,6 +86,11 @@ async function sendBlogsPage(req: PublicRequest, res: Response, next: NextFuncti
 function sendWriterBlogsPage(req: PublicRequest, res: Response) {
   res.send(pageBuilder(req, <WriterBlogs />));
 }
+
+function sendWritingPadPage(req: PublicRequest, res: Response) {
+  res.send(pageBuilder(req, <WritingPad />));
+}
+
 
 function sendLandingPage(req: PublicRequest, res: Response) {
   res.send(pageBuilder(req, <Landing />));

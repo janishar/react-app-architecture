@@ -88,40 +88,45 @@ export default function Component({ blog }: { blog?: Blog }): ReactElement {
         icon={<ArrowDropDownIcon />}
         open={true}
       >
-        {data.isDraft ? (
+        {data._id &&
+          (data.isDraft ? (
+            <SpeedDialAction
+              key="Done"
+              icon={<DoneAllIcon />}
+              tooltipTitle="Done"
+              onClick={handleDoneClick}
+            />
+          ) : data.isSubmitted ? (
+            <SpeedDialAction
+              key="Unsubmit"
+              icon={<CloseIcon />}
+              tooltipTitle="Remove Submission"
+              onClick={handleWithdrawClick}
+            />
+          ) : (
+            <SpeedDialAction
+              key="Submit"
+              icon={<SendIcon />}
+              tooltipTitle="Submit Blog"
+              onClick={handleSubmitClick}
+            />
+          ))}
+        {data?.draftText && (
           <SpeedDialAction
-            key="Done"
-            icon={<DoneAllIcon />}
-            tooltipTitle="Done"
-            onClick={handleDoneClick}
-          />
-        ) : data.isSubmitted ? (
-          <SpeedDialAction
-            key="Unsubmit"
-            icon={<CloseIcon />}
-            tooltipTitle="Remove Submission"
-            onClick={handleWithdrawClick}
-          />
-        ) : (
-          <SpeedDialAction
-            key="Submit"
-            icon={<SendIcon />}
-            tooltipTitle="Submit Blog"
-            onClick={handleSubmitClick}
+            key="Blog Preview"
+            icon={<VisibilityIcon />}
+            tooltipTitle="Blog Preview"
+            onClick={() => setShowPreview(true)}
           />
         )}
-        <SpeedDialAction
-          key="Blog Preview"
-          icon={<VisibilityIcon />}
-          tooltipTitle="Blog Preview"
-          onClick={() => setShowPreview(true)}
-        />
-        <SpeedDialAction
-          key="Save Blog"
-          icon={<SaveIcon />}
-          tooltipTitle="Save Blog"
-          onClick={handleSaveClick}
-        />
+        {data?.draftText && (
+          <SpeedDialAction
+            key="Save Blog"
+            icon={<SaveIcon />}
+            tooltipTitle="Save Blog"
+            onClick={handleSaveClick}
+          />
+        )}
       </SpeedDial>
     );
   };
