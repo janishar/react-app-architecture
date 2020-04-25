@@ -5,6 +5,7 @@ import authReducer, { State as AuthState } from '@ui/auth/reducer';
 import blogListReducer, { State as BlogListState } from '@ui/bloglist/reducer';
 import blogReducer, { State as BlogState } from '@ui/blogpage/reducer';
 import writerBlogsReducer, { State as WriterBlogsState } from '@ui/writer/myblogs/reducer';
+import writingPadReducer, { State as WritingPadState } from '@ui/writer/writingpad/reducer';
 
 export type RootState = {
   appState: AppState;
@@ -12,6 +13,7 @@ export type RootState = {
   blogListState: BlogListState;
   blogState: BlogState;
   writerBlogsState: WriterBlogsState;
+  writingPadState: WritingPadState;
 };
 
 export const useStateSelector: TypedUseSelectorHook<RootState> = useSelector;
@@ -22,6 +24,7 @@ const rootReducer = combineReducers<RootState>({
   blogListState: blogListReducer,
   blogState: blogReducer,
   writerBlogsState: writerBlogsReducer,
+  writingPadState: writingPadReducer,
 });
 
 export default rootReducer;

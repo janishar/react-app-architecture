@@ -9,6 +9,7 @@ import {
   fetchSubmittedBlogs,
   fetchPublishedBlogs,
 } from './actions';
+import { hydratePad } from '@ui/writer/writingpad/actions';
 import { useStateSelector } from '@core/reducers';
 import Snackbar from '@ui/common/snackbar';
 import NotFound from '@ui/notfound';
@@ -25,7 +26,8 @@ import {
   Chip,
   Button,
 } from '@material-ui/core';
-import { BlogDetail } from './reducer';
+import { BlogDetail } from 'app-types';
+import { Link } from 'react-router-dom';
 
 const tabNames = ['drafts', 'submissions', 'published'];
 
@@ -108,8 +110,10 @@ export default function Component(): ReactElement {
                 className={classes.button1}
                 variant="contained"
                 size="small"
+                component={Link}
+                to="/write/blog"
                 onClick={() => {
-                  // TODO
+                  dispatch(hydratePad.action(blog));
                 }}
               >
                 Edit

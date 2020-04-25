@@ -16,6 +16,7 @@ const Routes = (): ReactElement => (
 
     {/* PRIVATE CONTENTS */}
     <Route exact path="/writer/blogs" component={Home} />
+    <Route exact path="/write/blog" component={Home} />
 
     {/*FALLBACK*/}
     {<Route exact path="/404" component={NotFound} />}

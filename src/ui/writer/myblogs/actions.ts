@@ -1,10 +1,9 @@
-import { AsyncAction, Dispatch, StateFetcher } from 'app-types';
+import { AsyncAction, Dispatch, StateFetcher, BlogDetail } from 'app-types';
 import { actionCreator, networkActionsCreator } from '@utils/creator';
 import { validateToken } from '@utils/appUtils';
 import { protectedRequest } from '@utils/network';
-import { BlogDetail } from './reducer';
 
-export const removeMessage = actionCreator<string>('WRITER_REMOVE_MESSAGE');
+export const removeMessage = actionCreator<null>('WRITER_REMOVE_MESSAGE');
 export const blogActions = networkActionsCreator<BlogDetail>('WRITER_BLOG');
 export const deleteBlogActions = networkActionsCreator<BlogDetail>('WRITER_DELETE_BLOG');
 export const draftBlogsActions = networkActionsCreator<Array<BlogDetail>>('WRITER_DRAFT_BLOGS');

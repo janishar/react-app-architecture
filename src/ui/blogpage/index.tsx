@@ -30,7 +30,7 @@ export default function BlogPage(): ReactElement {
   }, [match.params.endpoint]);
 
   const authorView = data ? (
-    <div className={classes.author}>
+    <div>
       <CardActionArea>
         <CardHeader
           avatar={<Avatar aria-label={data.author.name} src={data.author.profilePicUrl} />}
@@ -44,8 +44,8 @@ export default function BlogPage(): ReactElement {
   return (
     <div className={classes.root}>
       {isFetching && <LinearProgress />}
-      <Grid className={classes.content} container justify="center">
-        <Grid item xs={12} sm={12} md={7}>
+      <Grid container justify="center">
+        <Grid item xs={12} sm={12} md={8} className={classes.blogContent}>
           {isFetching ? <AuthorPlaceholder /> : authorView}
           {isFetching ? (
             <Skeleton variant="rect" height={600} />
