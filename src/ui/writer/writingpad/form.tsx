@@ -11,7 +11,7 @@ import {
   Paper,
   PaperProps,
 } from '@material-ui/core';
-
+import ChipInput from 'material-ui-chip-input';
 import { LocalState } from './index';
 import { validateUrl } from '@utils/appUtils';
 
@@ -45,11 +45,11 @@ export default function BlogDetailsForm({
     setLocalState({
       ...localState,
       [name]: value,
-      isWriting: true,
       isTitleError: false,
       isDescriptionError: false,
       isImgUrlError: false,
       isBlogUrlError: false,
+      isTagsError: false,
       isAllDataSentToServer: false,
     });
   };
@@ -57,27 +57,35 @@ export default function BlogDetailsForm({
   const handleBlogDetailFormSubmit = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
     if (validateBlogDetailForm()) {
-      setLocalState({ ...localState, isWriting: false });
       if (!blog?._id) onCreate();
       else onSave();
     }
   };
 
   const validateBlogDetailForm = () => {
-    const newstate = { ...localState };
+    const newstate = {
+      ...localState,
+      isTitleError: false,
+      isDescriptionError: false,
+      isBlogUrlError: false,
+      isImgUrlError: false,
+      isTagsError: false,
+    };
 
     if (!newstate.title) newstate.isTitleError = true;
     if (!newstate.description) newstate.isDescriptionError = true;
     if (!newstate.blogUrl) newstate.isBlogUrlError = true;
     if (!validateUrl(newstate.imgUrl)) newstate.isImgUrlError = true;
+    if (newstate.tags.length === 0) newstate.isTagsError = true;
 
     const isError =
       newstate.isTitleError ||
       newstate.isDescriptionError ||
       newstate.isBlogUrlError ||
+      newstate.isTagsError ||
       newstate.isImgUrlError;
 
-    if (isError) setLocalState(newstate);
+    setLocalState(newstate);
     return !isError;
   };
 
@@ -96,65 +104,88 @@ export default function BlogDetailsForm({
       PaperComponent={PaperComponent}
       fullWidth={true}
       maxWidth="sm"
+      scroll="body"
       aria-labelledby="form-dialog-title"
+      aria-describedby="form-dialog-description"
     >
       <DialogTitle id="form-dialog-title">Blog Details</DialogTitle>
-      <DialogContent>
-        {[
-          {
-            error: localState.isTitleError,
-            name: 'title',
-            title: 'Title',
-            value: localState.title,
-            rows: 1,
-            maxRows: 1,
-            helperText: '',
-          },
-          {
-            error: localState.isDescriptionError,
-            name: 'description',
-            title: 'Description',
-            value: localState.description,
-            rows: 3,
-            maxRows: 5,
-            helperText: '',
-          },
-          {
-            error: localState.isBlogUrlError,
-            name: 'blogUrl',
-            title: 'URL Endpoint',
-            value: localState.blogUrl,
-            rows: 1,
-            maxRows: 1,
-            helperText: 'Example: my-awesome-blog',
-          },
-          {
-            error: localState.isImgUrlError,
-            name: 'imgUrl',
-            title: 'Image URL',
-            value: localState.imgUrl,
-            rows: 1,
-            maxRows: 1,
-            helperText: '',
-          },
-        ].map(({ error, name, title, value, rows, maxRows, helperText }, index) => (
+      <DialogContent dividers={true}>
+        <form>
           <TextField
-            key={index}
             required={true}
-            error={error}
+            error={localState.isTitleError}
             margin="normal"
             variant="outlined"
-            id={title}
-            label={title}
-            value={value}
+            id="title"
+            label="Title"
+            value={localState.title}
             type="text"
-            rows={rows}
-            rowsMax={maxRows}
-            helperText={helperText}
-            onChange={handleBlogDetailChange(name)}
+            rows={1}
+            onChange={handleBlogDetailChange('title')}
             fullWidth
           />
-        ))}
+          <TextField
+            required={true}
+            error={localState.isDescriptionError}
+            margin="normal"
+            variant="outlined"
+            multiline
+            id="description"
+            label="Description"
+            value={localState.description}
+            type="text"
+            rows={3}
+            rowsMax={5}
+            onChange={handleBlogDetailChange('description')}
+            fullWidth
+          />
+          <TextField
+            required={true}
+            error={localState.isBlogUrlError}
+            margin="normal"
+            variant="outlined"
+            id="blogUrl"
+            label="URL Endpoint"
+            value={localState.blogUrl}
+            type="text"
+            rows={1}
+            onChange={handleBlogDetailChange('blogUrl')}
+            fullWidth
+          />
+          <TextField
+            required={true}
+            error={localState.isImgUrlError}
+            margin="normal"
+            variant="outlined"
+            id="imgUrl"
+            label="Image URL"
+            value={localState.imgUrl}
+            type="text"
+            rows={1}
+            onChange={handleBlogDetailChange('imgUrl')}
+            fullWidth
+          />
+          <ChipInput
+            value={localState.tags}
+            error={localState.isTagsError}
+            fullWidth={true}
+            helperText="Press enter key or use comma separator to add"
+            newChipKeys={['Enter', ',']}
+            classes={{
+              root: classes.editTagsField,
+              chip: classes.tag,
+            }}
+            onAdd={(chip: string) => {
+              const values = [...localState.tags];
+              values.push(chip.toUpperCase());
+              setLocalState({ ...localState, tags: values });
+            }}
+            onDelete={(chip: string) => {
+              const values = localState.tags.filter((tag) => tag !== chip);
+              setLocalState({ ...localState, tags: values });
+            }}
+          />
+        </form>
       </DialogContent>
       <DialogActions>
         {blog?._id && localState.isForSubmission && localState.isAllDataSentToServer && (

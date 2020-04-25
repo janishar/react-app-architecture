@@ -53,7 +53,7 @@ const reducer = (state: State = defaultState, { type, payload }: Action): State 
     case editBlog.type:
       return {
         ...state,
-        data: { ...payload },
+        data: { ...state.data, ...payload },
       };
     // Handle blog fetch for edit
     case blogActions.requesting.type:
@@ -75,6 +75,10 @@ const reducer = (state: State = defaultState, { type, payload }: Action): State 
         ...state,
         isFetchingBlog: false,
         data: payload.data,
+        message: {
+          type: 'success',
+          text: payload.message,
+        },
       };
     // Handle blog create
     case createBlogActions.requesting.type:
@@ -96,6 +100,10 @@ const reducer = (state: State = defaultState, { type, payload }: Action): State 
         ...state,
         isSavingBlog: false,
         data: payload.data,
+        message: {
+          type: 'success',
+          text: payload.message,
+        },
       };
     // Handle blog save
     case saveBlogActions.requesting.type:
@@ -117,6 +125,10 @@ const reducer = (state: State = defaultState, { type, payload }: Action): State 
         ...state,
         isSavingBlog: false,
         data: payload.data,
+        message: {
+          type: 'success',
+          text: payload.message,
+        },
       };
     // Handle blog submit
     case submitBlogActions.requesting.type:
@@ -138,6 +150,10 @@ const reducer = (state: State = defaultState, { type, payload }: Action): State 
         ...state,
         isSavingBlog: false,
         data: state.data ? { ...state.data, isSubmitted: true } : state.data,
+        message: {
+          type: 'success',
+          text: payload.message,
+        },
       };
     // Handle blog withdraw
     case withdrawBlogActions.requesting.type:
@@ -159,6 +175,10 @@ const reducer = (state: State = defaultState, { type, payload }: Action): State 
         ...state,
         isSavingBlog: false,
         data: state.data ? { ...state.data, isSubmitted: false } : state.data,
+        message: {
+          type: 'success',
+          text: payload.message,
+        },
       };
     default:
       return state;

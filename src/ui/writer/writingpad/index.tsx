@@ -13,7 +13,7 @@ import {
 } from './actions';
 import { useStateSelector } from '@core/reducers';
 import Snackbar from '@ui/common/snackbar';
-import { Blog, BlogDetail } from 'app-types';
+import { Blog } from 'app-types';
 import { Prompt } from 'react-router-dom';
 import Preview from '@ui/common/preview';
 import { Grid, TextareaAutosize, LinearProgress } from '@material-ui/core';
@@ -44,26 +44,17 @@ export type LocalState = {
   isDescriptionError: boolean;
   isImgUrlError: boolean;
   isBlogUrlError: boolean;
+  isTagsError: boolean;
 };
 
-const mergeFormDataToBlog = (formData: LocalState, blog: BlogDetail): BlogDetail => ({
-  ...blog,
-  text: blog.draftText,
-  title: formData.title,
-  description: formData.description,
-  blogUrl: formData.blogUrl,
-  tags: formData.tags,
-  imgUrl: formData.imgUrl,
-});
-
-export default function WritingPad({ blog }: { blog?: Blog }): ReactElement {
+export default function WritingPad(): ReactElement {
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const [preventBack, setPreventBack] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
 
-  const { data, isFetchingBlog, isSavingBlog, message } = useStateSelector(
+  const { hydrationBlog, data, isFetchingBlog, isSavingBlog, message } = useStateSelector(
     ({ writingPadState }) => writingPadState,
   );
 
@@ -81,10 +72,20 @@ export default function WritingPad({ blog }: { blog?: Blog }): ReactElement {
     isDescriptionError: false,
     isImgUrlError: false,
     isBlogUrlError: false,
+    isTagsError: false,
   });
 
   useEffect(() => {
-    if (blog && !isFetchingBlog) dispatch(fetchBlog(blog));
+    if (hydrationBlog?._id && !isFetchingBlog) dispatch(fetchBlog(hydrationBlog._id));
+    if (hydrationBlog)
+      setLocalState({
+        ...localState,
+        title: hydrationBlog.title,
+        description: hydrationBlog.description,
+        imgUrl: hydrationBlog.imgUrl,
+        blogUrl: hydrationBlog.blogUrl,
+        tags: hydrationBlog.tags,
+      });
     return () => {
       dispatch(clearPad.action());
     };
@@ -103,25 +104,43 @@ export default function WritingPad({ blog }: { blog?: Blog }): ReactElement {
     if (!data?._id) {
       setLocalState({ ...localState, isBlogDetailsFormToShow: true });
     } else {
-      setLocalState({ ...localState, isBlogDetailsFormToShow: false });
-      data && dispatch(saveBlog(mergeFormDataToBlog(localState, data)));
+      setLocalState({ ...localState, isAllDataSentToServer: true });
+      data?._id &&
+        dispatch(
+          saveBlog(data._id, {
+            text: data.draftText,
+            title: localState.title,
+            description: localState.description,
+            tags: localState.tags,
+            imgUrl: localState.imgUrl,
+          }),
+        );
     }
     setPreventBack(false);
   };
 
   const handleCreateClick = () => {
-    setLocalState({ ...localState, isBlogDetailsFormToShow: false });
-    data && dispatch(createBlog(mergeFormDataToBlog(localState, data)));
+    data &&
+      dispatch(
+        createBlog({
+          text: data.draftText,
+          title: localState.title,
+          blogUrl: localState.blogUrl,
+          description: localState.description,
+          tags: localState.tags,
+          imgUrl: localState.imgUrl,
+        }),
+      );
   };
 
   const handleSubmitClick = () => {
     setLocalState({ ...localState, isBlogDetailsFormToShow: false });
-    data && dispatch(submitBlog(data));
+    data?._id && dispatch(submitBlog(data._id));
   };
 
   const handleWithdrawClick = () => {
     setLocalState({ ...localState, isBlogDetailsFormToShow: false });
-    data && dispatch(withdrawBlog(data));
+    data?._id && dispatch(withdrawBlog(data._id));
   };
 
   const renderMenu = () => {

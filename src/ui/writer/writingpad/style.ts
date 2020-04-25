@@ -44,6 +44,19 @@ const useStyles = makeStyles(({ spacing, palette, typography, breakpoints }: The
   paper: {
     background: palette.secondary.light,
   },
+  editTagsField: {
+    paddingBottom: spacing(1),
+    marginBottom: spacing(3),
+  },
+  tags: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  tag: {
+    margin: spacing(0.25),
+    fontWeight: 500,
+    fontSize: 14,
+  },
 }));
 
 export default useStyles;
