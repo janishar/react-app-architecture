@@ -41,6 +41,9 @@ const useStyles = makeStyles(({ spacing, palette, typography, breakpoints }: The
     position: 'fixed',
     zIndex: 1000,
   },
+  paper: {
+    background: palette.secondary.light,
+  },
 }));
 
 export default useStyles;

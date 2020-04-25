@@ -24,3 +24,10 @@ export const formatDate = (date: Date): string =>
 
 export const checkRole = (user: User | null | undefined, role: Roles): boolean =>
   user?.roles?.find((item) => item?.code === role) !== undefined;
+
+export const validateUrl = (url: string | null | undefined) => {
+  if (!url) return false;
+  if (!url.startsWith('http')) return false;
+  const re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
+  return re.test(url);
+};

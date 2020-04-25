@@ -13,7 +13,7 @@ import {
 } from './actions';
 import { useStateSelector } from '@core/reducers';
 import Snackbar from '@ui/common/snackbar';
-import { Blog } from 'app-types';
+import { Blog, BlogDetail } from 'app-types';
 import { Prompt } from 'react-router-dom';
 import Preview from '@ui/common/preview';
 import { Grid, TextareaAutosize, LinearProgress } from '@material-ui/core';
@@ -28,7 +28,35 @@ import {
   Save as SaveIcon,
 } from '@material-ui/icons';
 
-export default function Component({ blog }: { blog?: Blog }): ReactElement {
+import BlogDetailsForm from './form';
+
+export type LocalState = {
+  isForSubmission: boolean;
+  isAllDataSentToServer: boolean;
+  isBlogDetailsFormToShow: boolean;
+  title: string;
+  description: string;
+  imgUrl: string;
+  blogUrl: string;
+  tags: Array<string>;
+  isWriting: boolean;
+  isTitleError: boolean;
+  isDescriptionError: boolean;
+  isImgUrlError: boolean;
+  isBlogUrlError: boolean;
+};
+
+const mergeFormDataToBlog = (formData: LocalState, blog: BlogDetail): BlogDetail => ({
+  ...blog,
+  text: blog.draftText,
+  title: formData.title,
+  description: formData.description,
+  blogUrl: formData.blogUrl,
+  tags: formData.tags,
+  imgUrl: formData.imgUrl,
+});
+
+export default function WritingPad({ blog }: { blog?: Blog }): ReactElement {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -36,13 +64,23 @@ export default function Component({ blog }: { blog?: Blog }): ReactElement {
   const [showPreview, setShowPreview] = useState(false);
 
   const { data, isFetchingBlog, isSavingBlog, message } = useStateSelector(
-    (state) => state.writingPadState,
+    ({ writingPadState }) => writingPadState,
   );
 
-  const [state, setState] = useState({
+  const [localState, setLocalState] = useState<LocalState>({
     isForSubmission: false,
     isAllDataSentToServer: false,
     isBlogDetailsFormToShow: false,
+    title: '',
+    description: '',
+    imgUrl: '',
+    blogUrl: '',
+    tags: [],
+    isWriting: false,
+    isTitleError: false,
+    isDescriptionError: false,
+    isImgUrlError: false,
+    isBlogUrlError: false,
   });
 
   useEffect(() => {
@@ -53,27 +91,36 @@ export default function Component({ blog }: { blog?: Blog }): ReactElement {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleSaveClick = () => {
-    if (!data?._id) setState({ ...state, isBlogDetailsFormToShow: true });
-    else dispatch(saveBlog(data));
-    setPreventBack(false);
-  };
-
   const handleDoneClick = () => {
-    setState({
-      ...state,
+    setLocalState({
+      ...localState,
       isBlogDetailsFormToShow: true,
       isForSubmission: true,
     });
   };
 
+  const handleSaveClick = () => {
+    if (!data?._id) {
+      setLocalState({ ...localState, isBlogDetailsFormToShow: true });
+    } else {
+      setLocalState({ ...localState, isBlogDetailsFormToShow: false });
+      data && dispatch(saveBlog(mergeFormDataToBlog(localState, data)));
+    }
+    setPreventBack(false);
+  };
+
+  const handleCreateClick = () => {
+    setLocalState({ ...localState, isBlogDetailsFormToShow: false });
+    data && dispatch(createBlog(mergeFormDataToBlog(localState, data)));
+  };
+
   const handleSubmitClick = () => {
-    setState({ ...state, isBlogDetailsFormToShow: false });
-    data && dispatch(saveBlog(data));
+    setLocalState({ ...localState, isBlogDetailsFormToShow: false });
+    data && dispatch(submitBlog(data));
   };
 
   const handleWithdrawClick = () => {
-    setState({ ...state, isBlogDetailsFormToShow: false });
+    setLocalState({ ...localState, isBlogDetailsFormToShow: false });
     data && dispatch(withdrawBlog(data));
   };
 
@@ -145,12 +192,23 @@ export default function Component({ blog }: { blog?: Blog }): ReactElement {
             aria-label="blog writing pad"
             rowsMin={15}
             value={data?.draftText}
-            onChange={(e) => dispatch(editBlog.action({ draftText: e.target.value }))}
+            onChange={(e) => {
+              dispatch(editBlog.action({ draftText: e.target.value }));
+              if (!preventBack) setPreventBack(true);
+            }}
             placeholder="Write something awesome today.."
           />
         </Grid>
       </Grid>
       {data && <Preview blog={data} open={showPreview} onClose={() => setShowPreview(false)} />}
+      <BlogDetailsForm
+        blog={data}
+        localState={localState}
+        setLocalState={setLocalState}
+        onSubmit={handleSubmitClick}
+        onCreate={handleCreateClick}
+        onSave={handleSaveClick}
+      />
       {renderMenu()}
       {message && (
         <Snackbar
