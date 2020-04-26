@@ -41,6 +41,7 @@ import { logout } from '@ui/auth/actions';
 import { useDispatch } from 'react-redux';
 import { checkRole } from '@utils/appUtils';
 import { Roles } from '@ui/auth/reducer';
+import FirstLetter from '@ui/common/firstletter';
 
 const afterAcademyLogo = importer('./assets/afteracademy-logo.svg');
 
@@ -75,12 +76,16 @@ export default function Header(): ReactElement {
     if (!user) return null;
     return (
       <CardActionArea onClick={onClick}>
-        <CardHeader
-          avatar={
-            <Avatar className={classes.avatar} aria-label={user.name} src={user.profilePicUrl} />
-          }
-          title={user.name.split(' ')[0]}
-        />
+        {user.profilePicUrl ? (
+          <CardHeader
+            title={user.name.split(' ')[0]}
+            avatar={
+              <Avatar className={classes.avatar} aria-label={user.name} src={user.profilePicUrl} />
+            }
+          />
+        ) : (
+          <CardHeader title={user.name.split(' ')[0]} avatar={<FirstLetter text={user.name} />} />
+        )}
       </CardActionArea>
     );
   };
@@ -289,8 +294,10 @@ export default function Header(): ReactElement {
                 {title}
               </Button>
             ))}
-            {user?.profilePicUrl && (
+            {user?.profilePicUrl ? (
               <Avatar alt={user.name} src={user.profilePicUrl} className={classes.avatar} />
+            ) : (
+              user?.name && <FirstLetter text={user.name} />
             )}
             {isLoggedIn ? (
               <IconButton
