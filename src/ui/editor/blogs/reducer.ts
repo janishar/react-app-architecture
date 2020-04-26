@@ -1,24 +1,26 @@
 import {
   removeMessage,
   submittedBlogsActions,
-  draftBlogsActions,
   publishedBlogsActions,
-  deleteBlogActions,
+  publishBlogActions,
+  unpublishBlogActions,
+  blogActions,
   clearPage,
+  clearBlog,
 } from './actions';
-import { Action, Message, BlogDetail } from 'app-types';
+import { Action, BlogDetail, Message } from 'app-types';
 
 export type BlogsData = {
-  drafts?: Array<BlogDetail>;
   submissions?: Array<BlogDetail>;
   published?: Array<BlogDetail>;
 };
 
 export type State = {
   data: BlogsData | null;
+  blog: BlogDetail | null;
   isFetchingBlog: boolean;
-  isDeletingBlog: boolean;
-  isFetchingDrafts: boolean;
+  isPublishingBlog: boolean;
+  isUnpublishingBlog: boolean;
   isFetchingSubmissions: boolean;
   isFetchingPublished: boolean;
   message: Message | null;
@@ -26,9 +28,10 @@ export type State = {
 
 export const defaultState: State = {
   data: null,
+  blog: null,
   isFetchingBlog: false,
-  isDeletingBlog: false,
-  isFetchingDrafts: false,
+  isPublishingBlog: false,
+  isUnpublishingBlog: false,
   isFetchingSubmissions: false,
   isFetchingPublished: false,
   message: null,
@@ -45,29 +48,10 @@ const reducer = (state: State = defaultState, { type, payload }: Action): State 
       return {
         ...defaultState,
       };
-    // Handle draft blogs data
-    case draftBlogsActions.requesting.type:
+    case clearBlog.type:
       return {
         ...state,
-        isFetchingDrafts: true,
-      };
-    case draftBlogsActions.failure.type:
-      return {
-        ...state,
-        isFetchingDrafts: false,
-        message: {
-          type: 'error',
-          text: payload.message,
-        },
-      };
-    case draftBlogsActions.success.type:
-      return {
-        ...state,
-        isFetchingDrafts: false,
-        data: {
-          ...state.data,
-          drafts: payload.data,
-        },
+        blog: null,
       };
     // Handle submitted blogs data
     case submittedBlogsActions.requesting.type:
@@ -117,29 +101,78 @@ const reducer = (state: State = defaultState, { type, payload }: Action): State 
           published: payload.data,
         },
       };
-    // Handle blog delete
-    case deleteBlogActions.requesting.type:
+    // Handle blog publish
+    case publishBlogActions.requesting.type:
       return {
         ...state,
-        isDeletingBlog: true,
+        isPublishingBlog: true,
       };
-    case deleteBlogActions.failure.type:
+    case publishBlogActions.failure.type:
       return {
         ...state,
-        isDeletingBlog: false,
+        isPublishingBlog: false,
         message: {
           type: 'error',
           text: payload.message,
         },
       };
-    case deleteBlogActions.success.type:
+    case publishBlogActions.success.type: {
+      const publishedBlog = state.data?.published?.filter((blog) => blog._id !== payload.data._id);
       return {
         ...state,
-        isDeletingBlog: false,
+        isPublishingBlog: false,
         data: {
           ...state.data,
-          drafts: state.data?.drafts?.filter((blog) => blog._id !== payload.data._id),
+          submissions: state.data?.submissions?.filter((blog) => blog._id !== payload.data._id),
+          published: publishedBlog ? [payload.data, ...publishedBlog] : [payload.data],
         },
+      };
+    }
+    // Handle blog unpublish
+    case unpublishBlogActions.requesting.type:
+      return {
+        ...state,
+        isUnpublishingBlog: true,
+      };
+    case unpublishBlogActions.failure.type:
+      return {
+        ...state,
+        isUnpublishingBlog: false,
+        message: {
+          type: 'error',
+          text: payload.message,
+        },
+      };
+    case unpublishBlogActions.success.type:
+      return {
+        ...state,
+        isUnpublishingBlog: false,
+        data: {
+          ...state.data,
+          submissions: state.data?.submissions?.filter((blog) => blog._id !== payload.data._id),
+          published: state.data?.published?.filter((blog) => blog._id !== payload.data._id),
+        },
+      };
+    // Handle blog fetch for preview
+    case blogActions.requesting.type:
+      return {
+        ...state,
+        isFetchingBlog: true,
+      };
+    case blogActions.failure.type:
+      return {
+        ...state,
+        isFetchingBlog: false,
+        message: {
+          type: 'error',
+          text: payload.message,
+        },
+      };
+    case blogActions.success.type:
+      return {
+        ...state,
+        isFetchingBlog: false,
+        blog: payload.data,
       };
     default:
       return state;

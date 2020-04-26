@@ -3,7 +3,6 @@ import useStyles from './style';
 import { useDispatch } from 'react-redux';
 import {
   removeMessage,
-  fetchBlog,
   deleteBlog,
   fetchDraftBlogs,
   fetchSubmittedBlogs,
@@ -31,11 +30,15 @@ import { Link } from 'react-router-dom';
 
 const tabNames = ['drafts', 'submissions', 'published'];
 
-export default function Component(): ReactElement {
+type DialogState = {
+  open: boolean;
+  blog: BlogDetail | null;
+};
+
+export default function MyBlogs(): ReactElement {
   const classes = useStyles();
   const {
     data,
-    blog,
     isFetchingBlog,
     isDeletingBlog,
     isFetchingDrafts,
@@ -46,19 +49,16 @@ export default function Component(): ReactElement {
 
   const dispatch = useDispatch();
   const [currentTab, setCurrentTab] = useState(0);
-  const [deleteDialogState, setDeleteDialogState] = useState<{
-    open: boolean;
-    blog: BlogDetail | null;
-  }>({
+  const [deleteDialogState, setDeleteDialogState] = useState<DialogState>({
     open: false,
     blog: null,
   });
 
   useEffect(() => {
-    if (!data && !(isFetchingDrafts || isFetchingSubmissions || isFetchingPublished)) {
-      dispatch(fetchDraftBlogs());
-      dispatch(fetchSubmittedBlogs());
-      dispatch(fetchPublishedBlogs());
+    if (!data) {
+      !isFetchingDrafts && dispatch(fetchDraftBlogs());
+      !isFetchingSubmissions && dispatch(fetchSubmittedBlogs());
+      !isFetchingPublished && dispatch(fetchPublishedBlogs());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

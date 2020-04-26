@@ -9,12 +9,13 @@ import BlogList from '@ui/bloglist';
 import BlogPage from '@ui/blogpage';
 import WriterMyBlogs from '@ui/writer/myblogs';
 import WritingPad from '@ui/writer/writingpad';
+import EditorBlogs from '@ui/editor/blogs';
 
 export default function Routes(): ReactElement {
   const { data } = useStateSelector(({ authState }) => authState);
 
   const isWriter = checkRole(data?.user, Roles.WRITER);
-  // const isEditor = checkRole(data?.user, Roles.EDITOR);
+  const isEditor = checkRole(data?.user, Roles.EDITOR);
 
   return (
     <Switch>
@@ -27,6 +28,7 @@ export default function Routes(): ReactElement {
       {/* PRIVATE CONTENTS */}
       {isWriter && <Route exact path="/writer/blogs" component={WriterMyBlogs} />}
       {isWriter && <Route exact path="/write/blog" component={WritingPad} />}
+      {isEditor && <Route exact path="/editor/blogs" component={EditorBlogs} />}
 
       {/*FALLBACK*/}
       {<Route path="*" component={NotFound} />}

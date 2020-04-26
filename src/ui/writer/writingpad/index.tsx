@@ -13,7 +13,6 @@ import {
 } from './actions';
 import { useStateSelector } from '@core/reducers';
 import Snackbar from '@ui/common/snackbar';
-import { Blog } from 'app-types';
 import { Prompt } from 'react-router-dom';
 import Preview from '@ui/common/preview';
 import { Grid, TextareaAutosize, LinearProgress } from '@material-ui/core';

@@ -5,7 +5,6 @@ import { protectedRequest } from '@utils/network';
 
 export const removeMessage = actionCreator<null>('WRITER_REMOVE_MESSAGE');
 export const clearPage = actionCreator<null>('WRITER_CLEAR_PAGE');
-export const blogActions = networkActionsCreator<BlogDetail>('WRITER_BLOG');
 export const deleteBlogActions = networkActionsCreator<BlogDetail>('WRITER_DELETE_BLOG');
 export const draftBlogsActions = networkActionsCreator<Array<BlogDetail>>('WRITER_DRAFT_BLOGS');
 export const submittedBlogsActions = networkActionsCreator<Array<BlogDetail>>(
@@ -56,27 +55,6 @@ const fetchBlogs = async (
   }
 };
 
-export const fetchBlog = (blog: BlogDetail): AsyncAction => async (
-  dispatch: Dispatch,
-  getState: StateFetcher,
-) => {
-  try {
-    const token = validateToken(getState());
-    dispatch(blogActions.requesting.action());
-    const response = await protectedRequest<null, BlogDetail>(
-      {
-        url: 'writer/blog/id/' + blog._id,
-        method: 'GET',
-      },
-      token,
-      dispatch,
-    );
-    dispatch(blogActions.success.action(response));
-  } catch (e) {
-    dispatch(blogActions.failure.action(e));
-  }
-};
-
 export const deleteBlog = (blog: BlogDetail): AsyncAction => async (
   dispatch: Dispatch,
   getState: StateFetcher,
@@ -84,7 +62,7 @@ export const deleteBlog = (blog: BlogDetail): AsyncAction => async (
   try {
     const token = validateToken(getState());
     dispatch(deleteBlogActions.requesting.action());
-    const response = await protectedRequest<null, BlogDetail>(
+    const response = await protectedRequest<null, null>(
       {
         url: 'writer/blog/id/' + blog._id,
         method: 'DELETE',
