@@ -57,6 +57,10 @@ const useStyles = makeStyles(({ spacing, palette, typography, breakpoints }: The
     fontWeight: 500,
     fontSize: 14,
   },
+  fab: {
+    background: palette.primary.main,
+    margin: spacing(1),
+  },
 }));
 
 export default useStyles;

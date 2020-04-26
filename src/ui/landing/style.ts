@@ -22,9 +22,6 @@ const useStyles = makeStyles(({ palette, spacing, breakpoints }: Theme) => ({
   },
   card: {
     height: '100%',
-    [breakpoints.down('sm')]: {
-      padding: spacing(2),
-    },
   },
   cardAction: {
     paddingBottom: spacing(3),

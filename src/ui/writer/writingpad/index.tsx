@@ -153,45 +153,61 @@ export default function WritingPad(): ReactElement {
         icon={<ArrowDropDownIcon />}
         open={true}
       >
-        {data._id &&
-          (data.isDraft ? (
-            <SpeedDialAction
-              key="Done"
-              icon={<DoneAllIcon />}
-              tooltipTitle="Done"
-              onClick={handleDoneClick}
-            />
-          ) : data.isSubmitted ? (
-            <SpeedDialAction
-              key="Unsubmit"
-              icon={<CloseIcon />}
-              tooltipTitle="Remove Submission"
-              onClick={handleWithdrawClick}
-            />
-          ) : (
-            <SpeedDialAction
-              key="Submit"
-              icon={<SendIcon />}
-              tooltipTitle="Submit Blog"
-              onClick={handleSubmitClick}
-            />
-          ))}
-        {data?.draftText && (
-          <SpeedDialAction
-            key="Blog Preview"
-            icon={<VisibilityIcon />}
-            tooltipTitle="Blog Preview"
-            onClick={() => setShowPreview(true)}
-          />
-        )}
-        {data?.draftText && (
-          <SpeedDialAction
-            key="Save Blog"
-            icon={<SaveIcon />}
-            tooltipTitle="Save Blog"
-            onClick={handleSaveClick}
-          />
-        )}
+        <SpeedDialAction
+          FabProps={{
+            size: 'small',
+            className: classes.fab,
+            disabled: !(data && data._id && data.isDraft),
+          }}
+          key="Done"
+          icon={<DoneAllIcon />}
+          tooltipTitle="Done"
+          onClick={handleDoneClick}
+        />
+        <SpeedDialAction
+          key="Unsubmit"
+          FabProps={{
+            size: 'small',
+            className: classes.fab,
+            disabled: !(data && data._id && data.isSubmitted),
+          }}
+          icon={<CloseIcon />}
+          tooltipTitle="Remove Submission"
+          onClick={handleWithdrawClick}
+        />
+        <SpeedDialAction
+          key="Submit"
+          FabProps={{
+            size: 'small',
+            className: classes.fab,
+            disabled: !(data && data._id && !data.isSubmitted),
+          }}
+          icon={<SendIcon />}
+          tooltipTitle="Submit Blog"
+          onClick={handleSubmitClick}
+        />
+        <SpeedDialAction
+          FabProps={{
+            size: 'small',
+            className: classes.fab,
+            disabled: !(data?.draftText?.trim().length > 0),
+          }}
+          key="Blog Preview"
+          icon={<VisibilityIcon />}
+          tooltipTitle="Blog Preview"
+          onClick={() => setShowPreview(true)}
+        />
+        <SpeedDialAction
+          FabProps={{
+            size: 'small',
+            className: classes.fab,
+            disabled: !(data?.draftText?.trim().length > 0),
+          }}
+          key="Save Blog"
+          icon={<SaveIcon />}
+          tooltipTitle="Save Blog"
+          onClick={handleSaveClick}
+        />
       </SpeedDial>
     );
   };
