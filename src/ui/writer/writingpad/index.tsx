@@ -28,6 +28,7 @@ import {
 } from '@material-ui/icons';
 
 import BlogDetailsForm from './form';
+import { clearPage as clearEditorPage } from '@ui/editor/blogs/actions';
 
 export type LocalState = {
   isForSubmission: boolean;
@@ -135,11 +136,13 @@ export default function WritingPad(): ReactElement {
   const handleSubmitClick = () => {
     setLocalState({ ...localState, isBlogDetailsFormToShow: false });
     data?._id && dispatch(submitBlog(data._id));
+    dispatch(clearEditorPage.action());
   };
 
   const handleWithdrawClick = () => {
     setLocalState({ ...localState, isBlogDetailsFormToShow: false });
     data?._id && dispatch(withdrawBlog(data._id));
+    dispatch(clearEditorPage.action());
   };
 
   const renderMenu = () => {
@@ -155,8 +158,6 @@ export default function WritingPad(): ReactElement {
       >
         <SpeedDialAction
           FabProps={{
-            size: 'small',
-            className: classes.fab,
             disabled: !(data && data._id && data.isDraft),
           }}
           key="Done"
@@ -167,8 +168,6 @@ export default function WritingPad(): ReactElement {
         <SpeedDialAction
           key="Unsubmit"
           FabProps={{
-            size: 'small',
-            className: classes.fab,
             disabled: !(data && data._id && data.isSubmitted),
           }}
           icon={<CloseIcon />}
@@ -178,8 +177,6 @@ export default function WritingPad(): ReactElement {
         <SpeedDialAction
           key="Submit"
           FabProps={{
-            size: 'small',
-            className: classes.fab,
             disabled: !(data && data._id && !data.isSubmitted),
           }}
           icon={<SendIcon />}
@@ -188,8 +185,6 @@ export default function WritingPad(): ReactElement {
         />
         <SpeedDialAction
           FabProps={{
-            size: 'small',
-            className: classes.fab,
             disabled: !(data?.draftText?.trim().length > 0),
           }}
           key="Blog Preview"
@@ -199,8 +194,6 @@ export default function WritingPad(): ReactElement {
         />
         <SpeedDialAction
           FabProps={{
-            size: 'small',
-            className: classes.fab,
             disabled: !(data?.draftText?.trim().length > 0),
           }}
           key="Save Blog"

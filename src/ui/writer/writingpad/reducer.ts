@@ -75,10 +75,6 @@ const reducer = (state: State = defaultState, { type, payload }: Action): State 
         ...state,
         isFetchingBlog: false,
         data: payload.data,
-        message: {
-          type: 'success',
-          text: payload.message,
-        },
       };
     // Handle blog create
     case createBlogActions.requesting.type:
