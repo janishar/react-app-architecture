@@ -168,8 +168,20 @@ export default function Header(): ReactElement {
     <Drawer anchor="top" open={drawerOpen} onClose={toggleDrawer}>
       {isLoggedIn && renderProfileView(toggleDrawer)}
       <List component="nav">
+        <ListItem
+          className={classes.drawerItem}
+          button
+          href="https://github.com/afteracademy/react-app-architecture"
+          target="_blank"
+          onClick={toggleDrawer}
+          component="a"
+        >
+          <ListItemIcon className={classes.drawerIcon}>
+            <InfoIcon />
+          </ListItemIcon>
+          <ListItemText primary="About Project" />
+        </ListItem>
         {[
-          { title: 'About Project', link: '/about-project', icon: <InfoIcon /> },
           { title: 'Blogs', link: '/blogs', icon: <WebIcon /> },
           { title: 'Contact', link: '/contact', icon: <EmailIcon /> },
         ].map(({ title, link, icon }, position) => (
@@ -279,8 +291,15 @@ export default function Header(): ReactElement {
             AfterAcademy Tutorials
           </Typography>
           <div className={classes.sectionDesktop}>
+            <Button
+              color="inherit"
+              className={classes.button}
+              href="https://github.com/afteracademy/react-app-architecture"
+              target="_blank"
+            >
+              About Project
+            </Button>
             {[
-              { title: 'About Project', link: '/about-project' },
               { title: 'Blogs', link: '/blogs' },
               { title: 'Contact', link: '/contact' },
             ].map(({ title, link }, position) => (
