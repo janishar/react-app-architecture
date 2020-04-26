@@ -10,6 +10,7 @@ import { convertToReadableDate } from '@utils/appUtils';
 import { AuthorPlaceholder } from '@ui/common/placeholders';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Markdown from '@ui/common/markdown';
+import FirstLetter from '@ui/common/firstletter';
 
 export default function BlogPage(): ReactElement {
   const classes = useStyles();
@@ -33,7 +34,13 @@ export default function BlogPage(): ReactElement {
     <div className={classes.author}>
       <CardActionArea>
         <CardHeader
-          avatar={<Avatar aria-label={data.author.name} src={data.author.profilePicUrl} />}
+          avatar={
+            data.author.profilePicUrl ? (
+              <Avatar aria-label={data.author.name} src={data.author.profilePicUrl} />
+            ) : (
+              <FirstLetter text={data.author.name} />
+            )
+          }
           title={data.author.name}
           subheader={convertToReadableDate(data.publishedAt)}
         />

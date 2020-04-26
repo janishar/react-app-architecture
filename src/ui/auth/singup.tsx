@@ -104,7 +104,7 @@ export default function SignupDialog({
       error = true;
     }
 
-    if (validations.password.trim().length > 0 && validateUrl(validations.profilePicUrl)) {
+    if (validations.profilePicUrl.trim().length > 0 && !validateUrl(validations.profilePicUrl)) {
       validations.profilePicUrlError = 'URL is not valid';
       validations.isProfilePicUrlError = true;
       error = true;

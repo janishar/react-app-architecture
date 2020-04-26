@@ -7,7 +7,7 @@ const useStyles = makeStyles(({ palette, spacing }: Theme) => ({
       margin: spacing(1),
     },
   },
-  orange: {
+  primary: {
     color: palette.primary.contrastText,
     backgroundColor: palette.primary.main,
   },

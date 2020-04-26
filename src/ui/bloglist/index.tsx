@@ -19,6 +19,7 @@ import importer from '@utils/importer';
 import { Blog } from 'app-types';
 import { Link } from 'react-router-dom';
 import { convertToReadableDate } from '@utils/appUtils';
+import FirstLetter from '@ui/common/firstletter';
 
 export default function BlogList(): ReactElement {
   const classes = useStyles();
@@ -113,7 +114,13 @@ export const BlogCard = ({
         </CardContent>
         <CardHeader
           className={classes.cardAuthor}
-          avatar={<Avatar aria-label={author.name} src={author.profilePicUrl} />}
+          avatar={
+            author.profilePicUrl ? (
+              <Avatar aria-label={author.name} src={author.profilePicUrl} />
+            ) : (
+              <FirstLetter text={author.name} />
+            )
+          }
           title={author.name}
           subheader={convertToReadableDate(publishedAt)}
         />
