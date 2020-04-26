@@ -16,7 +16,7 @@ const useStyles = makeStyles(({ spacing, palette, breakpoints }: Theme) => ({
     },
   },
   paper: {
-    background: palette.background.paper,
+    background: palette.background.default,
   },
 }));
 

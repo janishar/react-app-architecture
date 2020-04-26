@@ -6,7 +6,7 @@ const useStyles = makeStyles(({ spacing, palette, typography, breakpoints }: The
     background: palette.background.paper,
   },
   content: {
-    paddingTop: spacing(2),
+    paddingTop: 0,
   },
   pad: {
     width: '100% !important',

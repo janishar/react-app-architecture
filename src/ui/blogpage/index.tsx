@@ -30,7 +30,7 @@ export default function BlogPage(): ReactElement {
   }, [match.params.endpoint]);
 
   const authorView = data ? (
-    <div>
+    <div className={classes.author}>
       <CardActionArea>
         <CardHeader
           avatar={<Avatar aria-label={data.author.name} src={data.author.profilePicUrl} />}

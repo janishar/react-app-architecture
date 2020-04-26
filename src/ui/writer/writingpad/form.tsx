@@ -38,8 +38,10 @@ export default function BlogDetailsForm({
     event.preventDefault(); // to prevent from loosing focus
     let value = event.target.value;
     if (name == 'blogUrl') {
-      value = value.replace(/\s/g, '');
+      value = value.replace(/\s/g, '-');
       value = value.replace(/\//g, '-');
+      value = value.replace(/\./g, '-');
+      value = value.toLowerCase();
     }
 
     setLocalState({

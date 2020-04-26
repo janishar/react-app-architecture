@@ -49,7 +49,7 @@ export default function BlogList(): ReactElement {
       {blogCover}
       <Grid container justify="center" alignItems="center">
         <Grid item xs={11} sm={11} md={10} className={classes.cards}>
-          <Grid container spacing={4} justify="flex-start" alignItems="center">
+          <Grid container spacing={4} justify="flex-start" alignItems="flex-start">
             {isFetching && <CardListPlaceholder />}
             {data &&
               data.map((blog) => (

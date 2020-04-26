@@ -50,6 +50,7 @@ const useStyles = makeStyles(({ spacing, breakpoints }: Theme) => ({
   cardDescription: {
     marginTop: spacing(1),
     marginBottom: 50,
+    minHeight: 80,
   },
 }));
 

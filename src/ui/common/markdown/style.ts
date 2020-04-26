@@ -14,6 +14,7 @@ const useStyles = makeStyles(({ spacing, palette }: Theme) => ({
       background: palette.secondary.dark,
       whiteSpace: 'pre-wrap',
       wordWrap: 'break-word',
+      fontSize: 13,
       '& code': {
         background: palette.secondary.dark,
       },

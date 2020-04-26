@@ -50,7 +50,7 @@ export default function BlogPreview({ blog, open, onClose }: Props): ReactElemen
         </Toolbar>
       </AppBar>
       <Grid container justify="center">
-        <Grid item xs={12} sm={12} md={7} className={classes.blogContent}>
+        <Grid item xs={12} sm={12} md={8} className={classes.blogContent}>
           {blog?.draftText && <Markdown text={blog.draftText} />}
         </Grid>
       </Grid>
