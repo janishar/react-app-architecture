@@ -1,7 +1,7 @@
 /**
  * Logs all actions and states after they are dispatched.
  */
-const LOGGING = process.env.LOGGING == 'true';
+const LOGGING = process.env.NODE_ENV !== 'production' && process.env.LOGGING == 'true';
 
 export const logger = (store: any) => (next: any) => (action: any) => {
   if (LOGGING) {

@@ -1,25 +1,15 @@
 import express, { Response, NextFunction } from 'express';
-import React from 'react';
 import pageBuilder from './pageBuilder';
 import { PublicRequest } from 'server-types';
 import { publicRequest } from '@utils/network';
 import { defaultState as blogListDefaultState } from '@ui/blogpage/reducer';
 import { Blog } from 'app-types';
-import BlogList from '@ui/bloglist';
-import BlogPage from '@ui/blogpage';
-import Landing from '@ui/landing';
-import NotFound from '@ui/notfound';
-import WriterBlogs from '@ui/writer/myblogs';
-import WritingPad from '@ui/writer/writingpad';
 
 const router = express.Router();
 
 router.get('/blog/:endpoint', sendBlogPage);
 router.get('/blogs', sendBlogsPage);
-router.get('/writer/blogs', sendWriterBlogsPage);
-router.get('/write/blog', sendWritingPadPage);
-router.get('/', sendLandingPage);
-router.use('*', sendNotFoundPagePage);
+router.get('*', sendPage);
 
 async function sendBlogPage(req: PublicRequest, res: Response) {
   try {
@@ -34,7 +24,6 @@ async function sendBlogPage(req: PublicRequest, res: Response) {
     res.send(
       pageBuilder(
         req,
-        <BlogPage />,
         {
           title: response.data.title,
           description: response.data.description,
@@ -49,7 +38,7 @@ async function sendBlogPage(req: PublicRequest, res: Response) {
       ),
     );
   } catch (e) {
-    sendNotFoundPagePage(req, res);
+    sendNotFoundPage(res);
   }
 }
 
@@ -63,7 +52,6 @@ async function sendBlogsPage(req: PublicRequest, res: Response, next: NextFuncti
     res.send(
       pageBuilder(
         req,
-        <BlogList />,
         {
           title: 'AfterAcademy | Open Source Blogs',
           description:
@@ -83,21 +71,12 @@ async function sendBlogsPage(req: PublicRequest, res: Response, next: NextFuncti
   }
 }
 
-function sendWriterBlogsPage(req: PublicRequest, res: Response) {
-  res.send(pageBuilder(req, <WriterBlogs />));
+function sendPage(req: PublicRequest, res: Response) {
+  res.send(pageBuilder(req));
 }
 
-function sendWritingPadPage(req: PublicRequest, res: Response) {
-  res.send(pageBuilder(req, <WritingPad />));
-}
-
-
-function sendLandingPage(req: PublicRequest, res: Response) {
-  res.send(pageBuilder(req, <Landing />));
-}
-
-function sendNotFoundPagePage(req: PublicRequest, res: Response) {
-  res.status(404).send(pageBuilder(req, <NotFound />));
+function sendNotFoundPage(res: Response) {
+  res.redirect('/404');
 }
 
 export default router;

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
@@ -38,7 +38,6 @@ export type PageInfo = {
 
 export default function pageBuilder(
   req: PublicRequest,
-  view: ReactElement,
   pageinfo: PageInfo = {
     title: 'AfterAcademy | React Project',
     description: 'This is the sample project to learn and implement React app.',
@@ -74,7 +73,7 @@ export default function pageBuilder(
         <CookiesProvider cookies={req.universalCookies}>
           <StaticRouter location={req.url} context={{}}>
             <ThemeProvider theme={theme}>
-              <App>{view}</App>
+              <App />
             </ThemeProvider>
           </StaticRouter>
         </CookiesProvider>

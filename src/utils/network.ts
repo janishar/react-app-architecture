@@ -2,7 +2,7 @@ import axios, { Method } from 'axios';
 import { forceLogout } from '@ui/auth/actions';
 import { Dispatch } from 'app-types';
 
-const isLogEnabled = process.env.LOGGING === 'true';
+const isLogEnabled = process.env.NODE_ENV !== 'production' && process.env.LOGGING == 'true';
 
 const instance = axios.create({
   baseURL: process.env.API_BASE_URL,

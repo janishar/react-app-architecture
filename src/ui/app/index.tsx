@@ -14,7 +14,7 @@ import { scrollPageToTop, setPageTitle, removeAppLoader } from '@utils/pageUtils
 
 export const KEY_AUTH_DATA = 'KEY_AUTH_DATA';
 
-function App({ children }: { children: ReactElement }): ReactElement {
+function App(): ReactElement {
   const willMount = useRef(true);
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -73,7 +73,9 @@ function App({ children }: { children: ReactElement }): ReactElement {
       <CssBaseline />
       <div className={classes.root}>
         <Header />
-        <div className={classes.contentArea}>{children !== undefined ? children : <Routes />}</div>
+        <div className={classes.content}>
+          <Routes />
+        </div>
         <Footer />
       </div>
     </Fragment>

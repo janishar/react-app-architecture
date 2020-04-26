@@ -7,7 +7,7 @@ const useStyles = makeStyles(({}: Theme) => ({
     margin: '0 auto',
     float: 'none',
   },
-  contentArea: {
+  content: {
     marginTop: 60,
     minHeight: '62vh',
   },
