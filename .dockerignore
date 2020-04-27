@@ -13,6 +13,9 @@ logs
 # ignore 3rd party lib
 node_modules
 
+# github repository readme assets
+github_assets
+
 # Ignore built files
 build
 dist
