@@ -3,7 +3,7 @@ Learn to build a complete production-level web app for a blogging platform like 
 
 [![AfterAcademy](https://img.shields.io/badge/AfterAcademy-opensource-blue.svg)](https://afteracademy.com)
 
-## Demo web app running this project: [**Website Link**](https://demo.react-app-architecture.afteracademy.com)
+## Demo web app running this project: [**Goto Website**](https://demo.react-app-architecture.afteracademy.com)
 
 <p align="center">
     <img src="https://raw.githubusercontent.com/afteracademy/react-app-architecture/master/.templates/github_assets/cover-react-app.png">
@@ -53,7 +53,7 @@ Following are the highlights of this project:
     * Run the project:
       * Development: Execute `npm run watch`
       * Production: Execute `npm start`
-    * You will be able to access the API from http://localhost:3001
+    * You will be able to access the website from http://localhost:3001
     
 ### Find this project useful? :heart:
 * Support it by clicking the :star: button on the upper right of this page. :v:
@@ -146,8 +146,6 @@ Following are the highlights of this project:
 │   │   │   └── style.ts
 │   │   ├── blogpage
 │   │   │   ├── actions.ts
-│   │   │   ├── assets
-│   │   │   │   └── .gitkeep
 │   │   │   ├── index.tsx
 │   │   │   ├── reducer.ts
 │   │   │   └── style.ts
