@@ -52,6 +52,16 @@ const useStyles = makeStyles(({ spacing, breakpoints }: Theme) => ({
     marginBottom: 50,
     minHeight: 80,
   },
+  coverTitle: {
+    [breakpoints.down('xs')]: {
+      fontSize: 32,
+    },
+  },
+  coverSubtitle: {
+    [breakpoints.down('xs')]: {
+      fontSize: 22,
+    },
+  },
 }));
 
 export default useStyles;

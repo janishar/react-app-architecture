@@ -35,10 +35,10 @@ export default function BlogList(): ReactElement {
   const blogCover = (
     <div className={classes.cover}>
       <div className={classes.coverBox}>
-        <Typography component="h1" variant="h2" align="center">
+        <Typography component="h1" variant="h1" align="center" className={classes.coverTitle}>
           AfterAcademy
         </Typography>
-        <Typography component="h2" variant="h4" align="center">
+        <Typography component="h2" variant="h3" align="center" className={classes.coverSubtitle}>
           Open Source Blogs
         </Typography>
       </div>
