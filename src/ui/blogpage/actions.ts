@@ -1,7 +1,6 @@
-import { AsyncAction, Dispatch } from 'app-types';
+import { AsyncAction, Dispatch, Blog } from 'app-types';
 import { actionCreator, networkActionsCreator } from '@utils/creator';
 import { publicRequest } from '@utils/network';
-import { Blog } from './reducer';
 
 export const removeMessage = actionCreator<null>('CLEAR_BLOG_PAGE_MESSAGE');
 export const clearPage = actionCreator<string>('CLEAR_BLOG_PAGE');

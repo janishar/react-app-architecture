@@ -12,7 +12,8 @@
     "bundle": "npm run clean && NODE_ENV=production webpack -p --config ./webpack.config.js",
     "build": "npm run bundle && npx babel src/ -d build/ --extensions '.js,.jsx,.ts,.tsx'",
     "clean": "rimraf ./dist && mkdir dist && rimraf ./build && mkdir build",
-    "test": "jest --forceExit --detectOpenHandles --coverage --verbose"
+    "test": "jest --forceExit --detectOpenHandles --coverage --verbose",
+    "eslint": "eslint . --ext .js,.ts,.jsx,.tsx"
   },
   "repository": {
     "type": "git",

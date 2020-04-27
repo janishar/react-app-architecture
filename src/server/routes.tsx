@@ -55,7 +55,7 @@ async function sendBlogsPage(req: PublicRequest, res: Response, next: NextFuncti
         {
           title: 'AfterAcademy | Open Source Blogs',
           description:
-            'AfterAcademy opne source blogs and articles with latest developments and trends',
+            'AfterAcademy open source blogs and articles with latest developments and trends',
         },
         {
           blogListState: {
