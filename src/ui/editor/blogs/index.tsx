@@ -252,7 +252,7 @@ export default function EditorBlogs(): ReactElement {
   );
 }
 
-const AuthorView = ({ author, date }: { author: Author; date: string }) => {
+const AuthorView = ({ author, date }: { author: Author; date?: string }) => {
   const classes = useStyles();
   return (
     <div className={classes.author}>
@@ -260,13 +260,13 @@ const AuthorView = ({ author, date }: { author: Author; date: string }) => {
         <CardHeader
           avatar={<Avatar aria-label={author.name} src={author.profilePicUrl} />}
           title={author.name}
-          subheader={convertToReadableDate(date)}
+          subheader={date ? convertToReadableDate(date) : ''}
         />
       ) : (
         <CardHeader
           avatar={<FirstLetter text={author.name} />}
           title={author.name}
-          subheader={convertToReadableDate(date)}
+          subheader={date ? convertToReadableDate(date) : ''}
         />
       )}
     </div>

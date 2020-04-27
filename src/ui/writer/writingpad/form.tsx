@@ -171,7 +171,8 @@ export default function BlogDetailsForm({
             value={localState.tags}
             error={localState.isTagsError}
             fullWidth={true}
-            helperText="Press enter key or use comma separator to add"
+            placeholder="Add tags for the blog"
+            helperText="Press enter key or use comma separator to create a tag"
             newChipKeys={['Enter', ',']}
             classes={{
               root: classes.editTagsField,
