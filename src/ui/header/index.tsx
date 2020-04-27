@@ -168,35 +168,46 @@ export default function Header(): ReactElement {
     <Drawer anchor="top" open={drawerOpen} onClose={toggleDrawer}>
       {isLoggedIn && renderProfileView(toggleDrawer)}
       <List component="nav">
-        <ListItem
-          className={classes.drawerItem}
-          button
-          href="https://github.com/afteracademy/react-app-architecture"
-          target="_blank"
-          onClick={toggleDrawer}
-          component="a"
-        >
-          <ListItemIcon className={classes.drawerIcon}>
-            <InfoIcon />
-          </ListItemIcon>
-          <ListItemText primary="About Project" />
-        </ListItem>
         {[
-          { title: 'Blogs', link: '/blogs', icon: <WebIcon /> },
-          { title: 'Contact', link: '/contact', icon: <EmailIcon /> },
-        ].map(({ title, link, icon }, position) => (
+          {
+            title: 'About Project',
+            href: 'https://github.com/afteracademy/react-app-architecture',
+            icon: <InfoIcon />,
+          },
+          {
+            title: 'Contact',
+            href: 'https://github.com/afteracademy/react-app-architecture/issues',
+            icon: <EmailIcon />,
+          },
+        ].map(({ title, href, icon }, position) => (
           <ListItem
             key={position}
             className={classes.drawerItem}
             button
-            component={Link}
-            to={link}
+            href={href}
+            target="_blank"
             onClick={toggleDrawer}
+            component="a"
           >
             <ListItemIcon className={classes.drawerIcon}>{icon}</ListItemIcon>
             <ListItemText primary={title} />
           </ListItem>
         ))}
+        {[{ title: 'Blogs', link: '/blogs', icon: <WebIcon /> }].map(
+          ({ title, link, icon }, position) => (
+            <ListItem
+              key={position}
+              className={classes.drawerItem}
+              button
+              component={Link}
+              to={link}
+              onClick={toggleDrawer}
+            >
+              <ListItemIcon className={classes.drawerIcon}>{icon}</ListItemIcon>
+              <ListItemText primary={title} />
+            </ListItem>
+          ),
+        )}
         {isWriter && <Divider />}
         {isWriter &&
           [
@@ -291,18 +302,27 @@ export default function Header(): ReactElement {
             AfterAcademy React
           </Typography>
           <div className={classes.sectionDesktop}>
-            <Button
-              color="inherit"
-              className={classes.button}
-              href="https://github.com/afteracademy/react-app-architecture"
-              target="_blank"
-            >
-              About Project
-            </Button>
             {[
-              { title: 'Blogs', link: '/blogs' },
-              { title: 'Contact', link: '/contact' },
-            ].map(({ title, link }, position) => (
+              {
+                title: 'About Project',
+                href: 'https://github.com/afteracademy/react-app-architecture',
+              },
+              {
+                title: 'Contact',
+                href: 'https://github.com/afteracademy/react-app-architecture/issues',
+              },
+            ].map(({ title, href }, position) => (
+              <Button
+                key={position}
+                color="inherit"
+                className={classes.button}
+                href={href}
+                target="_blank"
+              >
+                {title}
+              </Button>
+            ))}
+            {[{ title: 'Blogs', link: '/blogs' }].map(({ title, link }, position) => (
               <Button
                 key={position}
                 color="inherit"
