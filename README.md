@@ -3,7 +3,7 @@ Learn to build a complete production-level web app for a blogging platform like 
 
 [![AfterAcademy](https://img.shields.io/badge/AfterAcademy-opensource-blue.svg)](https://afteracademy.com)
 
-## Demo web app running this project: [**Goto Website**](https://demo.react-app-architecture.afteracademy.com)
+## Demo web app running this project: [**Goto Demo Website**](https://demo.react-app-architecture.afteracademy.com)
 
 <p align="center">
     <img src="https://raw.githubusercontent.com/afteracademy/react-app-architecture/master/.templates/github_assets/cover-react-app.png">
@@ -11,7 +11,7 @@ Learn to build a complete production-level web app for a blogging platform like 
 <br>
 
 ## About this Open Source Project
-This open-source project is for you(community). Our Team at [**AfterAcademy**](https://afteracademy.com) has taken this initiative to promote Backend Learning in the best possible way. We are determined to provide quality content for everyone. Let's do it together by learning from this project.
+This open-source project is for you(community). Our Team at [**AfterAcademy**](https://afteracademy.com) has taken this initiative to promote web development learning in the best possible way. We are determined to provide quality content for everyone. Let's do it together by learning from this project.
 
 ## We will learn and build the React web application for a blogging platform. 
 The main focus will be to create a super fast and production-ready application with SEO.
@@ -22,17 +22,20 @@ Following are the highlights of this project:
 * **Written in Typescript**: The type safety at build time and having intellisense for it in the IDE like vscode is unparalleled to productivity. We have found production bug reduced to a significant amount since most of the code vulnerabilities are identified during the build phase itself. The Typescript was preferred over the Flow for better vscode support and much more type availability for libraries.
 * **Separation of concern principle is applied**: Each component has been given a particular role. The role of the components is mutually exclusive. This makes the project easy to be unit tested.
 * **Feature encapsulation is adopted**: The files or components that are related to a particular feature have been grouped unless those components are required in multiple features. This enhances the ability to share code across projects.
-* **State management using Redux**: The Redux architecture is very well suited for scalable web apps. It is excelent in server side rendering for components that need data from the API server. It is also preferred over the context in the project.
+* **State management using Redux**: The Redux architecture is very well suited for scalable web apps. It is excellent in server side rendering for components that need data from the API server. It is also preferred over the context in the project.
 * **Separate API server**: This project also has a server, having the purpose of serving only the pages for the website. Lhe logic of the application lies in a separate API server which is also opensource by us [**here**](https://github.com/afteracademy/nodejs-backend-architecture-typescript).
 * **Boilerplate**: Utility classes have been written to reduce the application and Redux boilerplate. 
 * **Latest libraries and patterns**: All the libraries used in this project are standard, concerning the latest and modern web development practices.
-* **vscode tasks for templates**: For enhancing the productivity while coding on the vscode, many tasks has been written to help generate the initial working code for each component. Just execute these tasks in vscode.
+* **vscode tasks for templates**: For enhancing the productivity while coding on the vscode, many tasks have been written to help generate the initial working code for each component. Just execute these tasks in vscode.
 
 ## Architecture of an UI component
 <p align="center">
    <img src="https://raw.githubusercontent.com/afteracademy/react-app-architecture/master/.templates/github_assets/ui-component-architecture.png">
 </p>
 <br>
+
+## Learn the concepts used in this project
+* [Create React Isomorphic App like a Pro](https://afteracademy.com/blog/create-react-isomorphic-app-like-a-pro)
 
 ## Node.js Backend API Project: [**Goto Repository**](https://github.com/afteracademy/nodejs-backend-architecture-typescript)
 
@@ -48,15 +51,12 @@ Following are the highlights of this project:
     * You will be able to access the website from http://localhost:3001
     * *If having any issue* then make sure 3001 port is not occupied else provide a different port in **.env** file.
  * Install Without Docker [**2nd Method For Development**]
-    * Do step 1 to 4 as listed above for **Install using Docker Componse**.
+    * Do steps 1 to 4 as listed above for **Install using Docker Compose**.
     * Execute `npm install`
     * Run the project:
       * Development: Execute `npm run watch`
       * Production: Execute `npm start`
     * You will be able to access the website from http://localhost:3001
-    
-### Find this project useful? :heart:
-* Support it by clicking the :star: button on the upper right of this page. :v:
 
 ## Website Pages
 * Landing 
