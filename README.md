@@ -58,6 +58,9 @@ Following are the highlights of this project:
       * Production: Execute `npm start`
     * You will be able to access the website from http://localhost:3001
 
+### Find this project useful? :heart:
+* Support it by clicking the :star: button on the upper right of this page. :v:
+
 ## Website Pages
 * Landing 
 * Blog List
