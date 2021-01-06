@@ -33,7 +33,7 @@
     "@material-ui/lab": "^4.0.0-alpha.50",
     "@material-ui/pickers": "^3.2.10",
     "@mdi/js": "^5.1.45",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "clsx": "^1.1.0",
     "express": "^4.17.1",
     "hint.css": "^2.6.0",
