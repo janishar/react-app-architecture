@@ -1,17 +1,15 @@
 # React.js Isomorphic Web Application Architecture
 Learn to build a complete production-level web app for a blogging platform like Medium, MindOrks, and FreeCodeCamp
 
-[![AfterAcademy](https://img.shields.io/badge/AfterAcademy-opensource-blue.svg)](https://afteracademy.com)
-
 ## Demo web app running this project: [**Goto Demo Website**](https://demo.react-app-architecture.afteracademy.com)
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/afteracademy/react-app-architecture/master/.templates/github_assets/cover-react-app.png">
+    <img src="https://raw.githubusercontent.com/janishar/react-app-architecture/master/.templates/github_assets/cover-react-app.png">
 </p>
 <br>
 
 ## About this Open Source Project
-This open-source project is for you(community). Our Team at [**AfterAcademy**](https://afteracademy.com) has taken this initiative to promote web development learning in the best possible way. We are determined to provide quality content for everyone. Let's do it together by learning from this project.
+This open-source project is for you(community). I [**Janishar Ali**](https://janisharali.com) have taken this initiative to promote web development learning in the best possible way. I am determined to provide quality content for everyone. Let's do it together by learning from this project.
 
 ## We will learn and build the React web application for a blogging platform. 
 The main focus will be to create a super fast and production-ready application with SEO.
@@ -23,24 +21,24 @@ Following are the highlights of this project:
 * **Separation of concern principle is applied**: Each component has been given a particular role. The role of the components is mutually exclusive. This makes the project easy to be unit tested.
 * **Feature encapsulation is adopted**: The files or components that are related to a particular feature have been grouped unless those components are required in multiple features. This enhances the ability to share code across projects.
 * **State management using Redux**: The Redux architecture is very well suited for scalable web apps. It is excellent in server side rendering for components that need data from the API server. It is also preferred over the context in the project.
-* **Separate API server**: This project also has a server, having the purpose of serving only the pages for the website. Lhe logic of the application lies in a separate API server which is also opensource by us [**here**](https://github.com/afteracademy/nodejs-backend-architecture-typescript).
+* **Separate API server**: This project also has a server, having the purpose of serving only the pages for the website. Lhe logic of the application lies in a separate API server which is also opensource by us [**here**](https://github.com/janishar/nodejs-backend-architecture-typescript).
 * **Boilerplate**: Utility classes have been written to reduce the application and Redux boilerplate. 
 * **Latest libraries and patterns**: All the libraries used in this project are standard, concerning the latest and modern web development practices.
 * **vscode tasks for templates**: For enhancing the productivity while coding on the vscode, many tasks have been written to help generate the initial working code for each component. Just execute these tasks in vscode.
 
 ## Architecture of an UI component
 <p align="center">
-   <img src="https://raw.githubusercontent.com/afteracademy/react-app-architecture/master/.templates/github_assets/ui-component-architecture.png">
+   <img src="https://raw.githubusercontent.com/janishar/react-app-architecture/master/.templates/github_assets/ui-component-architecture.png">
 </p>
 <br>
 
 ## Learn the concepts used in this project
-* [Create React Isomorphic App like a Pro](https://afteracademy.com/blog/create-react-isomorphic-app-like-a-pro)
+* [Create React Isomorphic App like a Pro](https://janishar.com/blog/create-react-isomorphic-app-like-a-pro)
 
-## Node.js Backend API Project: [**Goto Repository**](https://github.com/afteracademy/nodejs-backend-architecture-typescript)
+## Node.js Backend API Project: [**Goto Repository**](https://github.com/janishar/nodejs-backend-architecture-typescript)
 
 ## How to build and run this project
-* Install the API server. [**Read Instructions Here**](https://github.com/afteracademy/nodejs-backend-architecture-typescript)
+* Install the API server. [**Read Instructions Here**](https://github.com/janishar/nodejs-backend-architecture-typescript)
 * Install using Docker Compose [**Recommended Method For Production**] 
     * Clone this repo.
     * Make a copy of **.env.example** file to **.env**.
@@ -72,20 +70,20 @@ Following are the highlights of this project:
 * Editor Blogs Management
 
 <p float="left">
-  <img width="45%" src="https://raw.githubusercontent.com/afteracademy/react-app-architecture/master/.templates/github_assets/screenshots/1.png">
-  <img width="45%" src="https://raw.githubusercontent.com/afteracademy/react-app-architecture/master/.templates/github_assets/screenshots/2.png">
+  <img width="45%" src="https://raw.githubusercontent.com/janishar/react-app-architecture/master/.templates/github_assets/screenshots/1.png">
+  <img width="45%" src="https://raw.githubusercontent.com/janishar/react-app-architecture/master/.templates/github_assets/screenshots/2.png">
 </p>
 <p float="left">
-  <img width="45%" src="https://raw.githubusercontent.com/afteracademy/react-app-architecture/master/.templates/github_assets/screenshots/3.png">
-  <img width="45%" src="https://raw.githubusercontent.com/afteracademy/react-app-architecture/master/.templates/github_assets/screenshots/4.png">
+  <img width="45%" src="https://raw.githubusercontent.com/janishar/react-app-architecture/master/.templates/github_assets/screenshots/3.png">
+  <img width="45%" src="https://raw.githubusercontent.com/janishar/react-app-architecture/master/.templates/github_assets/screenshots/4.png">
 </p>
 <p float="left">
-  <img width="45%" src="https://raw.githubusercontent.com/afteracademy/react-app-architecture/master/.templates/github_assets/screenshots/5.png">
-  <img width="45%" src="https://raw.githubusercontent.com/afteracademy/react-app-architecture/master/.templates/github_assets/screenshots/6.png">
+  <img width="45%" src="https://raw.githubusercontent.com/janishar/react-app-architecture/master/.templates/github_assets/screenshots/5.png">
+  <img width="45%" src="https://raw.githubusercontent.com/janishar/react-app-architecture/master/.templates/github_assets/screenshots/6.png">
 </p>
 <p float="left">
-  <img width="45%" src="https://raw.githubusercontent.com/afteracademy/react-app-architecture/master/.templates/github_assets/screenshots/7.png">
-  <img width="45%" src="https://raw.githubusercontent.com/afteracademy/react-app-architecture/master/.templates/github_assets/screenshots/8.png">
+  <img width="45%" src="https://raw.githubusercontent.com/janishar/react-app-architecture/master/.templates/github_assets/screenshots/7.png">
+  <img width="45%" src="https://raw.githubusercontent.com/janishar/react-app-architecture/master/.templates/github_assets/screenshots/8.png">
 </p>
 
  ## Project Directory Structure
@@ -250,7 +248,7 @@ Following are the highlights of this project:
 
 ### License
 ```
-Copyright (C) 2020 MINDORKS NEXTGEN PRIVATE LIMITED
+Copyright (C) 2022 JANISHAR ALI ANWAR
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
