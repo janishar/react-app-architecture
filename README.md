@@ -11,6 +11,13 @@ Learn to build a complete production-level web app for a blogging platform like 
 ## About this Open Source Project
 This open-source project is for you(community). I [**Janishar Ali**](https://janisharali.com) have taken this initiative to promote web development learning in the best possible way. I am determined to provide quality content for everyone. Let's do it together by learning from this project.
 
+# About The Author
+You can connect with me here:
+* [Twitter](https://twitter.com/janisharali)
+* [YouTube Channel](https://www.youtube.com/@unusualcode)
+* [LinkedIn](https://www.linkedin.com/in/janishar-ali)
+* [Instagram](https://www.instagram.com/janisharali)
+
 ## We will learn and build the React web application for a blogging platform. 
 The main focus will be to create a super fast and production-ready application with SEO.
 <br>
@@ -248,7 +255,7 @@ Following are the highlights of this project:
 
 ### License
 ```
-Copyright (C) 2022 JANISHAR ALI ANWAR
+Copyright (C) 2023 JANISHAR ALI ANWAR
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
