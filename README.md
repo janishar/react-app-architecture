@@ -13,10 +13,9 @@ This open-source project is for you(community). I [**Janishar Ali**](https://jan
 
 # About The Author
 You can connect with me here:
+* [Janishar Ali](https://janisharali.com)
 * [Twitter](https://twitter.com/janisharali)
 * [YouTube Channel](https://www.youtube.com/@unusualcode)
-* [LinkedIn](https://www.linkedin.com/in/janishar-ali)
-* [Instagram](https://www.instagram.com/janisharali)
 
 ## We will learn and build the React web application for a blogging platform. 
 The main focus will be to create a super fast and production-ready application with SEO.
