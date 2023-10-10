@@ -38,7 +38,7 @@
     "express": "^4.17.1",
     "hint.css": "^2.6.0",
     "jss": "^10.1.1",
-    "marked": "^1.0.0",
+    "marked": "^4.0.10",
     "material-ui-chip-input": "^1.1.0",
     "moment": "^2.24.0",
     "query-string": "^6.12.1",
