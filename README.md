@@ -1,8 +1,6 @@
 # React.js Isomorphic Web Application Architecture
 Learn to build a complete production-level web app for a blogging platform like Medium, MindOrks, and FreeCodeCamp
 
-## Demo web app running this project: [**Goto Demo Website**](https://demo.react-app-architecture.afteracademy.com)
-
 <p align="center">
     <img src="https://raw.githubusercontent.com/janishar/react-app-architecture/master/.templates/github_assets/cover-react-app.png">
 </p>
