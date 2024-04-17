@@ -8,9 +8,6 @@ Learn to build a complete production-level web app for a blogging platform like 
 </p>
 <br>
 
-## About this Open Source Project
-This open-source project is for you(community). I [**Janishar Ali**](https://janisharali.com) have taken this initiative to promote web development learning in the best possible way. I am determined to provide quality content for everyone. Let's do it together by learning from this project.
-
 # About The Author
 You can connect with me here:
 * [Janishar Ali](https://janisharali.com)
@@ -39,7 +36,7 @@ Following are the highlights of this project:
 <br>
 
 ## Learn the concepts used in this project
-* [Create React Isomorphic App like a Pro](https://janishar.com/blog/create-react-isomorphic-app-like-a-pro)
+* [Create React Isomorphic App like a Pro](https://janisharali.com/blog/create-react-isomorphic-app-like-a-pro)
 
 ## Node.js Backend API Project: [**Goto Repository**](https://github.com/janishar/nodejs-backend-architecture-typescript)
 
